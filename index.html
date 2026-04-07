@@ -304,13 +304,20 @@ document.getElementById("flashcardOverlay").addEventListener("click", e => { if(
 
 // Header beim Runterscrollen ausblenden, beim Hochscrollen wieder einblenden
 let lastScrollY = 0;
+let scrollDelta = 0;
+const header = document.querySelector("header");
+const headerHeight = header.offsetHeight;
 window.addEventListener("scroll", () => {
-  const header = document.querySelector("header");
   const currentY = window.scrollY;
-  if(currentY > lastScrollY && currentY > 80){
-    header.classList.add("hidden");
+  const diff = currentY - lastScrollY;
+  scrollDelta += diff;
+  if(diff > 0){
+    // Runterscrollen: erst ausblenden wenn Header komplett rausgescrollt wäre
+    if(currentY > headerHeight){ header.classList.add("hidden"); }
+    scrollDelta = 0;
   } else {
-    header.classList.remove("hidden");
+    // Hochscrollen: erst nach 60px einblenden (Spielraum)
+    if(scrollDelta < -60){ header.classList.remove("hidden"); scrollDelta = 0; }
   }
   lastScrollY = currentY;
 }, {passive: true});
