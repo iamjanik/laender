@@ -9,24 +9,35 @@
 :root{--bg:#f4f1eb;--surface:#fffef9;--surface2:#f0ede4;--border:#ddd8cc;--text:#1a1814;--text-muted:#7a7468;--accent:#2d5a27;--accent-light:#e8f0e7;--tag-Europa:#1a3a6b;--tag-Europa-bg:#e8eef7;--tag-Asien:#6b1a1a;--tag-Asien-bg:#f7e8e8;--tag-Afrika:#5a4000;--tag-Afrika-bg:#f7f0d8;--tag-Amerika:#1a5a4a;--tag-Amerika-bg:#e8f4f0;--tag-Ozeanien:#3a1a6b;--tag-Ozeanien-bg:#ede8f7;--shadow:0 2px 12px rgba(0,0,0,.07);--shadow-hover:0 6px 24px rgba(0,0,0,.12);--radius:12px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:18px 20px 0;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:var(--shadow);will-change:transform}
-
-.header-top{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
-h1{font-family:'DM Serif Display',serif;font-size:clamp(1.3rem,4vw,1.9rem);letter-spacing:-.02em}
-.count-badge{font-size:.75rem;font-weight:600;color:var(--text-muted);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:2px 10px}
-.controls{display:flex;gap:8px;padding:12px 0 8px;flex-wrap:wrap;align-items:center}
-.search-wrap{position:relative;flex:1;min-width:160px;max-width:360px}
-.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
-input[type=search]{width:100%;padding:8px 10px 8px 36px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px 0;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+.header-top{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(1.1rem,3.5vw,1.6rem);letter-spacing:-.02em}
+.count-badge{font-size:.7rem;font-weight:600;color:var(--text-muted);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:1px 8px}
+.header-actions{display:flex;gap:4px;margin-left:auto;align-items:center}
+.icon-btn{background:none;border:none;cursor:pointer;color:var(--text-muted);padding:4px;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:color .15s}
+.icon-btn:hover{color:var(--accent)}
+.icon-btn.active{color:var(--accent)}
+.search-wrap{position:relative;width:100%;margin:6px 0 2px}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
+input[type=search]{width:100%;padding:7px 10px 7px 32px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--text);outline:none;transition:border-color .2s}
 input[type=search]:focus{border-color:var(--accent)}
-.filter-btns{display:flex;gap:5px;flex-wrap:wrap}
-.filter-btn{padding:6px 13px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;cursor:pointer;color:var(--text-muted);transition:all .15s;white-space:nowrap}
+.filter-btns{display:flex;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 0 12px}
+.filter-btns::-webkit-scrollbar{display:none}
+.filter-btn{padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--text-muted);transition:all .15s;white-space:nowrap;flex-shrink:0}
 .filter-btn:hover{border-color:var(--accent);color:var(--accent)}
 .filter-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-.actions-row{display:flex;gap:6px;padding-bottom:12px;flex-wrap:wrap;align-items:center}
-.action-btn{padding:5px 12px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;cursor:pointer;color:var(--text-muted);transition:all .15s}
-.action-btn:hover{border-color:var(--accent);color:var(--accent)}
-.result-info{font-size:.75rem;color:var(--text-muted);margin-left:auto}
+.more-menu{display:none;flex-direction:column;gap:2px;padding:4px 0 8px}
+.more-menu.open{display:flex}
+.more-item{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.78rem;color:var(--text-muted);cursor:pointer;text-align:left;padding:5px 4px;border-radius:6px;transition:color .15s}
+.more-item:hover{color:var(--accent)}
+.result-info{font-size:.72rem;color:var(--text-muted);padding:2px 4px}
+
+.fc-letter-filter{margin:10px 0 4px}
+.fc-letter-label{font-size:.75rem;color:var(--text-muted);font-weight:500;margin-bottom:6px}
+.fc-letter-btns{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.fc-letter-btn{padding:3px 7px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;cursor:pointer;color:var(--text-muted);transition:all .15s}
+.fc-letter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.fc-letter-btn.active{background:var(--accent);border-color:var(--accent);color:white}
 main{max-width:800px;margin:0 auto;padding:18px 14px 60px}
 .loading{text-align:center;padding:80px 20px;color:var(--text-muted);font-size:.95rem}
 .alpha-divider{display:flex;align-items:center;gap:10px;margin:18px 0 8px}
@@ -100,25 +111,31 @@ main{max-width:800px;margin:0 auto;padding:18px 14px 60px}
   <div class="header-top">
     <h1>Länder &amp; Hauptstädte</h1>
     <span class="count-badge" id="countBadge">…</span>
-  </div>
-  <div class="controls">
-    <div class="search-wrap">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="search" id="searchInput" placeholder="Land oder Hauptstadt suchen …" autocomplete="off">
-    </div>
-    <div class="filter-btns">
-      <button class="filter-btn active" data-filter="Alle">Alle</button>
-      <button class="filter-btn" data-filter="Afrika">Afrika</button>
-      <button class="filter-btn" data-filter="Amerika">Amerika</button>
-      <button class="filter-btn" data-filter="Asien">Asien</button>
-      <button class="filter-btn" data-filter="Europa">Europa</button>
-      <button class="filter-btn" data-filter="Ozeanien">Ozeanien</button>
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggleBtn" title="Suchen">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="icon-btn" id="moreBtn" title="Mehr">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="19" cy="12" r="1.2" fill="currentColor"/></svg>
+      </button>
     </div>
   </div>
-  <div class="actions-row">
-    <button class="action-btn" id="expandAllBtn">Alle aufklappen</button>
-    <button class="action-btn" id="collapseAllBtn">Alle zuklappen</button>
-    <button class="action-btn" id="startFlashcardsBtn">🃏 Lernkarten</button>
+  <div class="search-wrap" id="searchWrap" style="display:none">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="search" id="searchInput" placeholder="Land oder Hauptstadt suchen …" autocomplete="off">
+  </div>
+  <div class="filter-btns">
+    <button class="filter-btn active" data-filter="Alle">Alle</button>
+    <button class="filter-btn" data-filter="Afrika">Afrika</button>
+    <button class="filter-btn" data-filter="Amerika">Amerika</button>
+    <button class="filter-btn" data-filter="Asien">Asien</button>
+    <button class="filter-btn" data-filter="Europa">Europa</button>
+    <button class="filter-btn" data-filter="Ozeanien">Ozeanien</button>
+  </div>
+  <div class="more-menu" id="moreMenu">
+    <button class="more-item" id="expandAllBtn">↕ Alle aufklappen</button>
+    <button class="more-item" id="collapseAllBtn">↕ Alle zuklappen</button>
+    <button class="more-item" id="startFlashcardsBtn">🃏 Lernkarten starten</button>
     <span class="result-info" id="resultInfo"></span>
   </div>
 </header>
@@ -236,6 +253,33 @@ fetch("laender.json")
       "⚠️ laender.json konnte nicht geladen werden. Stelle sicher, dass sie im selben Ordner liegt.";
   });
 
+// Suche ein-/ausblenden
+const searchToggleBtn = document.getElementById("searchToggleBtn");
+const searchWrap = document.getElementById("searchWrap");
+const searchInput = document.getElementById("searchInput");
+searchToggleBtn.addEventListener("click", () => {
+  const open = searchWrap.style.display === "none";
+  searchWrap.style.display = open ? "block" : "none";
+  searchToggleBtn.classList.toggle("active", open);
+  if(open) { searchInput.focus(); }
+  else { searchInput.value = ""; currentSearch = ""; render(); }
+});
+
+// Mehr-Menü
+const moreBtn = document.getElementById("moreBtn");
+const moreMenu = document.getElementById("moreMenu");
+moreBtn.addEventListener("click", () => {
+  moreMenu.classList.toggle("open");
+  moreBtn.classList.toggle("active");
+});
+// Menü schließen bei Klick außerhalb
+document.addEventListener("click", e => {
+  if(!moreBtn.contains(e.target) && !moreMenu.contains(e.target)){
+    moreMenu.classList.remove("open");
+    moreBtn.classList.remove("active");
+  }
+});
+
 document.querySelectorAll(".filter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
@@ -295,33 +339,70 @@ document.getElementById("startFlashcardsBtn").addEventListener("click", () => {
   const filtered = getFiltered();
   const fc = document.getElementById("flashcard");
   document.getElementById("flashcardOverlay").classList.add("active");
-  fc.innerHTML = `<div class="fc-result" style="font-size:1.2rem;margin-bottom:8px">🃏 Lernkarten</div><div class="fc-result-details">${filtered.length} Länder aus aktueller Auswahl</div><div class="fc-mode-select"><div class="fc-mode-label">Lernmodus wählen:</div><div class="fc-mode-btns"><button class="fc-mode-btn active" data-mode="reveal">Aufdecken</button><button class="fc-mode-btn" data-mode="type">Eingabe</button></div></div><div class="flashcard-btns"><button class="fc-btn fc-btn-correct" id="fcStartBtn">Starten</button><button class="fc-btn fc-btn-close" id="fcCancelBtn">Abbrechen</button></div>`;
-  fc.querySelectorAll(".fc-mode-btn").forEach(btn => { btn.addEventListener("click", () => { fc.querySelectorAll(".fc-mode-btn").forEach(b => b.classList.remove("active")); btn.classList.add("active"); fcMode = btn.dataset.mode; }); });
-  document.getElementById("fcStartBtn").onclick = () => { fcData=shuffle(filtered); fcIndex=0; fcCorrect=0; fcWrong=0; showFlashcard(); };
-  document.getElementById("fcCancelBtn").onclick = closeFC;
+  moreMenu.classList.remove("open");
+  moreBtn.classList.remove("active");
+
+  // Buchstaben ermitteln die in der aktuellen Auswahl vorkommen
+  const availableLetters = [...new Set(filtered.map(l => alphaGroup(l.Land)))].sort();
+  let selectedLetters = new Set(availableLetters); // alle vorausgewählt
+
+  function renderFcStart() {
+    const letterBtns = availableLetters.map(l =>
+      `<button class="fc-letter-btn${selectedLetters.has(l) ? ' active' : ''}" data-letter="${l}">${l}</button>`
+    ).join('');
+    const count = filtered.filter(l => selectedLetters.has(alphaGroup(l.Land))).length;
+    fc.innerHTML = `
+      <div class="fc-result" style="font-size:1.2rem;margin-bottom:8px">🃏 Lernkarten</div>
+      <div class="fc-mode-select">
+        <div class="fc-mode-label">Lernmodus:</div>
+        <div class="fc-mode-btns">
+          <button class="fc-mode-btn${fcMode==='reveal'?' active':''}" data-mode="reveal">Aufdecken</button>
+          <button class="fc-mode-btn${fcMode==='type'?' active':''}" data-mode="type">Eingabe</button>
+        </div>
+      </div>
+      <div class="fc-letter-filter">
+        <div class="fc-letter-label">Buchstaben (${count} Länder):</div>
+        <div class="fc-letter-btns" id="fcLetterBtns">
+          <button class="fc-letter-btn${selectedLetters.size===availableLetters.length?' active':''}" data-letter="alle">Alle</button>
+          ${letterBtns}
+        </div>
+      </div>
+      <div class="flashcard-btns" style="margin-top:16px">
+        <button class="fc-btn fc-btn-correct" id="fcStartBtn">Starten</button>
+        <button class="fc-btn fc-btn-close" id="fcCancelBtn">Abbrechen</button>
+      </div>`;
+
+    fc.querySelectorAll(".fc-mode-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        fc.querySelectorAll(".fc-mode-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active"); fcMode = btn.dataset.mode;
+      });
+    });
+    fc.querySelectorAll(".fc-letter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const l = btn.dataset.letter;
+        if(l === "alle") {
+          if(selectedLetters.size === availableLetters.length) selectedLetters.clear();
+          else selectedLetters = new Set(availableLetters);
+        } else {
+          if(selectedLetters.has(l)) selectedLetters.delete(l);
+          else selectedLetters.add(l);
+        }
+        renderFcStart();
+      });
+    });
+    document.getElementById("fcStartBtn").onclick = () => {
+      const pool = filtered.filter(l => selectedLetters.has(alphaGroup(l.Land)));
+      if(!pool.length) return;
+      fcData = shuffle(pool); fcIndex = 0; fcCorrect = 0; fcWrong = 0;
+      showFlashcard();
+    };
+    document.getElementById("fcCancelBtn").onclick = closeFC;
+  }
+  renderFcStart();
 });
 document.getElementById("flashcardOverlay").addEventListener("click", e => { if(e.target === document.getElementById("flashcardOverlay")) closeFC(); });
 
-// Header fließend mit Scroll bewegen
-const header = document.querySelector("header");
-const mainEl = document.getElementById("main");
-
-function setMainPadding(){
-  mainEl.style.paddingTop = (header.offsetHeight + 18) + "px";
-}
-setMainPadding();
-window.addEventListener("resize", setMainPadding);
-
-let lastScrollY = window.scrollY;
-let headerOffset = 0;
-
-window.addEventListener("scroll", () => {
-  const currentY = window.scrollY;
-  const diff = currentY - lastScrollY;
-  headerOffset = Math.min(0, Math.max(-header.offsetHeight, headerOffset - diff));
-  header.style.transform = `translateY(${headerOffset}px)`;
-  lastScrollY = currentY;
-}, {passive: true});
 </script>
 </body>
 </html>
