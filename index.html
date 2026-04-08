@@ -6,9 +6,6 @@
 <title>Staaten der Erde</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   DESIGN TOKENS
-═══════════════════════════════════════════ */
 :root {
   --bg:            #f4f1eb;
   --surface:       #fffef9;
@@ -30,11 +27,9 @@
   --shadow-hover: 0 6px 24px rgba(0,0,0,.12);
   --radius:       12px;
   --transition:   .18s cubic-bezier(.4,0,.2,1);
+  --header-h:     112px;
 }
 
-/* ═══════════════════════════════════════════
-   RESET & BASE
-═══════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -50,68 +45,54 @@ body {
 header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 12px 16px 0;
   position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: var(--shadow);
 }
 
-.header-top {
+/* Top bar: logo + actions */
+.header-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 56px;
+  gap: 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.header-logo {
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  margin-bottom: 4px;
+  gap: 6px;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 h1 {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  font-size: 1.35rem;
   letter-spacing: -.02em;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
-.count-badge {
-  font-size: .7rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 1px 8px;
-}
+/* Spacer pushes actions to right */
+.header-spacer { flex: 1; min-width: 4px; }
 
-.header-actions {
-  display: flex;
-  gap: 4px;
-  margin-left: auto;
-  align-items: center;
-  position: relative;
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-muted);
-  padding: 4px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color var(--transition);
-}
-.icon-btn:hover,
-.icon-btn.active { color: var(--accent); }
-.icon-btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* Search */
+/* Search – expands inline on desktop */
 .search-wrap {
   position: relative;
-  width: 100%;
-  margin: 6px 0 2px;
+  flex-shrink: 1;
+  min-width: 0;
 }
 .search-wrap svg {
   position: absolute;
@@ -122,8 +103,7 @@ h1 {
   pointer-events: none;
 }
 input[type=search] {
-  width: 100%;
-  padding: 7px 32px 7px 32px;
+  padding: 7px 10px 7px 32px;
   border: 1.5px solid var(--border);
   border-radius: 8px;
   background: var(--bg);
@@ -134,28 +114,116 @@ input[type=search] {
   transition: border-color var(--transition);
   -webkit-appearance: none;
   appearance: none;
+  width: 180px;
+  min-width: 80px;
 }
 input[type=search]::-webkit-search-cancel-button { display: none; }
 input[type=search]:focus { border-color: var(--accent); }
 
-/* Filter bar */
-.filter-btns {
+/* Desktop: inline search always visible, mobile-row hidden */
+@media (min-width: 600px) {
+  #searchWrapInline { display: block !important; }
+  #searchWrapMobile { display: none !important; }
+  #searchToggleBtn  { display: none !important; }
+}
+
+/* Mobile: inline search hidden, own row below header-bar */
+@media (max-width: 599px) {
+  #searchWrapInline { display: none !important; }
+  #searchWrapMobile {
+    display: none;
+    padding: 8px 12px 10px;
+    border-top: 1px solid var(--border);
+  }
+  #searchWrapMobile.open { display: block; }
+  #searchWrapMobile .search-inner { position: relative; }
+  #searchWrapMobile .search-inner svg {
+    position: absolute; left: 10px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted); pointer-events: none;
+  }
+  #searchWrapMobile input[type=search] {
+    width: 100%; min-width: 0;
+    padding-top: 8px; padding-bottom: 8px;
+  }
+}
+
+/* Header actions row */
+.header-actions {
   display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;   /* actions never shrink – they're always accessible */
+}
+
+/* Toolbar buttons */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 6px 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .8rem;
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+.icon-btn:hover { background: var(--surface2); color: var(--text); }
+.icon-btn.active { color: var(--accent); background: var(--accent-light); }
+.icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.icon-btn .btn-label { display: none; }
+@media (min-width: 820px) { .icon-btn .btn-label { display: inline; } }
+
+/* Flashcard button gets accent treatment */
+.btn-flashcard {
+  color: var(--accent);
+  border: 1.5px solid var(--border);
+}
+.btn-flashcard:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent-hover);
+}
+
+/* Divider between icon groups */
+.hdr-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* Filter bar */
+.filter-bar {
+  border-top: 1px solid var(--border);
+  padding: 0 20px;
+}
+.filter-inner {
+  display: flex;
+  gap: 4px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 6px 0 12px;
+  padding: 8px 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.filter-btns::-webkit-scrollbar { display: none; }
+.filter-bar::-webkit-scrollbar { display: none; }
 
 .filter-btn {
-  padding: 5px 12px;
+  padding: 5px 14px;
   border-radius: 20px;
   border: 1.5px solid var(--border);
-  background: var(--surface);
+  background: transparent;
   font-family: 'DM Sans', sans-serif;
-  font-size: .75rem;
+  font-size: .78rem;
   font-weight: 500;
   cursor: pointer;
   color: var(--text-muted);
@@ -167,44 +235,20 @@ input[type=search]:focus { border-color: var(--accent); }
 .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
 .filter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* More menu */
-.more-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 210px;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,.13);
-  padding: 6px;
-  z-index: 200;
-  flex-direction: column;
-  gap: 2px;
-}
-.more-menu.open { display: flex; }
-
-.more-item {
-  background: none;
-  border: none;
-  font-family: 'DM Sans', sans-serif;
-  font-size: .85rem;
-  color: var(--text);
-  cursor: pointer;
-  text-align: left;
-  padding: 9px 12px;
-  border-radius: 8px;
-  transition: background var(--transition);
-  width: 100%;
-}
-.more-item:hover { background: var(--surface2); color: var(--accent); }
-
-.result-info {
-  font-size: .72rem;
+/* Result info pill */
+.result-pill {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: .7rem;
   color: var(--text-muted);
-  padding: 4px 12px 8px;
+  padding: 4px 10px;
+  background: var(--surface2);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  align-self: center;
+  display: none;
 }
+.result-pill.visible { display: block; }
 
 /* ═══════════════════════════════════════════
    MAIN / CARDS
@@ -265,7 +309,6 @@ main {
 .country-card:hover { box-shadow: var(--shadow-hover); border-color: #c5bfb5; }
 .country-card.open { border-color: var(--accent); }
 
-/* card-trigger als echter Button für a11y */
 .card-trigger {
   display: flex;
   align-items: center;
@@ -286,7 +329,6 @@ main {
 }
 
 .flag { font-size: 1.4rem; line-height: 1; flex-shrink: 0; width: 30px; text-align: center; }
-
 .country-name { font-weight: 600; font-size: .95rem; flex: 1; }
 
 .continent-tag {
@@ -386,149 +428,51 @@ main {
   box-shadow: 0 24px 80px rgba(0,0,0,.3);
 }
 
-.fc-progress {
-  font-size: .75rem;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
+.fc-progress { font-size: .75rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 500; }
 .fc-flag { font-size: 2.6rem; line-height: 1; display: block; margin-bottom: 8px; }
-
-.fc-question {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.25rem, 5vw, 1.75rem);
-  margin-bottom: 24px;
-  line-height: 1.25;
-}
-
-.fc-answer-box {
-  background: var(--accent-light);
-  border: 2px solid var(--accent);
-  border-radius: 10px;
-  padding: 12px 20px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-
-/* Type-mode input */
-.fc-input {
-  width: 100%;
-  padding: 11px 14px;
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1rem;
-  color: var(--text);
-  background: var(--bg);
-  outline: none;
-  text-align: center;
-  transition: border-color var(--transition), background var(--transition);
-  margin-bottom: 8px;
-}
+.fc-question { font-family: 'DM Serif Display', serif; font-size: clamp(1.25rem, 5vw, 1.75rem); margin-bottom: 24px; line-height: 1.25; }
+.fc-answer-box { background: var(--accent-light); border: 2px solid var(--accent); border-radius: 10px; padding: 12px 20px; font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 20px; }
+.fc-input { width: 100%; padding: 11px 14px; border: 2px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--text); background: var(--bg); outline: none; text-align: center; transition: border-color var(--transition), background var(--transition); margin-bottom: 8px; }
 .fc-input:focus { border-color: var(--accent); }
 .fc-input.correct { border-color: #2d7a2d; background: #e8f5e8; }
 .fc-input.wrong   { border-color: #c0392b; background: #fdecea; }
 .fc-input:disabled { cursor: default; }
-
-.fc-feedback {
-  font-size: .88rem;
-  margin-bottom: 14px;
-  font-weight: 500;
-  min-height: 1.4em;
-}
+.fc-feedback { font-size: .88rem; margin-bottom: 14px; font-weight: 500; min-height: 1.4em; }
 .fc-feedback.correct { color: #2d7a2d; }
 .fc-feedback.wrong   { color: #c0392b; }
 
-/* Buttons */
-.fc-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 4px;
-}
-.fc-btn {
-  padding: 10px 22px;
-  border-radius: 10px;
-  border: 2px solid;
-  font-family: 'DM Sans', sans-serif;
-  font-size: .88rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition);
-  white-space: nowrap;
-}
+.fc-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 4px; }
+.fc-btn { padding: 10px 22px; border-radius: 10px; border: 2px solid; font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 600; cursor: pointer; transition: all var(--transition); white-space: nowrap; }
 .fc-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-
-.fc-btn-secondary { border-color: var(--border);  color: var(--text-muted); background: transparent; }
+.fc-btn-secondary { border-color: var(--border); color: var(--text-muted); background: transparent; }
 .fc-btn-secondary:hover { border-color: var(--text-muted); }
-.fc-btn-reveal    { border-color: var(--accent);  color: var(--accent); background: transparent; }
+.fc-btn-reveal    { border-color: var(--accent); color: var(--accent); background: transparent; }
 .fc-btn-reveal:hover { background: var(--accent-light); }
-.fc-btn-primary   { border-color: var(--accent);  color: white; background: var(--accent); }
+.fc-btn-primary   { border-color: var(--accent); color: white; background: var(--accent); }
 .fc-btn-primary:hover { background: var(--accent-hover); }
 .fc-btn-correct   { border-color: #2d7a2d; color: white; background: #2d7a2d; }
 .fc-btn-correct:hover { background: #256025; }
 .fc-btn-wrong     { border-color: #c0392b; color: white; background: #c0392b; }
 .fc-btn-wrong:hover { background: #a93226; }
 
-/* Empty-pool warning */
-.fc-warning {
-  color: #c0392b;
-  font-size: .82rem;
-  margin-top: 8px;
-  min-height: 1.2em;
-}
-
-/* Start screen */
+.fc-warning { color: #c0392b; font-size: .82rem; margin-top: 8px; min-height: 1.2em; }
 .fc-start-title { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 20px; }
-
 .fc-mode-row { margin-bottom: 20px; }
 .fc-mode-label { font-size: .8rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
 .fc-mode-btns { display: flex; gap: 8px; justify-content: center; }
-.fc-mode-btn {
-  padding: 7px 18px;
-  border-radius: 10px;
-  border: 1.5px solid var(--border);
-  background: var(--surface);
-  font-family: 'DM Sans', sans-serif;
-  font-size: .85rem;
-  font-weight: 500;
-  cursor: pointer;
-  color: var(--text-muted);
-  transition: all var(--transition);
-}
+.fc-mode-btn { padding: 7px 18px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface); font-family: 'DM Sans', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; color: var(--text-muted); transition: all var(--transition); }
 .fc-mode-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
-
 .fc-letters-row { margin-bottom: 20px; }
 .fc-letters-label { font-size: .78rem; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; }
 .fc-letters-grid { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
-
-.fc-letter-btn {
-  padding: 3px 7px;
-  border-radius: 6px;
-  border: 1.5px solid var(--border);
-  background: var(--surface);
-  font-family: 'DM Sans', sans-serif;
-  font-size: .72rem;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--text-muted);
-  transition: all var(--transition);
-}
+.fc-letter-btn { padding: 3px 7px; border-radius: 6px; border: 1.5px solid var(--border); background: var(--surface); font-family: 'DM Sans', sans-serif; font-size: .72rem; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all var(--transition); }
 .fc-letter-btn:hover { border-color: var(--accent); color: var(--accent); }
 .fc-letter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
 
-/* Result screen */
-.fc-result-emoji  { font-size: 2.2rem; display: block; margin-bottom: 6px; }
-.fc-result-title  { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 6px; }
-.fc-result-sub    { font-size: .85rem; color: var(--text-muted); margin-bottom: 22px; }
+.fc-result-emoji { font-size: 2.2rem; display: block; margin-bottom: 6px; }
+.fc-result-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 6px; }
+.fc-result-sub   { font-size: .85rem; color: var(--text-muted); margin-bottom: 22px; }
 
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
 @media (max-width: 500px) {
   .card-body { padding-left: 14px; }
   .info-grid  { grid-template-columns: 1fr 1fr; }
@@ -540,49 +484,87 @@ main {
 
 <!-- ══ HEADER ══════════════════════════════════════════════ -->
 <header>
-  <div class="header-top">
-    <h1>Staaten der Erde</h1>
-    <span class="count-badge" id="countBadge" aria-live="polite">…</span>
+  <div class="header-bar">
+    <!-- Logo + Count -->
+    <div class="header-logo">
+      <h1>Staaten der Erde</h1>
+
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <!-- Search inline (desktop only) -->
+    <div class="search-wrap" id="searchWrapInline" role="search">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="search" id="searchInput"
+             placeholder="Suchen …"
+             autocomplete="off"
+             aria-label="Staat oder Hauptstadt suchen">
+    </div>
+
+    <!-- Actions -->
     <div class="header-actions">
+      <!-- Mobile search toggle -->
       <button class="icon-btn" id="searchToggleBtn" title="Suchen" aria-label="Suche ein-/ausblenden" aria-expanded="false">
-        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
       </button>
-      <button class="icon-btn" id="moreBtn" title="Mehr Optionen" aria-label="Mehr Optionen" aria-haspopup="true" aria-expanded="false">
-        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="5" cy="12" r="1.2" fill="currentColor"/>
-          <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
-          <circle cx="19" cy="12" r="1.2" fill="currentColor"/>
+
+      <div class="hdr-divider"></div>
+
+      <!-- Expand / Collapse -->
+      <button class="icon-btn" id="expandAllBtn" title="Alle aufklappen" aria-label="Alle Karten aufklappen">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/>
         </svg>
+        <span class="btn-label">Aufklappen</span>
+      </button>
+      <button class="icon-btn" id="collapseAllBtn" title="Alle zuklappen" aria-label="Alle Karten zuklappen">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="7 11 12 6 17 11"/><polyline points="7 18 12 13 17 18"/>
+        </svg>
+        <span class="btn-label">Zuklappen</span>
+      </button>
+
+      <div class="hdr-divider"></div>
+
+      <!-- Lernkarten CTA -->
+      <button class="icon-btn btn-flashcard" id="startFlashcardsBtn" aria-label="Lernkarten starten">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="3"/><line x1="2" y1="10" x2="22" y2="10"/>
+        </svg>
+        <span class="btn-label">Lernkarten</span>
       </button>
     </div>
   </div>
 
-  <div class="search-wrap" id="searchWrap" style="display:none" role="search">
-    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="search" id="searchInput"
-           placeholder="Staat oder Hauptstadt suchen …"
-           autocomplete="off"
-           aria-label="Staat oder Hauptstadt suchen">
+  <!-- Mobile search row (toggled, sits below header-bar) -->
+  <div id="searchWrapMobile" role="search">
+    <div class="search-inner">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="search" id="searchInputMobile"
+             placeholder="Suchen …"
+             autocomplete="off"
+             aria-label="Staat oder Hauptstadt suchen">
+    </div>
   </div>
 
-  <nav class="filter-btns" aria-label="Nach Kontinent filtern">
-    <button class="filter-btn active" data-filter="Alle">Alle</button>
-    <button class="filter-btn" data-filter="Afrika">Afrika</button>
-    <button class="filter-btn" data-filter="Amerika">Amerika</button>
-    <button class="filter-btn" data-filter="Asien">Asien</button>
-    <button class="filter-btn" data-filter="Europa">Europa</button>
-    <button class="filter-btn" data-filter="Ozeanien">Ozeanien</button>
-  </nav>
-
-  <div class="more-menu" id="moreMenu" role="menu">
-    <button class="more-item" id="expandAllBtn"     role="menuitem">↕️ Alle aufklappen</button>
-    <button class="more-item" id="collapseAllBtn"   role="menuitem">↕️ Alle zuklappen</button>
-    <button class="more-item" id="startFlashcardsBtn" role="menuitem">🃏 Lernkarten starten</button>
-    <span class="result-info" id="resultInfo" aria-live="polite"></span>
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <nav class="filter-inner" aria-label="Nach Kontinent filtern">
+      <button class="filter-btn active" data-filter="Alle">Alle</button>
+      <button class="filter-btn" data-filter="Afrika">Afrika</button>
+      <button class="filter-btn" data-filter="Amerika">Amerika</button>
+      <button class="filter-btn" data-filter="Asien">Asien</button>
+      <button class="filter-btn" data-filter="Europa">Europa</button>
+      <button class="filter-btn" data-filter="Ozeanien">Ozeanien</button>
+      <span class="result-pill" id="resultPill" aria-live="polite"></span>
+    </nav>
   </div>
 </header>
 
@@ -603,11 +585,6 @@ main {
 </div>
 
 <script>
-/* ════════════════════════════════════════════════════════════
-   FLAGS  (statisches Mapping – wird gegen geladene Daten
-           validiert, sodass fehlende Einträge in der Console
-           sichtbar werden)
-════════════════════════════════════════════════════════════ */
 const FLAGS = {
   "Afghanistan":"🇦🇫","Albanien":"🇦🇱","Algerien":"🇩🇿","Andorra":"🇦🇩",
   "Angola":"🇦🇴","Antigua und Barbuda":"🇦🇬","Argentinien":"🇦🇷",
@@ -668,23 +645,11 @@ const FLAGS = {
   "Ägypten":"🇪🇬","Äquatorialguinea":"🇬🇶","Äthiopien":"🇪🇹"
 };
 
-/**
- * Gibt die Flagge für ein Land zurück.
- * Fehlende Einträge werden in der Konsole gewarnt
- * (hilfreich beim Erweitern des Datensatzes).
- */
-function getFlag(landName) {
-  if (!(landName in FLAGS)) {
-    console.warn(`[Flags] Kein Eintrag für: "${landName}"`);
-  }
-  return FLAGS[landName] || "🌐";
+function getFlag(n) {
+  if (!(n in FLAGS)) console.warn(`[Flags] Kein Eintrag für: "${n}"`);
+  return FLAGS[n] || "🌐";
 }
 
-/* ════════════════════════════════════════════════════════════
-   UTILITIES
-════════════════════════════════════════════════════════════ */
-
-/** Fisher-Yates Shuffle – gibt neues Array zurück */
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -694,87 +659,60 @@ function shuffle(arr) {
   return a;
 }
 
-/**
- * Normalisiert einen String für den Lernkarten-Vergleich:
- * Kleinbuchstaben, Umlaute beibehalten (kein ä→ae),
- * nur Buchstaben & Ziffern – kein Leerzeichen, keine Satzzeichen.
- * So wird "New York" und "newyork" gleich behandelt,
- * aber "Koeln" ≠ "Köln" (bewusst strenger als vorher).
- */
 function normalize(s) {
   return s.toLowerCase().trim().replace(/\s+/g, "").replace(/[^a-z0-9äöüéèàâêîôûñ]/g, "");
 }
 
-/**
- * Debounce – ruft fn erst nach `delay` ms auf,
- * wenn zwischendurch keine weiteren Aufrufe kamen.
- */
 function debounce(fn, delay = 150) {
   let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => fn(...args), delay);
-  };
+  return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
 }
 
-/**
- * Gruppiert den ersten Buchstaben eines Landsnamens
- * für die alphabetische Zwischenüberschrift.
- * Umlaute werden auf ihren Basisbuchstaben abgebildet.
- */
 function alphaGroup(land) {
   const c = land[0].toUpperCase();
   return { "Ä": "A", "Ö": "O", "Ü": "U", "É": "E", "È": "E", "Ñ": "N" }[c] ?? c;
 }
 
-/** Erzeugt eine Button-Zeile als HTML-String */
 function btnRowHTML(items) {
-  const btns = items.map(b =>
+  return `<div class="fc-actions">${items.map(b =>
     `<button class="fc-btn ${b.cls}" ${b.id ? `id="${b.id}"` : ""} type="button">${b.label}</button>`
-  ).join("");
-  return `<div class="fc-actions">${btns}</div>`;
+  ).join("")}</div>`;
 }
 
-/* ════════════════════════════════════════════════════════════
-   APP STATE
-════════════════════════════════════════════════════════════ */
-let LAENDER = [];           // rohe JSON-Daten
+function escapeHTML(str = "") {
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function cssId(name) { return name.replace(/[^a-z0-9]/gi, "_").toLowerCase(); }
+
+/* ── State ── */
+let LAENDER = [];
 let currentFilter = "Alle";
 let currentSearch  = "";
-const activeCards  = new Set(); // Menge der aufgeklappten Ländernamen
+const activeCards  = new Set();
 
-/* ════════════════════════════════════════════════════════════
-   DATEN LADEN
-════════════════════════════════════════════════════════════ */
 async function loadData() {
   try {
     const resp = await fetch("laender.json");
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const data = await resp.json();
-    if (!Array.isArray(data) || data.length === 0) throw new Error("Leere oder ungültige JSON-Daten");
+    if (!Array.isArray(data) || !data.length) throw new Error("Leere Daten");
     return data;
   } catch (err) {
-    // file://-Protokoll ergibt oft einen TypeError
-    const isFileProtocol = location.protocol === "file:";
-    document.getElementById("loadingMsg").innerHTML =
-      isFileProtocol
-        ? "⚠️ Direktes Öffnen via <code>file://</code> blockiert den Datei-Zugriff.<br>Bitte einen lokalen Server verwenden (z.&nbsp;B.&nbsp;VS&nbsp;Code&nbsp;Live&nbsp;Server)."
-        : `⚠️ <code>laender.json</code> konnte nicht geladen werden.<br><small>${err.message}</small>`;
+    const isFile = location.protocol === "file:";
+    document.getElementById("loadingMsg").innerHTML = isFile
+      ? "⚠️ Direktes Öffnen via <code>file://</code> blockiert den Datei-Zugriff.<br>Bitte einen lokalen Server verwenden."
+      : `⚠️ <code>laender.json</code> konnte nicht geladen werden.<br><small>${err.message}</small>`;
     return null;
   }
 }
 
-/* ════════════════════════════════════════════════════════════
-   FILTER & RENDER
-════════════════════════════════════════════════════════════ */
 function getFiltered() {
   const q = currentSearch.toLowerCase();
   return LAENDER.filter(l => {
-    const matchContinent = currentFilter === "Alle" || l.Kontinent === currentFilter;
-    const matchSearch    = !q
-      || l.Land.toLowerCase().includes(q)
-      || l.Hauptstadt.toLowerCase().includes(q);
-    return matchContinent && matchSearch;
+    const mc = currentFilter === "Alle" || l.Kontinent === currentFilter;
+    const ms = !q || l.Land.toLowerCase().includes(q) || l.Hauptstadt.toLowerCase().includes(q);
+    return mc && ms;
   });
 }
 
@@ -782,56 +720,49 @@ function renderList() {
   const filtered = getFiltered();
   const main      = document.getElementById("main");
   const noResults = document.getElementById("noResults");
+  const pill      = document.getElementById("resultPill");
 
-  // Result-Info im Mehr-Menü aktualisieren
-  document.getElementById("resultInfo").textContent =
-    filtered.length === LAENDER.length
-      ? ""
-      : `${filtered.length} von ${LAENDER.length} Staaten`;
+  if (filtered.length === LAENDER.length) {
+    pill.textContent = ""; pill.classList.remove("visible");
+  } else {
+    pill.textContent = `${filtered.length} von ${LAENDER.length}`;
+    pill.classList.add("visible");
+  }
 
-  // Alle dynamisch erzeugten Elemente entfernen
   Array.from(main.children).forEach(child => {
     if (child.id !== "noResults" && child.id !== "loadingMsg") child.remove();
   });
 
-  if (!filtered.length) {
-    noResults.style.display = "block";
-    return;
-  }
+  if (!filtered.length) { noResults.style.display = "block"; return; }
   noResults.style.display = "none";
 
   if (currentFilter === "Alle") {
-    // Alphabetische Gruppen
     let lastGroup = "";
     filtered.forEach(land => {
       const g = alphaGroup(land.Land);
       if (g !== lastGroup) {
         lastGroup = g;
-        const divider = document.createElement("div");
-        divider.className = "alpha-divider";
-        divider.setAttribute("aria-hidden", "true");
-        divider.innerHTML =
-          `<span class="alpha-letter">${g}</span><span class="alpha-line"></span>`;
-        main.insertBefore(divider, noResults);
+        const div = document.createElement("div");
+        div.className = "alpha-divider";
+        div.setAttribute("aria-hidden", "true");
+        div.innerHTML = `<span class="alpha-letter">${g}</span><span class="alpha-line"></span>`;
+        main.insertBefore(div, noResults);
       }
       main.insertBefore(buildCard(land), noResults);
     });
   } else {
-    // Kontinent-Gruppe
     const group = document.createElement("div");
     group.className = "continent-group";
-    group.innerHTML =
-      `<div class="continent-header">
-        <span class="continent-title">${currentFilter}</span>
-        <span class="continent-line"></span>
-        <span class="continent-count">${filtered.length} Staaten</span>
-      </div>`;
-    filtered.forEach(land => group.appendChild(buildCard(land)));
+    group.innerHTML = `<div class="continent-header">
+      <span class="continent-title">${currentFilter}</span>
+      <span class="continent-line"></span>
+      <span class="continent-count">${filtered.length} Staaten</span>
+    </div>`;
+    filtered.forEach(l => group.appendChild(buildCard(l)));
     main.insertBefore(group, noResults);
   }
 }
 
-/** Baut eine Länderkarte als DOM-Element */
 function buildCard(land) {
   const flag   = getFlag(land.Land);
   const isOpen = activeCards.has(land.Land);
@@ -843,15 +774,11 @@ function buildCard(land) {
     ? `<div class="info-block fakt-block">
          <div class="info-label">💡 Wusstest du?</div>
          <div class="info-value">${escapeHTML(land.Fakt)}</div>
-       </div>`
-    : "";
+       </div>` : "";
 
-  // card-trigger ist jetzt ein <button> für korrekte Semantik & Tastatur-Bedienung
   card.innerHTML = `
-    <button class="card-trigger"
-            aria-expanded="${isOpen}"
-            aria-controls="body-${cssId(land.Land)}"
-            type="button">
+    <button class="card-trigger" aria-expanded="${isOpen}"
+            aria-controls="body-${cssId(land.Land)}" type="button">
       <span class="flag" aria-hidden="true">${flag}</span>
       <span class="country-name">${escapeHTML(land.Land)}</span>
       <span class="continent-tag tag-${land.Kontinent}">${land.Kontinent}</span>
@@ -881,101 +808,54 @@ function buildCard(land) {
   card.querySelector(".card-trigger").addEventListener("click", () => {
     const open = card.classList.toggle("open");
     card.querySelector(".card-trigger").setAttribute("aria-expanded", String(open));
-    if (open) activeCards.add(land.Land);
-    else      activeCards.delete(land.Land);
+    if (open) activeCards.add(land.Land); else activeCards.delete(land.Land);
   });
-
   return card;
 }
 
-/** Erzeugt eine sichere CSS-ID aus einem Ländernamen */
-function cssId(name) {
-  return name.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+/* ── Header interactions ── */
+const searchWrapMobile = document.getElementById("searchWrapMobile");
+const searchInput      = document.getElementById("searchInput");        // desktop
+const searchInputMob   = document.getElementById("searchInputMobile");  // mobile
+const searchToggleBtn  = document.getElementById("searchToggleBtn");
+
+function closeSearchMobile() {
+  searchWrapMobile.classList.remove("open");
+  searchToggleBtn.setAttribute("aria-expanded", "false");
+  searchToggleBtn.classList.remove("active");
+  searchInputMob.value = "";
+  currentSearch = "";
+  renderList();
 }
-
-/** Minimales HTML-Escaping gegen XSS bei JSON-Daten */
-function escapeHTML(str = "") {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-/* ════════════════════════════════════════════════════════════
-   HEADER-INTERAKTION
-════════════════════════════════════════════════════════════ */
-
-// Suche
-const searchToggleBtn = document.getElementById("searchToggleBtn");
-const searchWrap      = document.getElementById("searchWrap");
-const searchInput     = document.getElementById("searchInput");
 
 searchToggleBtn.addEventListener("click", () => {
-  const isOpen = searchWrap.style.display !== "none";
-  searchWrap.style.display = isOpen ? "none" : "block";
-  searchToggleBtn.setAttribute("aria-expanded", String(!isOpen));
-  searchToggleBtn.classList.toggle("active", !isOpen);
-  if (!isOpen) {
-    searchInput.focus();
+  const isOpen = searchWrapMobile.classList.contains("open");
+  if (isOpen) {
+    closeSearchMobile();
   } else {
-    searchInput.value = "";
-    currentSearch = "";
-    renderList();
+    searchWrapMobile.classList.add("open");
+    searchToggleBtn.setAttribute("aria-expanded", "true");
+    searchToggleBtn.classList.add("active");
+    searchInputMob.focus();
   }
 });
 
-// Debounced search handler – kein DOM-Rebuild bei jedem Tastendruck
+// Desktop input
 searchInput.addEventListener("input", debounce(e => {
   currentSearch = e.target.value;
   renderList();
 }, 150));
 
-// Mehr-Menü
-const moreBtn  = document.getElementById("moreBtn");
-const moreMenu = document.getElementById("moreMenu");
+// Mobile input – keep in sync
+searchInputMob.addEventListener("input", debounce(e => {
+  currentSearch = e.target.value;
+  renderList();
+}, 150));
 
-moreBtn.addEventListener("click", e => {
-  e.stopPropagation();
-  const open = moreMenu.classList.toggle("open");
-  moreBtn.setAttribute("aria-expanded", String(open));
-  moreBtn.classList.toggle("active", open);
-});
-
-document.addEventListener("click", e => {
-  if (!moreBtn.contains(e.target) && !moreMenu.contains(e.target)) {
-    moreMenu.classList.remove("open");
-    moreBtn.setAttribute("aria-expanded", "false");
-    moreBtn.classList.remove("active");
-  }
-});
-
-// Escape schließt Mehr-Menü und Suche
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") {
-    if (moreMenu.classList.contains("open")) {
-      moreMenu.classList.remove("open");
-      moreBtn.setAttribute("aria-expanded", "false");
-      moreBtn.classList.remove("active");
-      moreBtn.focus();
-    } else if (searchWrap.style.display !== "none") {
-      searchWrap.style.display = "none";
-      searchToggleBtn.setAttribute("aria-expanded", "false");
-      searchToggleBtn.classList.remove("active");
-      searchInput.value = "";
-      currentSearch = "";
-      renderList();
-      searchToggleBtn.focus();
-    }
-  }
-});
-
-// Kontinent-Filter
 document.querySelectorAll(".filter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".filter-btn").forEach(b => {
-      b.classList.remove("active");
-      b.removeAttribute("aria-current");
+      b.classList.remove("active"); b.removeAttribute("aria-current");
     });
     btn.classList.add("active");
     btn.setAttribute("aria-current", "true");
@@ -984,103 +864,75 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
   });
 });
 
-// Alle aufklappen / zuklappen
 document.getElementById("expandAllBtn").addEventListener("click", () => {
   getFiltered().forEach(l => activeCards.add(l.Land));
   renderList();
-  moreMenu.classList.remove("open");
-  moreBtn.setAttribute("aria-expanded", "false");
-  moreBtn.classList.remove("active");
 });
 
 document.getElementById("collapseAllBtn").addEventListener("click", () => {
-  // Nur aktuell sichtbare Karten zuklappen (activeCards für andere Filter erhalten)
   getFiltered().forEach(l => activeCards.delete(l.Land));
   renderList();
-  moreMenu.classList.remove("open");
-  moreBtn.setAttribute("aria-expanded", "false");
-  moreBtn.classList.remove("active");
 });
 
-/* ════════════════════════════════════════════════════════════
-   LERNKARTEN
-════════════════════════════════════════════════════════════ */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && searchWrapMobile.classList.contains("open")) {
+    closeSearchMobile();
+    searchToggleBtn.focus();
+  }
+});
+
+/* ── Lernkarten ── */
 const fcOverlay = document.getElementById("fcOverlay");
 const fcBox     = document.getElementById("fcBox");
 
-/** Lernkarten-Zustand – alles zentral in einem Objekt */
 const FC = {
-  pool:             [],
-  index:            0,
-  correct:          0,
-  wrong:            0,
-  mode:             "reveal",   // "reveal" | "type"
-  selectedLetters:  new Set(),
-  availableLetters: [],
-  initialized:      false,
+  pool: [], index: 0, correct: 0, wrong: 0,
+  mode: "reveal", selectedLetters: new Set(), availableLetters: [], initialized: false,
 };
 
-function openFC()  { fcOverlay.classList.add("active");    fcBox.focus(); }
+function openFC()  { fcOverlay.classList.add("active"); fcBox.focus(); }
 function closeFC() { fcOverlay.classList.remove("active"); }
 
-/* ── Startscreen ─────────────────────────────────────────── */
 function renderStart() {
   const filtered = getFiltered();
   FC.availableLetters = [...new Set(filtered.map(l => alphaGroup(l.Land)))].sort();
-
-  // Beim ersten Öffnen alle Buchstaben vorauswählen
-   if (!FC.initialized) {
-     FC.selectedLetters = new Set(FC.availableLetters);
-     FC.initialized = true;
-   } else {
-    // Buchstaben entfernen, die im aktuellen Filter nicht mehr existieren
+  if (!FC.initialized) {
+    FC.selectedLetters = new Set(FC.availableLetters);
+    FC.initialized = true;
+  } else {
     for (const l of FC.selectedLetters) {
       if (!FC.availableLetters.includes(l)) FC.selectedLetters.delete(l);
     }
   }
-
   const poolSize    = filtered.filter(l => FC.selectedLetters.has(alphaGroup(l.Land))).length;
   const allSelected = FC.selectedLetters.size === FC.availableLetters.length;
-
-  const letterBtns = FC.availableLetters.map(l =>
+  const letterBtns  = FC.availableLetters.map(l =>
     `<button class="fc-letter-btn${FC.selectedLetters.has(l) ? " active" : ""}"
-             data-l="${escapeHTML(l)}" type="button"
-             aria-pressed="${FC.selectedLetters.has(l)}">${l}</button>`
+             data-l="${escapeHTML(l)}" type="button" aria-pressed="${FC.selectedLetters.has(l)}">${l}</button>`
   ).join("");
 
   fcBox.innerHTML = `
     <div class="fc-start-title">🃏 Lernkarten</div>
-
     <div class="fc-mode-row">
       <div class="fc-mode-label">Modus</div>
       <div class="fc-mode-btns">
-        <button class="fc-mode-btn${FC.mode === "reveal" ? " active" : ""}"
-                data-mode="reveal" type="button"
-                aria-pressed="${FC.mode === "reveal"}">Aufdecken</button>
-        <button class="fc-mode-btn${FC.mode === "type" ? " active" : ""}"
-                data-mode="type" type="button"
-                aria-pressed="${FC.mode === "type"}">Eingabe</button>
+        <button class="fc-mode-btn${FC.mode==="reveal"?" active":""}" data-mode="reveal" type="button" aria-pressed="${FC.mode==="reveal"}">Aufdecken</button>
+        <button class="fc-mode-btn${FC.mode==="type"?" active":""}" data-mode="type" type="button" aria-pressed="${FC.mode==="type"}">Eingabe</button>
       </div>
     </div>
-
     <div class="fc-letters-row">
       <div class="fc-letters-label">Buchstaben · <strong>${poolSize}</strong> Staaten</div>
       <div class="fc-letters-grid">
-        <button class="fc-letter-btn${allSelected ? " active" : ""}"
-                data-l="alle" type="button"
-                aria-pressed="${allSelected}">Alle</button>
+        <button class="fc-letter-btn${allSelected?" active":""}" data-l="alle" type="button" aria-pressed="${allSelected}">Alle</button>
         ${letterBtns}
       </div>
     </div>
-
     <div class="fc-warning" id="fcStartWarning" role="alert" aria-live="polite"></div>
-
     ${btnRowHTML([
       { label: "Abbrechen", cls: "fc-btn-secondary", id: "fcCancelBtn" },
       { label: "Starten",   cls: "fc-btn-primary",   id: "fcStartBtn"  },
     ])}`;
 
-  // Modus-Buttons
   fcBox.querySelectorAll(".fc-mode-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       FC.mode = btn.dataset.mode;
@@ -1090,221 +942,136 @@ function renderStart() {
       });
     });
   });
-
-  // Buchstaben-Buttons
   fcBox.querySelectorAll(".fc-letter-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const l = btn.dataset.l;
       if (l === "alle") {
-        FC.selectedLetters =
-          FC.selectedLetters.size === FC.availableLetters.length
-            ? new Set()
-            : new Set(FC.availableLetters);
+        FC.selectedLetters = FC.selectedLetters.size === FC.availableLetters.length
+          ? new Set() : new Set(FC.availableLetters);
       } else {
-        FC.selectedLetters.has(l)
-          ? FC.selectedLetters.delete(l)
-          : FC.selectedLetters.add(l);
+        FC.selectedLetters.has(l) ? FC.selectedLetters.delete(l) : FC.selectedLetters.add(l);
       }
-      // Warnung zurücksetzen, neu rendern
       renderStart();
     });
   });
-
-  // Starten
   document.getElementById("fcStartBtn").addEventListener("click", () => {
     const pool = filtered.filter(l => FC.selectedLetters.has(alphaGroup(l.Land)));
     if (!pool.length) {
-      // Benutzerfreundliches Feedback statt silent fail
-      document.getElementById("fcStartWarning").textContent =
-        "⚠️ Bitte mindestens einen Buchstaben auswählen.";
+      document.getElementById("fcStartWarning").textContent = "⚠️ Bitte mindestens einen Buchstaben auswählen.";
       return;
     }
-    FC.pool    = shuffle(pool);
-    FC.index   = 0;
-    FC.correct = 0;
-    FC.wrong   = 0;
+    FC.pool = shuffle(pool); FC.index = 0; FC.correct = 0; FC.wrong = 0;
     renderCard_FC();
   });
-
   document.getElementById("fcCancelBtn").addEventListener("click", closeFC);
 }
 
-/* ── Karte anzeigen ──────────────────────────────────────── */
 function renderCard_FC() {
   if (FC.index >= FC.pool.length) { renderResult(); return; }
-
   const land = FC.pool[FC.index];
   const flag = getFlag(land.Land);
   const prog = `${FC.index + 1} / ${FC.pool.length} · ✅ ${FC.correct} · ❌ ${FC.wrong}`;
-
   if (FC.mode === "reveal") renderReveal(land, flag, prog);
-  else                      renderType(land, flag, prog);
+  else renderType(land, flag, prog);
 }
 
-/* ── Aufdecken-Modus ─────────────────────────────────────── */
 function renderReveal(land, flag, prog) {
   fcBox.innerHTML = `
     <div class="fc-progress">${prog}</div>
     <span class="fc-flag" aria-hidden="true">${flag}</span>
-    <div class="fc-question" aria-live="polite">
-      Hauptstadt von<br><strong>${escapeHTML(land.Land)}</strong>?
-    </div>
+    <div class="fc-question" aria-live="polite">Hauptstadt von<br><strong>${escapeHTML(land.Land)}</strong>?</div>
     ${btnRowHTML([
-      { label: "Abbrechen",       cls: "fc-btn-secondary", id: "fcAbortBtn"  },
-      { label: "Antwort zeigen",  cls: "fc-btn-reveal",    id: "fcRevealBtn" },
+      { label: "Abbrechen",      cls: "fc-btn-secondary", id: "fcAbortBtn" },
+      { label: "Antwort zeigen", cls: "fc-btn-reveal",    id: "fcRevealBtn" },
     ])}`;
-
   document.getElementById("fcRevealBtn").addEventListener("click", () => {
-    // Antwort einblenden, Selbstbewertungs-Buttons zeigen
     fcBox.innerHTML = `
       <div class="fc-progress">${prog}</div>
       <span class="fc-flag" aria-hidden="true">${flag}</span>
-      <div class="fc-question">
-        Hauptstadt von<br><strong>${escapeHTML(land.Land)}</strong>?
-      </div>
-      <div class="fc-answer-box" role="status" aria-live="polite">
-        ${escapeHTML(land.Hauptstadt)}
-      </div>
+      <div class="fc-question">Hauptstadt von<br><strong>${escapeHTML(land.Land)}</strong>?</div>
+      <div class="fc-answer-box" role="status" aria-live="polite">${escapeHTML(land.Hauptstadt)}</div>
       ${btnRowHTML([
         { label: "✗ Nicht gewusst", cls: "fc-btn-wrong",   id: "fcWrongBtn" },
         { label: "✓ Gewusst",       cls: "fc-btn-correct", id: "fcOkBtn"    },
       ])}`;
-
-    document.getElementById("fcOkBtn").addEventListener("click", () => {
-      FC.correct++; FC.index++; renderCard_FC();
-    });
-    document.getElementById("fcWrongBtn").addEventListener("click", () => {
-      FC.wrong++; FC.index++; renderCard_FC();
-    });
+    document.getElementById("fcOkBtn").addEventListener("click",    () => { FC.correct++; FC.index++; renderCard_FC(); });
+    document.getElementById("fcWrongBtn").addEventListener("click", () => { FC.wrong++;   FC.index++; renderCard_FC(); });
   });
-
   document.getElementById("fcAbortBtn").addEventListener("click", closeFC);
 }
 
-/* ── Eingabe-Modus ───────────────────────────────────────── */
 function renderType(land, flag, prog) {
   fcBox.innerHTML = `
     <div class="fc-progress">${prog}</div>
     <span class="fc-flag" aria-hidden="true">${flag}</span>
-    <div class="fc-question" aria-live="polite">
-      Hauptstadt von<br><strong>${escapeHTML(land.Land)}</strong>?
-    </div>
-    <input class="fc-input" id="fcInput"
-           type="text"
-           placeholder="Hauptstadt eingeben …"
-           autocomplete="off"
-           spellcheck="false"
-           aria-label="Deine Antwort">
+    <div class="fc-question" aria-live="polite">Hauptstadt von<br><strong>${escapeHTML(land.Land)}</strong>?</div>
+    <input class="fc-input" id="fcInput" type="text" placeholder="Hauptstadt eingeben …"
+           autocomplete="off" spellcheck="false" aria-label="Deine Antwort">
     <div class="fc-feedback" id="fcFeedback" role="status" aria-live="polite"></div>
     ${btnRowHTML([
       { label: "Abbrechen", cls: "fc-btn-secondary", id: "fcAbortBtn" },
       { label: "Prüfen",    cls: "fc-btn-reveal",    id: "fcCheckBtn" },
     ])}`;
-
   const input = document.getElementById("fcInput");
   input.focus();
-
   const check = () => {
     const val = input.value.trim();
-    if (!val) return;  // leere Eingabe ignorieren
-
-    /**
-     * Vergleichsstrategie:
-     * 1. Exakter Vergleich nach Normalisierung (Hauptmethode)
-     * 2. Normalisierter Vergleich aller /-getrennten Alternativnamen
-     *    (z. B. "Pretoria / Kapstadt / Bloemfontein")
-     * Kein substring-Check mehr – "a" für "Manama" wird nicht mehr akzeptiert.
-     */
-    const normalizedInput = normalize(val);
-    const alternatives    = land.Hauptstadt.split(/[/,]/).map(s => normalize(s.trim()));
-    const isCorrect       = alternatives.some(alt => alt === normalizedInput);
-
-    input.classList.add(isCorrect ? "correct" : "wrong");
+    if (!val) return;
+    const ni   = normalize(val);
+    const alts = land.Hauptstadt.split(/[/,]/).map(s => normalize(s.trim()));
+    const ok   = alts.some(a => a === ni);
+    input.classList.add(ok ? "correct" : "wrong");
     input.disabled = true;
-
     const fb = document.getElementById("fcFeedback");
-    fb.textContent  = isCorrect ? "✓ Richtig!" : `✗ Richtig wäre: ${land.Hauptstadt}`;
-    fb.className    = "fc-feedback " + (isCorrect ? "correct" : "wrong");
-
-    if (isCorrect) FC.correct++; else FC.wrong++;
-
-    // Prüfen- und Abbrechen-Button durch Weiter ersetzen
+    fb.textContent = ok ? "✓ Richtig!" : `✗ Richtig wäre: ${land.Hauptstadt}`;
+    fb.className   = "fc-feedback " + (ok ? "correct" : "wrong");
+    if (ok) FC.correct++; else FC.wrong++;
     fcBox.querySelector(".fc-actions").innerHTML =
       `<button class="fc-btn fc-btn-primary" id="fcNextBtn" type="button">Weiter →</button>`;
-    document.getElementById("fcNextBtn").addEventListener("click", () => {
-      FC.index++; renderCard_FC();
-    });
-    // Enter-Taste funktioniert auch auf dem Weiter-Button
+    document.getElementById("fcNextBtn").addEventListener("click", () => { FC.index++; renderCard_FC(); });
     document.getElementById("fcNextBtn").focus();
   };
-
   input.addEventListener("keydown", e => { if (e.key === "Enter") check(); });
   document.getElementById("fcCheckBtn").addEventListener("click", check);
   document.getElementById("fcAbortBtn").addEventListener("click", closeFC);
 }
 
-/* ── Ergebnis-Screen ─────────────────────────────────────── */
 function renderResult() {
   const total = FC.pool.length;
   const pct   = total > 0 ? Math.round(FC.correct / total * 100) : 0;
   const emoji = pct >= 80 ? "🎉" : pct >= 50 ? "👍" : "📚";
-
   fcBox.innerHTML = `
     <span class="fc-result-emoji" aria-hidden="true">${emoji}</span>
     <div class="fc-result-title">Fertig!</div>
-    <div class="fc-result-sub" role="status">
-      ${FC.correct} richtig · ${FC.wrong} falsch · ${pct}&nbsp;%
-    </div>
+    <div class="fc-result-sub" role="status">${FC.correct} richtig · ${FC.wrong} falsch · ${pct}&nbsp;%</div>
     ${btnRowHTML([
       { label: "Schließen", cls: "fc-btn-secondary", id: "fcDoneBtn"  },
       { label: "Nochmal",   cls: "fc-btn-primary",   id: "fcRetryBtn" },
     ])}`;
-
   document.getElementById("fcRetryBtn").addEventListener("click", () => {
-    FC.pool    = shuffle(FC.pool);
-    FC.index   = 0;
-    FC.correct = 0;
-    FC.wrong   = 0;
+    FC.pool = shuffle(FC.pool); FC.index = 0; FC.correct = 0; FC.wrong = 0;
     renderCard_FC();
   });
   document.getElementById("fcDoneBtn").addEventListener("click", closeFC);
 }
 
-/* ── Lernkarten-Trigger ──────────────────────────────────── */
 document.getElementById("startFlashcardsBtn").addEventListener("click", () => {
-  moreMenu.classList.remove("open");
-  moreBtn.setAttribute("aria-expanded", "false");
-  moreBtn.classList.remove("active");
-  // Buchstabenauswahl zurücksetzen, damit beim Neustart alles frisch ist
   FC.initialized = false;
   openFC();
   renderStart();
 });
 
-// Klick auf Overlay-Hintergrund schließt
-fcOverlay.addEventListener("click", e => {
-  if (e.target === fcOverlay) closeFC();
-});
+fcOverlay.addEventListener("click", e => { if (e.target === fcOverlay) closeFC(); });
+fcOverlay.addEventListener("keydown", e => { if (e.key === "Escape") closeFC(); });
 
-// Escape schließt auch das Overlay
-fcOverlay.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeFC();
-});
-
-/* ════════════════════════════════════════════════════════════
-   BOOTSTRAP
-════════════════════════════════════════════════════════════ */
+/* ── Bootstrap ── */
 (async () => {
   const data = await loadData();
-  if (!data) return;   // Fehlermeldung bereits gesetzt
-
+  if (!data) return;
   LAENDER = data;
   document.getElementById("loadingMsg").style.display = "none";
-  document.getElementById("countBadge").textContent   = `${LAENDER.length} Staaten`;
 
-  // FLAGS-Vollständigkeit prüfen (erscheint nur in der Dev-Console)
   LAENDER.forEach(l => getFlag(l.Land));
-
   renderList();
 })();
 </script>
