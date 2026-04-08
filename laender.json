@@ -157,7 +157,7 @@
   },
   {
     "Land": "Benin",
-    "Hauptstadt": "Porto-Novo",
+    "Hauptstadt": "Porto-Novo (de jure)\nCotonou (de facto)",
     "Kontinent": "Afrika",
     "Fläche": "112.622 km²",
     "Bevölkerung": "ca. 13 Mio.",
@@ -173,7 +173,7 @@
   },
   {
     "Land": "Bolivien",
-    "Hauptstadt": "Sucre (Verfassungshauptstadt)\nLa Paz (Regierungssitz)",
+    "Hauptstadt": "Sucre (de jure)\nLa Paz (de facto)",
     "Kontinent": "Amerika",
     "Fläche": "1.098.581 km²",
     "Bevölkerung": "ca. 12 Mio.",
@@ -325,7 +325,7 @@
   },
   {
     "Land": "Elfenbeinküste",
-    "Hauptstadt": "Yamoussoukro",
+    "Hauptstadt": "Yamoussoukro (de jure)\nAbidjan (de facto)",
     "Kontinent": "Afrika",
     "Fläche": "322.463 km²",
     "Bevölkerung": "ca. 27 Mio.",
@@ -349,7 +349,7 @@
   },
   {
     "Land": "Eswatini",
-    "Hauptstadt": "Mbabane",
+    "Hauptstadt": "Mbabane (de jure)\nLobamba (de facto)",
     "Kontinent": "Afrika",
     "Fläche": "17.364 km²",
     "Bevölkerung": "ca. 1,2 Mio.",
@@ -522,7 +522,7 @@
   },
   {
     "Land": "Israel",
-    "Hauptstadt": "Jerusalem",
+    "Hauptstadt": "Jerusalem (de facto)",
     "Kontinent": "Asien",
     "Fläche": "20.770 km²",
     "Bevölkerung": "ca. 9,7 Mio.",
@@ -554,7 +554,7 @@
   },
   {
     "Land": "Jemen",
-    "Hauptstadt": "Sanaa",
+    "Hauptstadt": "Sanaa (de jure)\nAden (de facto)",
     "Kontinent": "Asien",
     "Fläche": "527.968 km²",
     "Bevölkerung": "ca. 34 Mio."
@@ -805,7 +805,7 @@
   },
   {
     "Land": "Malaysia",
-    "Hauptstadt": "Kuala Lumpur",
+    "Hauptstadt": "Kuala Lumpur (de jure)\nPutrajaya (de facto)",
     "Kontinent": "Asien",
     "Fläche": "329.847 km²",
     "Bevölkerung": "ca. 33 Mio.",
@@ -940,7 +940,7 @@
   },
   {
     "Land": "Nauru",
-    "Hauptstadt": "Yaren",
+    "Hauptstadt": "Yaren (de facto)",
     "Kontinent": "Ozeanien",
     "Fläche": "21 km²",
     "Bevölkerung": "ca. 10.000",
@@ -971,7 +971,7 @@
   },
   {
     "Land": "Niederlande",
-    "Hauptstadt": "Amsterdam",
+    "Hauptstadt": "Amsterdam (de jure)\nDen Haag (de facto)",
     "Kontinent": "Europa",
     "Fläche": "41.543 km²",
     "Bevölkerung": "ca. 17,9 Mio.",
@@ -1177,7 +1177,7 @@
   },
   {
     "Land": "Schweiz",
-    "Hauptstadt": "Bern",
+    "Hauptstadt": "Bern (de facto)",
     "Kontinent": "Europa",
     "Fläche": "41.285 km²",
     "Bevölkerung": "ca. 8,8 Mio.",
@@ -1263,7 +1263,7 @@
   },
   {
     "Land": "Sri Lanka",
-    "Hauptstadt": "Sri Jayewardenepura Kotte",
+    "Hauptstadt": "Sri Jayewardenepura Kotte (de jure)\nColombo (de facto)",
     "Kontinent": "Asien",
     "Fläche": "65.610 km²",
     "Bevölkerung": "ca. 22 Mio.",
@@ -1294,7 +1294,7 @@
   },
   {
     "Land": "Südafrika",
-    "Hauptstadt": "Pretoria (Verwaltung)\nKapstadt (Parlament)\nBloemfontein (Justiz)",
+    "Hauptstadt": "Bloemfontein (Judikative)\nKapstadt (Legislative)\nPretoria (Exekutive)",
     "Kontinent": "Afrika",
     "Fläche": "1.219.090 km²",
     "Bevölkerung": "ca. 60 Mio.",
@@ -1349,7 +1349,7 @@
   },
   {
     "Land": "Tansania",
-    "Hauptstadt": "Dodoma",
+    "Hauptstadt": "Dodoma (de jure)\nDaressalam (de facto)",
     "Kontinent": "Afrika",
     "Fläche": "945.087 km²",
     "Bevölkerung": "ca. 63 Mio.",
@@ -1428,7 +1428,7 @@
   },
   {
     "Land": "Tuvalu",
-    "Hauptstadt": "Funafuti",
+    "Hauptstadt": "Funafuti (de jure)\nVaiaku (de facto)",
     "Kontinent": "Ozeanien",
     "Fläche": "26 km²",
     "Bevölkerung": "ca. 11.000",
