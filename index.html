@@ -23,9 +23,20 @@
   --tag-Amerika-bg:  #e8f4f0; --tag-Amerika-fg:  #1a5a4a;
   --tag-Ozeanien-bg: #ede8f7; --tag-Ozeanien-fg: #3a1a6b;
 
-  --un-bg:    #fdf3e3;
-  --un-border:#e8c97a;
-  --un-text:  #7a5200;
+  /* UN-Status: kein Mitglied (rot-orange) */
+  --un-none-bg:    #fdf0e3;
+  --un-none-border:#e8a87a;
+  --un-none-text:  #7a3200;
+
+  /* UN-Status: Beobachter (blau-grau) */
+  --un-obs-bg:     #e8f0f7;
+  --un-obs-border: #7aaee8;
+  --un-obs-text:   #1a3a6b;
+
+  /* UN-Status: teilweise anerkannt (gelb-amber) */
+  --un-part-bg:    #fdf7e3;
+  --un-part-border:#e8c97a;
+  --un-part-text:  #5a4000;
 
   --shadow:       0 2px 12px rgba(0,0,0,.07);
   --shadow-hover: 0 6px 24px rgba(0,0,0,.12);
@@ -293,10 +304,18 @@ main {
 .country-card:hover { box-shadow: var(--shadow-hover); border-color: #c5bfb5; }
 .country-card.open { border-color: var(--accent); }
 
-/* Karten mit UN-Hinweis bekommen einen leicht wärmeren Rand */
-.country-card.un-hinweis { border-color: var(--un-border); }
-.country-card.un-hinweis:hover { border-color: #c8a84a; }
-.country-card.un-hinweis.open { border-color: var(--accent); }
+/* Karten mit UN-Hinweisen */
+.country-card.un-nicht-anerkannt { border-color: var(--un-none-border); }
+.country-card.un-nicht-anerkannt:hover { border-color: #c86030; }
+.country-card.un-nicht-anerkannt.open { border-color: var(--accent); }
+
+.country-card.un-beobachter { border-color: var(--un-obs-border); }
+.country-card.un-beobachter:hover { border-color: #4a8ed8; }
+.country-card.un-beobachter.open { border-color: var(--accent); }
+
+.country-card.un-teilweise { border-color: var(--un-part-border); }
+.country-card.un-teilweise:hover { border-color: #c8a84a; }
+.country-card.un-teilweise.open { border-color: var(--accent); }
 
 .card-trigger {
   display: flex;
@@ -320,17 +339,18 @@ main {
 .flag { font-size: 1.4rem; line-height: 1; flex-shrink: 0; width: 30px; text-align: center; }
 .country-name { font-weight: 600; font-size: .95rem; flex: 1; }
 
-/* Sternchen hinter dem Ländernamen */
+/* Sternchen hinter dem Ländernamen – drei Varianten */
 .un-marker {
   display: inline-block;
   font-size: .75em;
   font-weight: 700;
-  color: var(--un-text);
   vertical-align: super;
   line-height: 1;
   margin-left: 1px;
-  cursor: help;
 }
+.un-marker.un-marker--none { color: var(--un-none-text); }
+.un-marker.un-marker--obs  { color: var(--un-obs-text);  }
+.un-marker.un-marker--part { color: var(--un-part-text);  }
 
 .continent-tag {
   font-size: .68rem;
@@ -407,16 +427,34 @@ main {
 .fakt-block .info-label { color: var(--accent); }
 .fakt-block .info-value { font-size: .85rem; font-weight: 400; line-height: 1.5; color: #2a3d29; }
 
-/* UN-Status-Block */
+/* UN-Status-Blöcke: drei Varianten */
 .un-block {
-  background: var(--un-bg);
-  border: 1px solid var(--un-border);
   border-radius: 8px;
   padding: 10px 13px;
   grid-column: 1 / -1;
 }
-.un-block .info-label { color: var(--un-text); }
-.un-block .info-value { font-size: .85rem; font-weight: 400; line-height: 1.5; color: var(--un-text); }
+.un-block .info-value { font-size: .85rem; font-weight: 400; line-height: 1.5; }
+
+.un-block--none {
+  background: var(--un-none-bg);
+  border: 1px solid var(--un-none-border);
+}
+.un-block--none .info-label { color: var(--un-none-text); }
+.un-block--none .info-value { color: var(--un-none-text); }
+
+.un-block--obs {
+  background: var(--un-obs-bg);
+  border: 1px solid var(--un-obs-border);
+}
+.un-block--obs .info-label { color: var(--un-obs-text); }
+.un-block--obs .info-value { color: var(--un-obs-text); }
+
+.un-block--part {
+  background: var(--un-part-bg);
+  border: 1px solid var(--un-part-border);
+}
+.un-block--part .info-label { color: var(--un-part-text); }
+.un-block--part .info-value { color: var(--un-part-text); }
 
 .no-results {
   text-align: center;
@@ -567,7 +605,6 @@ main {
       <button class="filter-btn" data-filter="Europa">Europa</button>
       <button class="filter-btn" data-filter="Ozeanien">Ozeanien</button>
       <span class="result-pill" id="resultPill" aria-live="polite"></span>
-
     </nav>
   </div>
 </header>
@@ -647,6 +684,31 @@ const FLAGS = {
   "Ägypten":"🇪🇬","Äquatorialguinea":"🇬🇶","Äthiopien":"🇪🇹"
 };
 
+// UN-Status-Konfiguration
+const UN_STATUS_CONFIG = {
+  "nicht_anerkannt": {
+    cardClass: "un-nicht-anerkannt",
+    markerClass: "un-marker--none",
+    blockClass: "un-block--none",
+    icon: "🚫",
+    label: "UN-Status"
+  },
+  "beobachter": {
+    cardClass: "un-beobachter",
+    markerClass: "un-marker--obs",
+    blockClass: "un-block--obs",
+    icon: "👁",
+    label: "UN-Status"
+  },
+  "teilweise_anerkannt": {
+    cardClass: "un-teilweise",
+    markerClass: "un-marker--part",
+    blockClass: "un-block--part",
+    icon: "⚠️",
+    label: "UN-Status"
+  }
+};
+
 function getFlag(n) { return FLAGS[n] || "🌐"; }
 
 function shuffle(arr) {
@@ -662,12 +724,10 @@ function normalize(s) {
   return s.toLowerCase().trim().replace(/\s+/g, "").replace(/[^a-z0-9äöüéèàâêîôûñ]/g, "");
 }
 
-// Alle Varianten einer Hauptstadt extrahieren (für Lernkarten-Prüfung)
-// Unterstützt sowohl "/" und "," als Trennzeichen als auch "\n" (mehrzeilige Einträge)
 function getHauptstadtVarianten(hauptstadt) {
   return hauptstadt
     .split(/[\n/,]/)
-    .map(s => s.replace(/\(.*?\)/g, "").trim())  // Klammerzusätze entfernen
+    .map(s => s.replace(/\(.*?\)/g, "").trim())
     .filter(Boolean);
 }
 
@@ -771,30 +831,34 @@ function renderList() {
 }
 
 function buildCard(land) {
-  const flag      = getFlag(land.Land);
-  const isOpen    = activeCards.has(land.Land);
-  const keinUN    = land.UNMitglied === false;
-  const card      = document.createElement("article");
+  const flag   = getFlag(land.Land);
+  const isOpen = activeCards.has(land.Land);
+  const status = land.UNStatus ? UN_STATUS_CONFIG[land.UNStatus] : null;
+  const card   = document.createElement("article");
 
-  card.className = "country-card" + (isOpen ? " open" : "") + (keinUN ? " un-hinweis" : "");
+  // CSS-Klassen für Karte
+  let cardClasses = "country-card" + (isOpen ? " open" : "");
+  if (status) cardClasses += " " + status.cardClass;
+  card.className = cardClasses;
   card.dataset.land = land.Land;
 
-  // Sternchen mit Tooltip wenn kein UN-Mitglied
-  const unMarker = keinUN
-    ? `<span class="un-marker" title="Kein Mitglied der Vereinten Nationen">*</span>`
+  // Sternchen ohne Tooltip
+  const unMarker = status
+    ? `<span class="un-marker ${status.markerClass}" aria-hidden="true">*</span>`
     : "";
 
-  // Hauptstadt: mehrere Zeilen erlauben
+  // Hauptstadt: mehrere Zeilen
   const hatMehrereHauptstaedte = land.Hauptstadt.includes("\n");
   const hauptstadtHTML = `<div class="info-value${hatMehrereHauptstaedte ? " multiline" : ""}">${escapeHTML(land.Hauptstadt)}</div>`;
 
-  // UN-Status-Block im aufgeklappten Bereich
-  const unBlockHTML = keinUN
-    ? `<div class="info-block un-block">
-         <div class="info-label">⚠️ UN-Status</div>
-         <div class="info-value">Kein Mitglied der Vereinten Nationen.</div>
-       </div>`
-    : "";
+  // UN-Block je nach Status
+  let unBlockHTML = "";
+  if (status && land.UNStatusText) {
+    unBlockHTML = `<div class="info-block un-block ${status.blockClass}">
+      <div class="info-label">${status.icon} ${status.label}</div>
+      <div class="info-value">${escapeHTML(land.UNStatusText)}</div>
+    </div>`;
+  }
 
   const faktHTML = land.Fakt
     ? `<div class="info-block fakt-block">
@@ -1018,16 +1082,12 @@ function renderType(land, flag, prog) {
     const val = input.value.trim();
     if (!val) return;
     const ni       = normalize(val);
-    // Alle Varianten der Hauptstadt prüfen (inkl. mehrzeiliger Einträge)
     const varianten = getHauptstadtVarianten(land.Hauptstadt);
     const ok        = varianten.some(v => normalize(v) === ni);
     input.classList.add(ok ? "correct" : "wrong");
     input.disabled = true;
     const fb = document.getElementById("fcFeedback");
-    // Bei mehreren Hauptstädten alle anzeigen
-    const antwortText = varianten.length > 1
-      ? varianten.join(" / ")
-      : land.Hauptstadt;
+    const antwortText = varianten.length > 1 ? varianten.join(" / ") : land.Hauptstadt;
     fb.textContent = ok ? "✓ Richtig!" : `✗ Richtig wäre: ${antwortText}`;
     fb.className   = "fc-feedback " + (ok ? "correct" : "wrong");
     if (ok) FC.correct++; else FC.wrong++;
