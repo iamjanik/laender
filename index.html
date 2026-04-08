@@ -787,7 +787,7 @@ function renderList() {
   document.getElementById("resultInfo").textContent =
     filtered.length === LAENDER.length
       ? ""
-      : `${filtered.length} von ${LAENDER.length} Ländern`;
+      : `${filtered.length} von ${LAENDER.length} Staaten`;
 
   // Alle dynamisch erzeugten Elemente entfernen
   Array.from(main.children).forEach(child => {
@@ -824,7 +824,7 @@ function renderList() {
       `<div class="continent-header">
         <span class="continent-title">${currentFilter}</span>
         <span class="continent-line"></span>
-        <span class="continent-count">${filtered.length} Länder</span>
+        <span class="continent-count">${filtered.length} Staaten</span>
       </div>`;
     filtered.forEach(land => group.appendChild(buildCard(land)));
     main.insertBefore(group, noResults);
@@ -1064,7 +1064,7 @@ function renderStart() {
     </div>
 
     <div class="fc-letters-row">
-      <div class="fc-letters-label">Buchstaben · <strong>${poolSize}</strong> Länder</div>
+      <div class="fc-letters-label">Buchstaben · <strong>${poolSize}</strong> Staaten</div>
       <div class="fc-letters-grid">
         <button class="fc-letter-btn${allSelected ? " active" : ""}"
                 data-l="alle" type="button"
@@ -1300,7 +1300,7 @@ fcOverlay.addEventListener("keydown", e => {
 
   LAENDER = data;
   document.getElementById("loadingMsg").style.display = "none";
-  document.getElementById("countBadge").textContent   = `${LAENDER.length} Länder`;
+  document.getElementById("countBadge").textContent   = `${LAENDER.length} Staaten`;
 
   // FLAGS-Vollständigkeit prüfen (erscheint nur in der Dev-Console)
   LAENDER.forEach(l => getFlag(l.Land));
