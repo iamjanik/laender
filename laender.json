@@ -249,7 +249,8 @@
     "Fläche": "36.193 km²",
     "Bevölkerung": "ca. 23 Mio.",
     "Fakt": "Taiwan produziert über 90 % der weltweit hergestellten Halbleiter (mit einer Strukturbreite unter 7 nm) und ist trotz geopolitischer Sonderlage eine der größten Volkswirtschaften Asiens.",
-    "UNMitglied": false
+    "UNStatus": "nicht_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Taiwan wird offiziell nur noch von rund 11 Staaten anerkannt, da die Volksrepublik China einen Alleinvertretungsanspruch erhebt. 1971 verlor Taiwan seinen UN-Sitz an die Volksrepublik China (Resolution 2758). De facto ist Taiwan ein unabhängiger, demokratischer Staat."
   },
   {
     "Land": "China, Volksrepublik",
@@ -691,7 +692,8 @@
     "Fläche": "10.908 km²",
     "Bevölkerung": "ca. 1,8 Mio.",
     "Fakt": "Kosovo erklärte 2008 die Unabhängigkeit und ist eines der jüngsten Länder der Welt. Über 90 % der Bevölkerung sind albanischsprachig.",
-    "UNMitglied": false
+    "UNStatus": "teilweise_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Kosovo erklärte am 17. Februar 2008 einseitig die Unabhängigkeit von Serbien. Bisher wird er von rund 119 UN-Mitgliedstaaten anerkannt, darunter die USA, Deutschland und die meisten EU-Staaten. Russland, China und Serbien verweigern die Anerkennung."
   },
   {
     "Land": "Kroatien",
@@ -1489,7 +1491,8 @@
     "Fläche": "0,44 km²",
     "Bevölkerung": "ca. 800",
     "Fakt": "Der Vatikan ist der kleinste Staat der Welt und der einzige ohne reguläre Staatsbürger von Geburt – man wird durch Amt oder Funktion Bürger.",
-    "UNMitglied": false
+    "UNStatus": "beobachter",
+    "UNStatusText": "Kein UN-Mitglied, aber ständiger Beobachterstaat. Der Heilige Stuhl vertritt den Vatikan bei den Vereinten Nationen und besitzt seit 2004 alle Rechte eines Mitgliedstaates – mit Ausnahme des Stimmrechts in der Generalversammlung."
   },
   {
     "Land": "Venezuela",
