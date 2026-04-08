@@ -1017,6 +1017,7 @@ const FC = {
   mode:             "reveal",   // "reveal" | "type"
   selectedLetters:  new Set(),
   availableLetters: [],
+  initialized:      false,
 };
 
 function openFC()  { fcOverlay.classList.add("active");    fcBox.focus(); }
@@ -1028,9 +1029,10 @@ function renderStart() {
   FC.availableLetters = [...new Set(filtered.map(l => alphaGroup(l.Land)))].sort();
 
   // Beim ersten Öffnen alle Buchstaben vorauswählen
-  if (FC.selectedLetters.size === 0) {
-    FC.selectedLetters = new Set(FC.availableLetters);
-  } else {
+   if (!FC.initialized) {
+     FC.selectedLetters = new Set(FC.availableLetters);
+     FC.initialized = true;
+   } else {
     // Buchstaben entfernen, die im aktuellen Filter nicht mehr existieren
     for (const l of FC.selectedLetters) {
       if (!FC.availableLetters.includes(l)) FC.selectedLetters.delete(l);
@@ -1274,7 +1276,7 @@ document.getElementById("startFlashcardsBtn").addEventListener("click", () => {
   moreBtn.setAttribute("aria-expanded", "false");
   moreBtn.classList.remove("active");
   // Buchstabenauswahl zurücksetzen, damit beim Neustart alles frisch ist
-  FC.selectedLetters = new Set();
+  FC.initialized = false;
   openFC();
   renderStart();
 });
