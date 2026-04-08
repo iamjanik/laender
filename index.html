@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Staaten der Erde</title>
+<title>Länder der Erde</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -487,7 +487,7 @@ main {
   <div class="header-bar">
     <!-- Logo + Count -->
     <div class="header-logo">
-      <h1>Staaten der Erde</h1>
+      <h1>Länder der Erde</h1>
 
     </div>
 
@@ -501,7 +501,7 @@ main {
       <input type="search" id="searchInput"
              placeholder="Suchen …"
              autocomplete="off"
-             aria-label="Staat oder Hauptstadt suchen">
+             aria-label="Land oder Hauptstadt suchen">
     </div>
 
     <!-- Actions -->
@@ -550,7 +550,7 @@ main {
       <input type="search" id="searchInputMobile"
              placeholder="Suchen …"
              autocomplete="off"
-             aria-label="Staat oder Hauptstadt suchen">
+             aria-label="Land oder Hauptstadt suchen">
     </div>
   </div>
 
@@ -575,7 +575,7 @@ main {
     <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <p>Keine Staaten gefunden.</p>
+    <p>Keine Länder gefunden.</p>
   </div>
 </main>
 
@@ -756,7 +756,7 @@ function renderList() {
     group.innerHTML = `<div class="continent-header">
       <span class="continent-title">${currentFilter}</span>
       <span class="continent-line"></span>
-      <span class="continent-count">${filtered.length} Staaten</span>
+      <span class="continent-count">${filtered.length} Länder</span>
     </div>`;
     filtered.forEach(l => group.appendChild(buildCard(l)));
     main.insertBefore(group, noResults);
@@ -912,7 +912,7 @@ function renderStart() {
   ).join("");
 
   fcBox.innerHTML = `
-    <div class="fc-start-title">🃏 Lernkarten</div>
+    <div class="fc-start-title">Lernkarten</div>
     <div class="fc-mode-row">
       <div class="fc-mode-label">Modus</div>
       <div class="fc-mode-btns">
@@ -921,7 +921,7 @@ function renderStart() {
       </div>
     </div>
     <div class="fc-letters-row">
-      <div class="fc-letters-label">Buchstaben · <strong>${poolSize}</strong> Staaten</div>
+      <div class="fc-letters-label">Buchstaben · <strong>${poolSize}</strong> Länder</div>
       <div class="fc-letters-grid">
         <button class="fc-letter-btn${allSelected?" active":""}" data-l="alle" type="button" aria-pressed="${allSelected}">Alle</button>
         ${letterBtns}
