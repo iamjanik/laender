@@ -85,7 +85,7 @@ main{max-width:800px;margin:0 auto;padding:18px 14px 60px}
 .fc-input.wrong{border-color:#c0392b;background:#fdecea}
 .flashcard-answer{background:var(--accent-light);border:2px solid var(--accent);border-radius:10px;padding:13px 20px;font-size:1.1rem;font-weight:600;color:var(--accent);margin-bottom:20px;display:none;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.flashcard-btns{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+.flashcard-btns{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap;flex-direction:row-reverse}
 .fc-btn{padding:10px 22px;border-radius:10px;border:2px solid;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .15s}
 .fc-btn-reveal{border-color:var(--accent);color:var(--accent);background:transparent}
 .fc-btn-reveal:hover{background:var(--accent-light)}
@@ -302,7 +302,7 @@ function showFlashcard(){
   document.getElementById("flashcardOverlay").classList.add("active");
   if(fcIndex >= fcData.length){
     const pct = Math.round(fcCorrect/fcData.length*100);
-    fc.innerHTML = `<div class="fc-result">${pct>=80?"🎉":pct>=50?"👍":"📚"} Fertig!</div><div class="fc-result-details">${fcCorrect} richtig · ${fcWrong} falsch · ${pct}%</div><div class="flashcard-btns"><button class="fc-btn fc-btn-reveal" id="fcRestartBtn">Nochmal</button><button class="fc-btn fc-btn-close" id="fcDoneBtn">Schließen</button></div>`;
+    fc.innerHTML = `<div class="fc-result">${pct>=80?"🎉":pct>=50?"👍":"📚"} Fertig!</div><div class="fc-result-details">${fcCorrect} richtig · ${fcWrong} falsch · ${pct}%</div><div class="flashcard-btns"><button class="fc-btn fc-btn-close" id="fcDoneBtn">Schließen</button><button class="fc-btn fc-btn-reveal" id="fcRestartBtn">Nochmal</button></div>`;
     document.getElementById("fcRestartBtn").onclick = () => { fcIndex=0; fcCorrect=0; fcWrong=0; fcData=shuffle(fcData); showFlashcard(); };
     document.getElementById("fcDoneBtn").onclick = closeFC;
     return;
@@ -310,16 +310,16 @@ function showFlashcard(){
   const land = fcData[fcIndex];
   const flag = FLAGS[land.Land] || "🌐";
   if(fcMode === "reveal"){
-    fc.innerHTML = `<div class="flashcard-progress">${fcIndex+1} / ${fcData.length} · ✅ ${fcCorrect} · ❌ ${fcWrong}</div><span class="flashcard-flag">${flag}</span><div class="flashcard-question">Hauptstadt von<br><strong>${land.Land}</strong>?</div><div class="flashcard-answer" id="fcAnswer">${land.Hauptstadt}</div><div class="flashcard-btns" id="fcBtns"><button class="fc-btn fc-btn-reveal" id="fcRevealBtn">Antwort zeigen</button><button class="fc-btn fc-btn-close" id="fcCloseBtn">Abbrechen</button></div>`;
+    fc.innerHTML = `<div class="flashcard-progress">${fcIndex+1} / ${fcData.length} · ✅ ${fcCorrect} · ❌ ${fcWrong}</div><span class="flashcard-flag">${flag}</span><div class="flashcard-question">Hauptstadt von<br><strong>${land.Land}</strong>?</div><div class="flashcard-answer" id="fcAnswer">${land.Hauptstadt}</div><div class="flashcard-btns" id="fcBtns"><button class="fc-btn fc-btn-close" id="fcCloseBtn">Abbrechen</button><button class="fc-btn fc-btn-reveal" id="fcRevealBtn">Antwort zeigen</button></div>`;
     document.getElementById("fcRevealBtn").onclick = () => {
       document.getElementById("fcAnswer").style.display = "block";
-      document.getElementById("fcBtns").innerHTML = `<button class="fc-btn fc-btn-correct" id="fcOkBtn">✓ Gewusst</button><button class="fc-btn fc-btn-wrong" id="fcNokBtn">✗ Nicht gewusst</button>`;
+      document.getElementById("fcBtns").innerHTML = `<button class="fc-btn fc-btn-wrong" id="fcNokBtn">✗ Nicht gewusst</button><button class="fc-btn fc-btn-correct" id="fcOkBtn">✓ Gewusst</button>`;
       document.getElementById("fcOkBtn").onclick = () => { fcCorrect++; fcIndex++; showFlashcard(); };
       document.getElementById("fcNokBtn").onclick = () => { fcWrong++; fcIndex++; showFlashcard(); };
     };
     document.getElementById("fcCloseBtn").onclick = closeFC;
   } else {
-    fc.innerHTML = `<div class="flashcard-progress">${fcIndex+1} / ${fcData.length} · ✅ ${fcCorrect} · ❌ ${fcWrong}</div><span class="flashcard-flag">${flag}</span><div class="flashcard-question">Hauptstadt von<br><strong>${land.Land}</strong>?</div><div class="fc-input-wrap"><input class="fc-input" id="fcInput" type="text" placeholder="Hauptstadt eingeben …" autocomplete="off" spellcheck="false"></div><div class="flashcard-answer" id="fcAnswer">Richtig: ${land.Hauptstadt}</div><div class="flashcard-btns" id="fcBtns"><button class="fc-btn fc-btn-reveal" id="fcCheckBtn">Prüfen</button><button class="fc-btn fc-btn-close" id="fcCloseBtn">Abbrechen</button></div>`;
+    fc.innerHTML = `<div class="flashcard-progress">${fcIndex+1} / ${fcData.length} · ✅ ${fcCorrect} · ❌ ${fcWrong}</div><span class="flashcard-flag">${flag}</span><div class="flashcard-question">Hauptstadt von<br><strong>${land.Land}</strong>?</div><div class="fc-input-wrap"><input class="fc-input" id="fcInput" type="text" placeholder="Hauptstadt eingeben …" autocomplete="off" spellcheck="false"></div><div class="flashcard-answer" id="fcAnswer">Richtig: ${land.Hauptstadt}</div><div class="flashcard-btns" id="fcBtns"><button class="fc-btn fc-btn-close" id="fcCloseBtn">Abbrechen</button><button class="fc-btn fc-btn-reveal" id="fcCheckBtn">Prüfen</button></div>`;
     const input = document.getElementById("fcInput"); input.focus();
     const check = () => {
       if(!input.value.trim()) return;
@@ -368,8 +368,8 @@ document.getElementById("startFlashcardsBtn").addEventListener("click", () => {
         </div>
       </div>
       <div class="flashcard-btns" style="margin-top:16px">
-        <button class="fc-btn fc-btn-correct" id="fcStartBtn">Starten</button>
         <button class="fc-btn fc-btn-close" id="fcCancelBtn">Abbrechen</button>
+        <button class="fc-btn fc-btn-correct" id="fcStartBtn">Starten</button>
       </div>`;
 
     fc.querySelectorAll(".fc-mode-btn").forEach(btn => {
