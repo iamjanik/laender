@@ -6,6 +6,9 @@
 <title>Länder</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
+/* ── Dark-Mode-Toggle: Script läuft inline im <head>, bevor CSS rendert ── */
+/* Verhindert FOUC (Flash of unstyled content) */
+
 :root {
   --bg:            #f4f1eb;
   --surface:       #fffef9;
@@ -23,17 +26,14 @@
   --tag-Amerika-bg:  #e8f4f0; --tag-Amerika-fg:  #1a5a4a;
   --tag-Ozeanien-bg: #ede8f7; --tag-Ozeanien-fg: #3a1a6b;
 
-  /* UN-Status: kein Mitglied (rot-orange) */
   --un-none-bg:    #fdf0e3;
   --un-none-border:#e8a87a;
   --un-none-text:  #7a3200;
 
-  /* UN-Status: Beobachter (blau-grau) */
   --un-obs-bg:     #e8f0f7;
   --un-obs-border: #7aaee8;
   --un-obs-text:   #1a3a6b;
 
-  /* UN-Status: teilweise anerkannt (gelb-amber) */
   --un-part-bg:    #fdf7e3;
   --un-part-border:#e8c97a;
   --un-part-text:  #5a4000;
@@ -42,9 +42,133 @@
   --shadow-hover: 0 6px 24px rgba(0,0,0,.12);
   --radius:       12px;
   --transition:   .18s cubic-bezier(.4,0,.2,1);
+
+  /* Dark-Mode-Transition */
+  --theme-transition: background-color .25s ease, color .25s ease, border-color .25s ease;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── Automatischer Dark Mode via Systemeinstellung ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:           #18161200;
+    --surface:      #1f1d19;
+    --surface2:     #272420;
+    --border:       #38342c;
+    --text:         #ede9e0;
+    --text-muted:   #948e84;
+    --accent:       #6aaa60;
+    --accent-light: #1a2b18;
+    --accent-hover: #7aba70;
+
+    --tag-Europa-bg:   #16243e; --tag-Europa-fg:   #7aa4e4;
+    --tag-Asien-bg:    #2a1616; --tag-Asien-fg:    #e08080;
+    --tag-Afrika-bg:   #2a2010; --tag-Afrika-fg:   #d4aa50;
+    --tag-Amerika-bg:  #102820; --tag-Amerika-fg:  #5aaa90;
+    --tag-Ozeanien-bg: #1c1030; --tag-Ozeanien-fg: #9a74d4;
+
+    --un-none-bg:    #2a1a0a;
+    --un-none-border:#8a4820;
+    --un-none-text:  #f0a870;
+
+    --un-obs-bg:     #0e1e30;
+    --un-obs-border: #3a6ea8;
+    --un-obs-text:   #7ab0e8;
+
+    --un-part-bg:    #2a2008;
+    --un-part-border:#8a7820;
+    --un-part-text:  #d4b850;
+
+    --shadow:       0 2px 12px rgba(0,0,0,.28);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,.44);
+  }
+}
+
+/* ── Manuell gesetzter Dark Mode (überschreibt Systemeinstellung) ── */
+:root[data-theme="dark"] {
+  --bg:           #18161200;
+  --surface:      #1f1d19;
+  --surface2:     #272420;
+  --border:       #38342c;
+  --text:         #ede9e0;
+  --text-muted:   #948e84;
+  --accent:       #6aaa60;
+  --accent-light: #1a2b18;
+  --accent-hover: #7aba70;
+
+  --tag-Europa-bg:   #16243e; --tag-Europa-fg:   #7aa4e4;
+  --tag-Asien-bg:    #2a1616; --tag-Asien-fg:    #e08080;
+  --tag-Afrika-bg:   #2a2010; --tag-Afrika-fg:   #d4aa50;
+  --tag-Amerika-bg:  #102820; --tag-Amerika-fg:  #5aaa90;
+  --tag-Ozeanien-bg: #1c1030; --tag-Ozeanien-fg: #9a74d4;
+
+  --un-none-bg:    #2a1a0a;
+  --un-none-border:#8a4820;
+  --un-none-text:  #f0a870;
+
+  --un-obs-bg:     #0e1e30;
+  --un-obs-border: #3a6ea8;
+  --un-obs-text:   #7ab0e8;
+
+  --un-part-bg:    #2a2008;
+  --un-part-border:#8a7820;
+  --un-part-text:  #d4b850;
+
+  --shadow:       0 2px 12px rgba(0,0,0,.28);
+  --shadow-hover: 0 6px 24px rgba(0,0,0,.44);
+}
+
+/* ── Manuell gesetzter Light Mode (überschreibt dunkle Systemeinstellung) ── */
+:root[data-theme="light"] {
+  --bg:            #f4f1eb;
+  --surface:       #fffef9;
+  --surface2:      #f0ede4;
+  --border:        #ddd8cc;
+  --text:          #1a1814;
+  --text-muted:    #7a7468;
+  --accent:        #2d5a27;
+  --accent-light:  #e8f0e7;
+  --accent-hover:  #246020;
+
+  --tag-Europa-bg:   #e8eef7; --tag-Europa-fg:   #1a3a6b;
+  --tag-Asien-bg:    #f7e8e8; --tag-Asien-fg:    #6b1a1a;
+  --tag-Afrika-bg:   #f7f0d8; --tag-Afrika-fg:   #5a4000;
+  --tag-Amerika-bg:  #e8f4f0; --tag-Amerika-fg:  #1a5a4a;
+  --tag-Ozeanien-bg: #ede8f7; --tag-Ozeanien-fg: #3a1a6b;
+
+  --un-none-bg:    #fdf0e3;
+  --un-none-border:#e8a87a;
+  --un-none-text:  #7a3200;
+
+  --un-obs-bg:     #e8f0f7;
+  --un-obs-border: #7aaee8;
+  --un-obs-text:   #1a3a6b;
+
+  --un-part-bg:    #fdf7e3;
+  --un-part-border:#e8c97a;
+  --un-part-text:  #5a4000;
+
+  --shadow:       0 2px 12px rgba(0,0,0,.07);
+  --shadow-hover: 0 6px 24px rgba(0,0,0,.12);
+}
+
+/* ── Smooth Transition beim Umschalten ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: var(--theme-transition);
+}
+
+/* Transition nur für theme-relevante Properties; Animationen nicht bremsen */
+.country-card, .card-trigger, .filter-btn, .icon-btn, .fc-btn, .fc-input,
+.info-block, .fakt-block, .un-block, header, main {
+  transition: background-color .25s ease, color .25s ease,
+              border-color .25s ease, box-shadow .25s ease;
+}
+
+/* Elemente, die eigene Transitions brauchen → Shorthand deaktivieren */
+.chevron { transition: transform .25s cubic-bezier(.4,0,.2,1) !important; }
+.country-card.open .chevron { transform: rotate(180deg); }
 
 body {
   font-family: 'DM Sans', sans-serif;
@@ -92,7 +216,6 @@ h1 {
 
 .header-spacer { flex: 1; min-width: 4px; }
 
-/* Search */
 .search-wrap {
   position: relative;
   flex-shrink: 1;
@@ -170,7 +293,6 @@ input[type=search]:focus { border-color: var(--accent); }
   font-family: 'DM Sans', sans-serif;
   font-size: .82rem;
   font-weight: 500;
-  transition: background var(--transition), color var(--transition);
   white-space: nowrap;
 }
 .icon-btn:hover { background: var(--surface2); color: var(--text); }
@@ -178,6 +300,36 @@ input[type=search]:focus { border-color: var(--accent); }
 .icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .icon-btn .btn-label { display: none; }
 @media (min-width: 820px) { .icon-btn .btn-label { display: inline; } }
+
+/* Dark-Mode-Button: Sonne/Mond leicht hervorgehoben */
+#themeToggleBtn {
+  position: relative;
+  overflow: hidden;
+}
+#themeToggleBtn .icon-sun,
+#themeToggleBtn .icon-moon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .2s ease, transform .3s cubic-bezier(.4,0,.2,1);
+}
+#themeToggleBtn .icon-sun  { opacity: 1; transform: rotate(0deg) scale(1); }
+#themeToggleBtn .icon-moon { opacity: 0; transform: rotate(-90deg) scale(.6); }
+
+/* Im Dark Mode: Mond sichtbar, Sonne weg */
+[data-theme="dark"] #themeToggleBtn .icon-sun,
+.is-dark #themeToggleBtn .icon-sun {
+  opacity: 0; transform: rotate(90deg) scale(.6);
+}
+[data-theme="dark"] #themeToggleBtn .icon-moon,
+.is-dark #themeToggleBtn .icon-moon {
+  opacity: 1; transform: rotate(0deg) scale(1);
+}
+
+/* Fallback-Größe damit der Button nicht zusammenfällt */
+#themeToggleBtn { width: 34px; height: 34px; padding: 0; }
 
 .btn-flashcard {
   color: var(--accent);
@@ -197,7 +349,6 @@ input[type=search]:focus { border-color: var(--accent); }
   flex-shrink: 0;
 }
 
-/* Filter bar */
 .filter-bar {
   border-top: 1px solid var(--border);
   padding: 0 20px;
@@ -224,7 +375,6 @@ input[type=search]:focus { border-color: var(--accent); }
   font-weight: 500;
   cursor: pointer;
   color: var(--text-muted);
-  transition: all var(--transition);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -299,23 +449,24 @@ main {
   border-radius: var(--radius);
   margin-bottom: 7px;
   overflow: hidden;
-  transition: box-shadow var(--transition), border-color var(--transition);
 }
 .country-card:hover { box-shadow: var(--shadow-hover); border-color: #c5bfb5; }
-.country-card.open { border-color: var(--accent); }
+.country-card.open  { border-color: var(--accent); }
 
-/* Karten mit UN-Hinweisen */
+[data-theme="dark"] .country-card:hover,
+.is-dark .country-card:hover { border-color: #504a40; }
+
 .country-card.un-nicht-anerkannt { border-color: var(--un-none-border); }
 .country-card.un-nicht-anerkannt:hover { border-color: #c86030; }
-.country-card.un-nicht-anerkannt.open { border-color: var(--accent); }
+.country-card.un-nicht-anerkannt.open  { border-color: var(--accent); }
 
 .country-card.un-beobachter { border-color: var(--un-obs-border); }
 .country-card.un-beobachter:hover { border-color: #4a8ed8; }
-.country-card.un-beobachter.open { border-color: var(--accent); }
+.country-card.un-beobachter.open  { border-color: var(--accent); }
 
 .country-card.un-teilweise { border-color: var(--un-part-border); }
 .country-card.un-teilweise:hover { border-color: #c8a84a; }
-.country-card.un-teilweise.open { border-color: var(--accent); }
+.country-card.un-teilweise.open  { border-color: var(--accent); }
 
 .card-trigger {
   display: flex;
@@ -339,7 +490,6 @@ main {
 .flag { font-size: 1.4rem; line-height: 1; flex-shrink: 0; width: 30px; text-align: center; }
 .country-name { font-weight: 600; font-size: .95rem; flex: 1; }
 
-/* Sternchen hinter dem Ländernamen – drei Varianten */
 .un-marker {
   display: inline-block;
   font-size: .75em;
@@ -350,7 +500,7 @@ main {
 }
 .un-marker.un-marker--none { color: var(--un-none-text); }
 .un-marker.un-marker--obs  { color: var(--un-obs-text);  }
-.un-marker.un-marker--part { color: var(--un-part-text);  }
+.un-marker.un-marker--part { color: var(--un-part-text); }
 
 .continent-tag {
   font-size: .68rem;
@@ -365,13 +515,6 @@ main {
 .tag-Afrika   { color: var(--tag-Afrika-fg);   background: var(--tag-Afrika-bg); }
 .tag-Amerika  { color: var(--tag-Amerika-fg);  background: var(--tag-Amerika-bg); }
 .tag-Ozeanien { color: var(--tag-Ozeanien-fg); background: var(--tag-Ozeanien-bg); }
-
-.chevron {
-  flex-shrink: 0;
-  color: var(--text-muted);
-  transition: transform .25s cubic-bezier(.4,0,.2,1);
-}
-.country-card.open .chevron { transform: rotate(180deg); }
 
 .card-body {
   display: none;
@@ -411,11 +554,7 @@ main {
   color: var(--text);
   line-height: 1.35;
 }
-
-/* Mehrere Hauptstädte: Zeilenumbrüche erlauben */
-.info-value.multiline {
-  white-space: pre-line;
-}
+.info-value.multiline { white-space: pre-line; }
 
 .fakt-block {
   background: var(--accent-light);
@@ -424,10 +563,17 @@ main {
   padding: 10px 13px;
   grid-column: 1 / -1;
 }
-.fakt-block .info-label { color: var(--accent); }
-.fakt-block .info-value { font-size: .85rem; font-weight: 400; line-height: 1.5; color: #2a3d29; }
+[data-theme="dark"] .fakt-block,
+.is-dark .fakt-block { border-color: #2a4a28; }
 
-/* UN-Status-Blöcke: drei Varianten */
+.fakt-block .info-label { color: var(--accent); }
+.fakt-block .info-value {
+  font-size: .85rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+}
+
 .un-block {
   border-radius: 8px;
   padding: 10px 13px;
@@ -435,24 +581,15 @@ main {
 }
 .un-block .info-value { font-size: .85rem; font-weight: 400; line-height: 1.5; }
 
-.un-block--none {
-  background: var(--un-none-bg);
-  border: 1px solid var(--un-none-border);
-}
+.un-block--none { background: var(--un-none-bg); border: 1px solid var(--un-none-border); }
 .un-block--none .info-label { color: var(--un-none-text); }
 .un-block--none .info-value { color: var(--un-none-text); }
 
-.un-block--obs {
-  background: var(--un-obs-bg);
-  border: 1px solid var(--un-obs-border);
-}
+.un-block--obs { background: var(--un-obs-bg); border: 1px solid var(--un-obs-border); }
 .un-block--obs .info-label { color: var(--un-obs-text); }
 .un-block--obs .info-value { color: var(--un-obs-text); }
 
-.un-block--part {
-  background: var(--un-part-bg);
-  border: 1px solid var(--un-part-border);
-}
+.un-block--part { background: var(--un-part-bg); border: 1px solid var(--un-part-border); }
 .un-block--part .info-label { color: var(--un-part-text); }
 .un-block--part .info-value { color: var(--un-part-text); }
 
@@ -486,23 +623,72 @@ main {
   width: 100%;
   text-align: center;
   box-shadow: 0 24px 80px rgba(0,0,0,.3);
+  border: 1px solid var(--border);
 }
 
 .fc-progress { font-size: .75rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 500; }
 .fc-flag { font-size: 2.6rem; line-height: 1; display: block; margin-bottom: 8px; }
-.fc-question { font-family: 'DM Serif Display', serif; font-size: clamp(1.25rem, 5vw, 1.75rem); margin-bottom: 24px; line-height: 1.25; }
-.fc-answer-box { background: var(--accent-light); border: 2px solid var(--accent); border-radius: 10px; padding: 12px 20px; font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 20px; white-space: pre-line; }
-.fc-input { width: 100%; padding: 11px 14px; border: 2px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--text); background: var(--bg); outline: none; text-align: center; transition: border-color var(--transition), background var(--transition); margin-bottom: 8px; }
+.fc-question {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.25rem, 5vw, 1.75rem);
+  margin-bottom: 24px;
+  line-height: 1.25;
+  color: var(--text);
+}
+.fc-answer-box {
+  background: var(--accent-light);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 20px;
+  white-space: pre-line;
+}
+.fc-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  text-align: center;
+  margin-bottom: 8px;
+}
 .fc-input:focus { border-color: var(--accent); }
-.fc-input.correct { border-color: #2d7a2d; background: #e8f5e8; }
-.fc-input.wrong   { border-color: #c0392b; background: #fdecea; }
+.fc-input.correct { border-color: #2d7a2d; background: #e8f5e8; color: #1a4a1a; }
+.fc-input.wrong   { border-color: #c0392b; background: #fdecea; color: #6a1a14; }
+
+[data-theme="dark"] .fc-input.correct,
+.is-dark .fc-input.correct { background: #0e2a0e; color: #6aca6a; }
+[data-theme="dark"] .fc-input.wrong,
+.is-dark .fc-input.wrong   { background: #2a0e0e; color: #e07070; }
+
 .fc-input:disabled { cursor: default; }
-.fc-feedback { font-size: .88rem; margin-bottom: 14px; font-weight: 500; min-height: 1.4em; }
+.fc-feedback { font-size: .88rem; margin-bottom: 14px; font-weight: 500; min-height: 1.4em; color: var(--text-muted); }
 .fc-feedback.correct { color: #2d7a2d; }
 .fc-feedback.wrong   { color: #c0392b; }
 
+[data-theme="dark"] .fc-feedback.correct,
+.is-dark .fc-feedback.correct { color: #6aaa60; }
+[data-theme="dark"] .fc-feedback.wrong,
+.is-dark .fc-feedback.wrong   { color: #e07070; }
+
 .fc-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 4px; }
-.fc-btn { padding: 10px 22px; border-radius: 10px; border: 2px solid; font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 600; cursor: pointer; transition: all var(--transition); white-space: nowrap; }
+.fc-btn {
+  padding: 10px 22px;
+  border-radius: 10px;
+  border: 2px solid;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
 .fc-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .fc-btn-secondary { border-color: var(--border); color: var(--text-muted); background: transparent; }
 .fc-btn-secondary:hover { border-color: var(--text-muted); }
@@ -516,21 +702,44 @@ main {
 .fc-btn-wrong:hover { background: #a93226; }
 
 .fc-warning { color: #c0392b; font-size: .82rem; margin-top: 8px; min-height: 1.2em; }
-.fc-start-title { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 20px; }
+[data-theme="dark"] .fc-warning,
+.is-dark .fc-warning { color: #e07070; }
+
+.fc-start-title { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 20px; color: var(--text); }
 .fc-mode-row { margin-bottom: 20px; }
 .fc-mode-label { font-size: .8rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
 .fc-mode-btns { display: flex; gap: 8px; justify-content: center; }
-.fc-mode-btn { padding: 7px 18px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface); font-family: 'DM Sans', sans-serif; font-size: .85rem; font-weight: 500; cursor: pointer; color: var(--text-muted); transition: all var(--transition); }
+.fc-mode-btn {
+  padding: 7px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-muted);
+}
 .fc-mode-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
 .fc-letters-row { margin-bottom: 20px; }
 .fc-letters-label { font-size: .78rem; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; }
 .fc-letters-grid { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
-.fc-letter-btn { padding: 3px 7px; border-radius: 6px; border: 1.5px solid var(--border); background: var(--surface); font-family: 'DM Sans', sans-serif; font-size: .72rem; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all var(--transition); }
+.fc-letter-btn {
+  padding: 3px 7px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-muted);
+}
 .fc-letter-btn:hover { border-color: var(--accent); color: var(--accent); }
 .fc-letter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
 
 .fc-result-emoji { font-size: 2.2rem; display: block; margin-bottom: 6px; }
-.fc-result-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 6px; }
+.fc-result-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 6px; color: var(--text); }
 .fc-result-sub   { font-size: .85rem; color: var(--text-muted); margin-bottom: 22px; }
 
 @media (max-width: 500px) {
@@ -539,6 +748,22 @@ main {
   .fc-btn     { padding: 9px 14px; font-size: .82rem; }
 }
 </style>
+
+<!-- Anti-FOUC: Theme vor dem ersten Paint setzen -->
+<script>
+(function() {
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') {
+      document.documentElement.setAttribute('data-theme', saved);
+    }
+    // is-dark-Klasse für CSS-Selektoren (Systemeinstellung + gespeichert)
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isDark = saved === 'dark' || (!saved && prefersDark);
+    if (isDark) document.documentElement.classList.add('is-dark');
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 
@@ -563,17 +788,37 @@ main {
 
       <div class="hdr-divider"></div>
 
-      <button class="icon-btn" id="expandAllBtn" aria-label="Alle Karten aufklappen">
-        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+      <button class="icon-btn" id="toggleAllBtn" aria-label="Alle Karten aufklappen">
+        <svg id="toggleAllIcon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" style="transition: transform .3s cubic-bezier(.4,0,.2,1);">
           <polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/>
         </svg>
-        <span class="btn-label">Aufklappen</span>
+        <span class="btn-label" id="toggleAllLabel">Aufklappen</span>
       </button>
-      <button class="icon-btn" id="collapseAllBtn" aria-label="Alle Karten zuklappen">
-        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-          <polyline points="7 11 12 6 17 11"/><polyline points="7 18 12 13 17 18"/>
-        </svg>
-        <span class="btn-label">Zuklappen</span>
+
+      <div class="hdr-divider"></div>
+
+      <!-- Dark-Mode-Toggle -->
+      <button class="icon-btn" id="themeToggleBtn" aria-label="Dark Mode umschalten" aria-pressed="false">
+        <!-- Sonne (Light Mode) -->
+        <span class="icon-sun" aria-hidden="true">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1"  x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22"  x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1"  y1="12" x2="3"  y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22"  y1="19.78" x2="5.64"  y2="18.36"/>
+            <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
+          </svg>
+        </span>
+        <!-- Mond (Dark Mode) -->
+        <span class="icon-moon" aria-hidden="true">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </span>
       </button>
 
       <div class="hdr-divider"></div>
@@ -624,6 +869,45 @@ main {
 </div>
 
 <script>
+/* ════════════════════════════════════════════
+   THEME MANAGEMENT
+════════════════════════════════════════════ */
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+
+function getEffectiveTheme() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark' || saved === 'light') return saved;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function applyTheme(theme, save) {
+  const isDark = theme === 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  document.documentElement.classList.toggle('is-dark', isDark);
+  themeToggleBtn.setAttribute('aria-pressed', String(isDark));
+  themeToggleBtn.setAttribute('aria-label', isDark ? 'Zum Light Mode wechseln' : 'Zum Dark Mode wechseln');
+  if (save) localStorage.setItem('theme', theme);
+}
+
+themeToggleBtn.addEventListener('click', () => {
+  const current = getEffectiveTheme();
+  applyTheme(current === 'dark' ? 'light' : 'dark', true);
+});
+
+// Systemeinstellung live mithören (wenn keine manuelle Überschreibung gespeichert)
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (!localStorage.getItem('theme')) {
+    applyTheme(e.matches ? 'dark' : 'light', false);
+  }
+});
+
+// Initial-State setzen (ohne localStorage-Schreiben, nur aria-Attribute)
+applyTheme(getEffectiveTheme(), false);
+
+
+/* ════════════════════════════════════════════
+   APP
+════════════════════════════════════════════ */
 const FLAGS = {
   "Afghanistan":"🇦🇫","Albanien":"🇦🇱","Algerien":"🇩🇿","Andorra":"🇦🇩",
   "Angola":"🇦🇴","Antigua und Barbuda":"🇦🇬","Argentinien":"🇦🇷",
@@ -684,7 +968,6 @@ const FLAGS = {
   "Ägypten":"🇪🇬","Äquatorialguinea":"🇬🇶","Äthiopien":"🇪🇹"
 };
 
-// UN-Status-Konfiguration
 const UN_STATUS_CONFIG = {
   "nicht_anerkannt": {
     cardClass: "un-nicht-anerkannt",
@@ -836,22 +1119,18 @@ function buildCard(land) {
   const status = land.UNStatus ? UN_STATUS_CONFIG[land.UNStatus] : null;
   const card   = document.createElement("article");
 
-  // CSS-Klassen für Karte
   let cardClasses = "country-card" + (isOpen ? " open" : "");
   if (status) cardClasses += " " + status.cardClass;
   card.className = cardClasses;
   card.dataset.land = land.Land;
 
-  // Sternchen ohne Tooltip
   const unMarker = status
     ? `<span class="un-marker ${status.markerClass}" aria-hidden="true">*</span>`
     : "";
 
-  // Hauptstadt: mehrere Zeilen
   const hatMehrereHauptstaedte = land.Hauptstadt.includes("\n");
   const hauptstadtHTML = `<div class="info-value${hatMehrereHauptstaedte ? " multiline" : ""}">${escapeHTML(land.Hauptstadt)}</div>`;
 
-  // UN-Block je nach Status
   let unBlockHTML = "";
   if (status && land.UNStatusText) {
     unBlockHTML = `<div class="info-block un-block ${status.blockClass}">
@@ -900,6 +1179,7 @@ function buildCard(land) {
     const open = card.classList.toggle("open");
     card.querySelector(".card-trigger").setAttribute("aria-expanded", String(open));
     if (open) activeCards.add(land.Land); else activeCards.delete(land.Land);
+    updateToggleAllBtn();
   });
   return card;
 }
@@ -941,14 +1221,35 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
     btn.setAttribute("aria-current", "true");
     currentFilter = btn.dataset.filter;
     renderList();
+    updateToggleAllBtn();
   });
 });
 
-document.getElementById("expandAllBtn").addEventListener("click", () => {
-  getFiltered().forEach(l => activeCards.add(l.Land)); renderList();
-});
-document.getElementById("collapseAllBtn").addEventListener("click", () => {
-  getFiltered().forEach(l => activeCards.delete(l.Land)); renderList();
+function updateToggleAllBtn() {
+  const anyOpen = getFiltered().some(l => activeCards.has(l.Land));
+  const btn   = document.getElementById("toggleAllBtn");
+  const icon  = document.getElementById("toggleAllIcon");
+  const label = document.getElementById("toggleAllLabel");
+  if (anyOpen) {
+    btn.setAttribute("aria-label", "Alle Karten zuklappen");
+    if (label) label.textContent = "Zuklappen";
+    icon.style.transform = "rotate(180deg)";
+  } else {
+    btn.setAttribute("aria-label", "Alle Karten aufklappen");
+    if (label) label.textContent = "Aufklappen";
+    icon.style.transform = "rotate(0deg)";
+  }
+}
+
+document.getElementById("toggleAllBtn").addEventListener("click", () => {
+  const anyOpen = getFiltered().some(l => activeCards.has(l.Land));
+  if (anyOpen) {
+    getFiltered().forEach(l => activeCards.delete(l.Land));
+  } else {
+    getFiltered().forEach(l => activeCards.add(l.Land));
+  }
+  renderList();
+  updateToggleAllBtn();
 });
 
 document.addEventListener("keydown", e => {
@@ -1081,7 +1382,7 @@ function renderType(land, flag, prog) {
   const check = () => {
     const val = input.value.trim();
     if (!val) return;
-    const ni       = normalize(val);
+    const ni        = normalize(val);
     const varianten = getHauptstadtVarianten(land.Hauptstadt);
     const ok        = varianten.some(v => normalize(v) === ni);
     input.classList.add(ok ? "correct" : "wrong");
@@ -1131,6 +1432,7 @@ fcOverlay.addEventListener("keydown", e => { if (e.key === "Escape") closeFC(); 
   LAENDER = data;
   document.getElementById("loadingMsg").style.display = "none";
   renderList();
+  updateToggleAllBtn();
 })();
 </script>
 </body>
