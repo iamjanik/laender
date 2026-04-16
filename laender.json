@@ -1,11 +1,13 @@
 [
   {
-    "Land": "Afghanistan",
-    "Hauptstadt": "Kabul",
+    "Land": "Abchasien",
+    "Hauptstadt": "Sochumi",
     "Kontinent": "Asien",
-    "Fläche": "652.230 km²",
-    "Bevölkerung": "ca. 41 Mio.",
-    "Fakt": "Afghanistan ist eines der jüngsten Länder der Welt gemessen am Medianalter – über 60 % der Bevölkerung sind unter 25 Jahre alt."
+    "Fläche": "8.660 km²",
+    "Bevölkerung": "ca. 245.000",
+    "Fakt": "Abchasien erklärte sich 1990 von Georgien unabhängig. Völkerrechtlich gehört es zu Georgien; anerkannt wird es nur von Russland, Nicaragua, Venezuela, Nauru und Syrien.",
+    "UNStatus": "nicht_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Abchasien erklärte 1990 die Unabhängigkeit von Georgien. Die Vereinten Nationen bekräftigen regelmäßig die territoriale Unversehrtheit Georgiens. Nur fünf Staaten erkennen Abchasien an: Russland (2008), Nicaragua, Venezuela, Nauru und Syrien. Von der Völkerrechtswissenschaft wird es teils als stabilisiertes De-facto-Regime eingestuft."
   },
   {
     "Land": "Ägypten",
@@ -14,6 +16,30 @@
     "Fläche": "1.001.449 km²",
     "Bevölkerung": "ca. 105 Mio.",
     "Fakt": "95 % der Ägypter leben auf nur 5 % der Landesfläche – entlang des Nils. Kairo ist die größte Stadt Afrikas und Arabiens."
+  },
+  {
+    "Land": "Äquatorialguinea",
+    "Hauptstadt": "Ciudad de la Paz",
+    "Kontinent": "Afrika",
+    "Fläche": "28.051 km²",
+    "Bevölkerung": "ca. 1,5 Mio.",
+    "Fakt": "Das einzige Land Afrikas, in dem Spanisch Amtssprache ist. Die Stadt Malabo lag auf einer Vulkaninsel und war bis Januar 2026 die Hauptstadt."
+  },
+  {
+    "Land": "Äthiopien",
+    "Hauptstadt": "Addis Abeba",
+    "Kontinent": "Afrika",
+    "Fläche": "1.104.300 km²",
+    "Bevölkerung": "ca. 128 Mio.",
+    "Fakt": "Äthiopien hat einen eigenen Kalender mit 13 Monaten – das Land befindet sich zeitlich etwa 7–8 Jahre hinter dem gregorianischen Kalender."
+  },
+  {
+    "Land": "Afghanistan",
+    "Hauptstadt": "Kabul",
+    "Kontinent": "Asien",
+    "Fläche": "652.230 km²",
+    "Bevölkerung": "ca. 41 Mio.",
+    "Fakt": "Afghanistan ist eines der jüngsten Länder der Welt gemessen am Medianalter – über 60 % der Bevölkerung sind unter 25 Jahre alt."
   },
   {
     "Land": "Albanien",
@@ -54,14 +80,6 @@
     "Fakt": "Antigua hat angeblich 365 Strände – einen für jeden Tag des Jahres."
   },
   {
-    "Land": "Äquatorialguinea",
-    "Hauptstadt": "Ciudad de la Paz",
-    "Kontinent": "Afrika",
-    "Fläche": "28.051 km²",
-    "Bevölkerung": "ca. 1,5 Mio.",
-    "Fakt": "Das einzige Land Afrikas, in dem Spanisch Amtssprache ist. Die Stadt Malabo lag auf einer Vulkaninsel und war bis Januar 2026 die Hauptstadt."
-  },
-  {
     "Land": "Argentinien",
     "Hauptstadt": "Buenos Aires",
     "Kontinent": "Amerika",
@@ -84,14 +102,6 @@
     "Fläche": "86.600 km²",
     "Bevölkerung": "ca. 10 Mio.",
     "Fakt": "Baku liegt unter dem Meeresspiegel. Das Kaspische Meer, an dem Baku liegt, ist der größte Binnensee der Erde."
-  },
-  {
-    "Land": "Äthiopien",
-    "Hauptstadt": "Addis Abeba",
-    "Kontinent": "Afrika",
-    "Fläche": "1.104.300 km²",
-    "Bevölkerung": "ca. 128 Mio.",
-    "Fakt": "Äthiopien hat einen eigenen Kalender mit 13 Monaten – das Land befindet sich zeitlich etwa 7–8 Jahre hinter dem gregorianischen Kalender."
   },
   {
     "Land": "Australien",
@@ -538,8 +548,8 @@
     "Fläche": "20.770 km²",
     "Bevölkerung": "ca. 9,7 Mio.",
     "Fakt": "Israel bezeichnet Jerusalem seit 1980 als seine Hauptstadt (Jerusalemgesetz). Die meisten Staaten erkennen dies nicht an, da sie die Annexion Ostjerusalems ablehnen – daher befinden sich die meisten Botschaften in Tel Aviv. Parlament und Regierung tagen in Jerusalem.",
-    "UNStatus": "teilweise_anerkannt",
-    "UNStatusText": "Vollmitglied der Vereinten Nationen, wird jedoch nicht von allen Staaten anerkannt: Lediglich 162 der anderen UN-Mitgliedstaaten unterhalten diplomatische Beziehungen zu Israel. Der Hauptstadtstatus Jerusalems ist völkerrechtlich umstritten – die meisten Staaten betrachten Tel Aviv als faktischen Regierungssitz und unterhalten ihre Botschaften dort."
+    "UNHinweis": "teilweise_anerkannt",
+    "UNHinweisText": "Vollmitglied der Vereinten Nationen, wird jedoch nicht von allen Staaten anerkannt: Lediglich 162 der anderen UN-Mitgliedstaaten unterhalten diplomatische Beziehungen zu Israel. Der Hauptstadtstatus Jerusalems ist völkerrechtlich umstritten – die meisten Staaten betrachten Tel Aviv als faktischen Regierungssitz und unterhalten ihre Botschaften dort."
   },
   {
     "Land": "Italien",
@@ -1027,6 +1037,16 @@
     "Fakt": "Mutter Teresa wurde 1910 in Skopje geboren. Das Land hieß erst seit 2019 offiziell \"Nordmazedonien\" – nach einer Einigung mit Griechenland."
   },
   {
+    "Land": "Nordzypern",
+    "Hauptstadt": "Nordzikosia (Lefkoşa)",
+    "Kontinent": "Europa",
+    "Fläche": "3.355 km²",
+    "Bevölkerung": "ca. 350.000",
+    "Fakt": "Die Türkische Republik Nordzypern (TRNZ) existiert seit 1983 im Norden der Insel Zypern, nachdem türkische Truppen 1974 den Norden besetzt hatten. In einer Volksabstimmung 2004 sprach sich die Bevölkerung des Nordens für Wiedervereinigung aus.",
+    "UNStatus": "nicht_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Die Türkische Republik Nordzypern (TRNZ) wird von der internationalen Staatengemeinschaft mit Ausnahme der Türkei nicht als Staat anerkannt und gilt als stabilisiertes De-facto-Regime. Die Vereinten Nationen betrachten das Gebiet als Teil der Republik Zypern. Die Grüne Linie der UN trennt seit 1974 Nord- und Südzypern."
+  },
+  {
     "Land": "Norwegen",
     "Hauptstadt": "Oslo",
     "Kontinent": "Europa",
@@ -1035,19 +1055,19 @@
     "Fakt": "Norwegen besitzt den größten Staatsfonds der Welt (über 1,5 Billionen USD) und hat mehr Elektroautos pro Kopf als jedes andere Land."
   },
   {
-    "Land": "Oman",
-    "Hauptstadt": "Maskat",
-    "Kontinent": "Asien",
-    "Fläche": "309.500 km²",
-    "Bevölkerung": "ca. 4,5 Mio."
-  },
-  {
     "Land": "Österreich",
     "Hauptstadt": "Wien",
     "Kontinent": "Europa",
     "Fläche": "83.871 km²",
     "Bevölkerung": "ca. 9,1 Mio.",
     "Fakt": "Wien ist die einzige Großstadt der Welt mit signifikantem Weinanbau innerhalb der Stadtgrenzen."
+  },
+  {
+    "Land": "Oman",
+    "Hauptstadt": "Maskat",
+    "Kontinent": "Asien",
+    "Fläche": "309.500 km²",
+    "Bevölkerung": "ca. 4,5 Mio."
   },
   {
     "Land": "Osttimor / Timor-Leste",
@@ -1195,13 +1215,6 @@
     "Fakt": "San Marino ist die älteste noch existierende Republik der Welt (gegründet 301 n. Chr.) und eines der wenigen Länder ohne Staatsverschuldung."
   },
   {
-    "Land": "São Tomé und Príncipe",
-    "Hauptstadt": "São Tomé",
-    "Kontinent": "Afrika",
-    "Fläche": "964 km²",
-    "Bevölkerung": "ca. 230.000"
-  },
-  {
     "Land": "Saudi-Arabien",
     "Hauptstadt": "Riad",
     "Kontinent": "Asien",
@@ -1296,6 +1309,16 @@
     "Fakt": "Somalia hat die längste Küstenlinie Afrikas (3.333 km)."
   },
   {
+    "Land": "Somaliland",
+    "Hauptstadt": "Hargeisa",
+    "Kontinent": "Afrika",
+    "Fläche": "176.120 km²",
+    "Bevölkerung": "ca. 5,7 Mio.",
+    "Fakt": "Somaliland erklärte 1991 nach dem Zusammenbruch Somalias die Unabhängigkeit und hat seitdem stabile Institutionen aufgebaut – mit eigener Währung, Polizei und demokratischen Wahlen.",
+    "UNStatus": "nicht_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Somaliland erklärte 1991 einseitig die Unabhängigkeit von Somalia. Die internationale Staatengemeinschaft erkennt es bisher nicht als unabhängigen Staat an – es gilt völkerrechtlich als Teil Somalias. Somaliland ist seit 2004 Mitglied der Interessenvertretung UNPO."
+  },
+  {
     "Land": "Spanien",
     "Hauptstadt": "Madrid",
     "Kontinent": "Europa",
@@ -1335,6 +1358,14 @@
     "Bevölkerung": "ca. 110.000"
   },
   {
+    "Land": "Sudan",
+    "Hauptstadt": "Khartum",
+    "Kontinent": "Afrika",
+    "Fläche": "1.861.484 km²",
+    "Bevölkerung": "ca. 48 Mio.",
+    "Fakt": "Sudan hat mehr antike Pyramiden als Ägypten – über 200 meroitische Pyramiden stehen in der Nubischen Wüste."
+  },
+  {
     "Land": "Südafrika",
     "Hauptstadt": "Bloemfontein (Judikative)\nKapstadt (Legislative)\nPretoria (Exekutive)",
     "Kontinent": "Afrika",
@@ -1343,12 +1374,14 @@
     "Fakt": "Südafrika ist das einzige Land mit drei Hauptstädten und das einzige afrikanische Land, das Atomwaffen entwickelte – und sie dann freiwillig wieder aufgab."
   },
   {
-    "Land": "Sudan",
-    "Hauptstadt": "Khartum",
-    "Kontinent": "Afrika",
-    "Fläche": "1.861.484 km²",
-    "Bevölkerung": "ca. 48 Mio.",
-    "Fakt": "Sudan hat mehr antike Pyramiden als Ägypten – über 200 meroitische Pyramiden stehen in der Nubischen Wüste."
+    "Land": "Südossetien",
+    "Hauptstadt": "Zchinwali",
+    "Kontinent": "Asien",
+    "Fläche": "3.900 km²",
+    "Bevölkerung": "ca. 53.000",
+    "Fakt": "Südossetien erklärte sich 1990 von Georgien unabhängig. Nach dem Kaukasuskrieg 2008 erkannten Russland, Nicaragua, Venezuela, Nauru und Syrien die Unabhängigkeit an.",
+    "UNStatus": "nicht_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Südossetien erklärte 1990 die Unabhängigkeit von Georgien. Georgien beansprucht das Gebiet weiterhin und wird darin von den meisten Staaten und der UN unterstützt. Nur fünf Staaten erkennen Südossetien an: Russland (2008), Nicaragua, Venezuela, Nauru und Syrien. Es gilt als De-facto-Regime, das nur durch russische Militärpräsenz existiert."
   },
   {
     "Land": "Südsudan",
@@ -1373,6 +1406,13 @@
     "Fläche": "185.180 km²",
     "Bevölkerung": "ca. 22 Mio.",
     "Fakt": "Damaskus gilt als eine der ältesten kontinuierlich bewohnten Städte der Welt, mit einer Geschichte von über 10.000 Jahren."
+  },
+  {
+    "Land": "São Tomé und Príncipe",
+    "Hauptstadt": "São Tomé",
+    "Kontinent": "Afrika",
+    "Fläche": "964 km²",
+    "Bevölkerung": "ca. 230.000"
   },
   {
     "Land": "Tadschikistan",
@@ -1414,6 +1454,16 @@
     "Fakt": "Tonga ist die einzige Monarchie im Pazifik und war nie vollständig kolonisiert."
   },
   {
+    "Land": "Transnistrien",
+    "Hauptstadt": "Tiraspol",
+    "Kontinent": "Europa",
+    "Fläche": "4.163 km²",
+    "Bevölkerung": "ca. 470.000",
+    "Fakt": "Transnistrien (Pridnestrowische Moldauische Republik) ist eine separatistische Region im Osten Moldaus, die sich als Relikt der Sowjetunion versteht. Kein Staat der Welt hat ihre Unabhängigkeit anerkannt.",
+    "UNStatus": "nicht_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Transnistrien ist eine separatistische Region im Osten Moldaus. Ihre Institutionen agieren unabhängig von Moldau, kein Staat der Erde hat die Unabhängigkeit jedoch anerkannt. Transnistrien ist außenpolitisch fast vollständig isoliert und Mitglied der Gemeinschaft nicht-anerkannter Staaten."
+  },
+  {
     "Land": "Trinidad und Tobago",
     "Hauptstadt": "Port of Spain",
     "Kontinent": "Amerika",
@@ -1438,20 +1488,20 @@
     "Fakt": "Tschechien hat den höchsten Bierkonsum pro Kopf der Welt. Prag gilt als eine der am besten erhaltenen mittelalterlichen Altstädte Europas."
   },
   {
-    "Land": "Tunesien",
-    "Hauptstadt": "Tunis",
-    "Kontinent": "Afrika",
-    "Fläche": "163.610 km²",
-    "Bevölkerung": "ca. 12 Mio.",
-    "Fakt": "Die Wüstenszenen des Planeten Tatooine in Star Wars wurden in der tunesischen Sahara gedreht."
-  },
-  {
     "Land": "Türkei",
     "Hauptstadt": "Ankara",
     "Kontinent": "Asien",
     "Fläche": "783.562 km²",
     "Bevölkerung": "ca. 85 Mio.",
     "Fakt": "Istanbul ist die einzige Stadt der Welt, die sich über zwei Kontinente erstreckt. Troja liegt im heutigen Nordwesten der Türkei."
+  },
+  {
+    "Land": "Tunesien",
+    "Hauptstadt": "Tunis",
+    "Kontinent": "Afrika",
+    "Fläche": "163.610 km²",
+    "Bevölkerung": "ca. 12 Mio.",
+    "Fakt": "Die Wüstenszenen des Planeten Tatooine in Star Wars wurden in der tunesischen Sahara gedreht."
   },
   {
     "Land": "Turkmenistan",
@@ -1568,6 +1618,16 @@
     "Fakt": "Vietnam ist der zweitgrößte Kaffeeexporteur der Welt (nach Brasilien). Die Ha-Long-Bucht mit über 1.600 Inseln ist UNESCO-Welterbe."
   },
   {
+    "Land": "Westsahara",
+    "Hauptstadt": "Laayoune (de facto)\nTifariti (von DARS beansprucht)",
+    "Kontinent": "Afrika",
+    "Fläche": "266.000 km²",
+    "Bevölkerung": "ca. 600.000",
+    "Fakt": "Die Westsahara ist das größte nicht selbstverwaltete Gebiet der Welt. Marokko beansprucht und kontrolliert den Großteil des Territoriums. Die Demokratische Arabische Republik Sahara (DARS) wird von der Befreiungsbewegung Polisario vertreten.",
+    "UNStatus": "teilweise_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Die Demokratische Arabische Republik Sahara (Westsahara) wird von über 80 Staaten anerkannt, insbesondere afrikanischen und lateinamerikanischen Ländern sowie Mitgliedern der Afrikanischen Union. Marokko sieht das Territorium als Teil seines historischen Staatsgebiets. Deutschland bleibt neutral und unterstützt UN-Bemühungen um eine friedliche Lösung."
+  },
+  {
     "Land": "Zentralafrikanische Republik",
     "Hauptstadt": "Bangui",
     "Kontinent": "Afrika",
@@ -1581,7 +1641,7 @@
     "Fläche": "9.251 km²",
     "Bevölkerung": "ca. 1,2 Mio.",
     "Fakt": "Nikosia ist die letzte geteilte Hauptstadt der Welt – eine UN-Grüne Linie trennt den griechisch-zyprischen und den türkisch-zyprischen Teil. Die Fläche Zyperns umfasst laut internationalem Recht auch das Gebiet der Türkischen Republik Nordzypern (TRNZ), die international nur von der Türkei anerkannt wird.",
-    "UNStatus": "teilweise_anerkannt",
-    "UNStatusText": "Die Republik Zypern ist vollständiges UN-Mitglied und EU-Mitglied. Allerdings kontrolliert sie nur den Südteil der Insel. Der Nordteil wird seit 1974 von der Türkischen Republik Nordzypern (TRNZ) kontrolliert, die international mit Ausnahme der Türkei nicht anerkannt wird. In einer Volksabstimmung 2004 sprach sich die Bevölkerung des Nordens für eine Wiedervereinigung aus, der Süden lehnte den Annan-Plan jedoch ab. Die Insel bleibt faktisch geteilt."
+    "UNHinweis": "teilweise_anerkannt",
+    "UNHinweisText": "Die Republik Zypern ist vollständiges UN-Mitglied und EU-Mitglied. Allerdings kontrolliert sie nur den Südteil der Insel. Der Nordteil wird seit 1974 von der Türkischen Republik Nordzypern (TRNZ) kontrolliert, die international mit Ausnahme der Türkei nicht anerkannt wird. In einer Volksabstimmung 2004 sprach sich die Bevölkerung des Nordens für eine Wiedervereinigung aus, der Süden lehnte den Annan-Plan jedoch ab. Die Insel bleibt faktisch geteilt."
   }
 ]
