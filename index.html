@@ -82,7 +82,7 @@ input[type=search]::-webkit-search-cancel-button{display:none;}
 input[type=search]:focus{border-color:var(--acc);}
 @media(min-width:600px){#sWrapI{display:block!important;}#sWrapM{display:none!important;}#sTglBtn{display:none!important;}}
 @media(max-width:599px){#sWrapI{display:none!important;}#sWrapM{display:none;padding:7px 12px 9px;border-top:1px solid var(--border);}#sWrapM.open{display:block;}#sWrapM .si{position:relative;}#sWrapM .si svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;}#sWrapM input[type=search]{width:100%;min-width:0;}}
-.hacts{display:flex;align-items:center;gap:1px;flex-shrink:0;}
+.hacts{display:flex;align-items:center;gap:4px;flex-shrink:0;}
 .icon-btn{background:none;border:none;cursor:pointer;color:var(--muted);padding:8px 9px;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;white-space:nowrap;min-width:36px;min-height:36px;}
 @media(max-width:599px){.icon-btn{min-width:42px;min-height:42px;padding:8px;}}
 .icon-btn:hover{background:var(--surface2);color:var(--text);}
@@ -255,6 +255,9 @@ main{max-width:800px;margin:0 auto;padding:10px 14px 60px;}
 .fc-wrong-row .fc-sep{color:var(--muted);flex-shrink:0;}
 .fc-wrong-row .fa{color:var(--muted);white-space:pre-line;}
 .info-sec{display:flex;flex-direction:column;gap:4px;}
+.ov-close-x{position:absolute;top:12px;right:12px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--muted);cursor:pointer;border-radius:6px;padding:0;}
+.ov-close-x:hover{background:var(--surface2);color:var(--text);}
+
 .info-sec p{margin:0;font-size:.875rem;line-height:1.65;color:var(--text);}
 @media(max-width:500px){.cbody{padding-left:14px;}.igrid{grid-template-columns:1fr 1fr;}.fc-btn{padding:9px 14px;font-size:.82rem;}}
 /* Range-Button: kleines Icon-Button rechts in jeder Zeile */
@@ -340,7 +343,8 @@ a.nice-link:hover{opacity:.75;}
 </div>
 
 <div class="ov" id="infoOv" role="dialog" aria-modal="true" aria-label="Informationen">
-  <div class="fc-box" style="text-align:left;max-width:530px;max-height:90vh;overflow-y:auto;">
+  <div class="fc-box" style="text-align:left;max-width:530px;max-height:90vh;overflow-y:auto;position:relative;">
+    <button class="ov-close-x" id="infoCloseX" aria-label="Schließen" type="button"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <div class="fc-title" style="margin-bottom:18px;">Hinweise &amp; Informationen</div>
     <div style="display:flex;flex-direction:column;gap:14px;">
       <div class="info-sec">
@@ -701,8 +705,10 @@ fcOv.addEventListener("keydown",e=>{if(e.key==="Escape")closeFC();});
 
 /* ── Info ── */
 const iOv=document.getElementById("infoOv");
-document.getElementById("infoBtn").addEventListener("click",()=>iOv.classList.add("active"));
+const iBox=iOv.querySelector(".fc-box");
+document.getElementById("infoBtn").addEventListener("click",()=>{iOv.classList.add("active");iBox.scrollTop=0;});
 document.getElementById("infoClose").addEventListener("click",()=>iOv.classList.remove("active"));
+document.getElementById("infoCloseX").addEventListener("click",()=>iOv.classList.remove("active"));
 iOv.addEventListener("click",e=>{if(e.target===iOv)iOv.classList.remove("active");});
 iOv.addEventListener("keydown",e=>{if(e.key==="Escape")iOv.classList.remove("active");});
 
