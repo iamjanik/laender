@@ -449,20 +449,12 @@ function renderList(){
   Array.from(main.children).forEach(c=>{if(c.id!=="noRes"&&c.id!=="loadMsg")c.remove();});
   if(!f.length){noR.style.display="block";return;}
   noR.style.display="none";
-  if(curU.size>0||curK.size!==1){
-    let last="";
-    f.forEach(l=>{
-      const g=ag(l.Land);
-      if(g!==last){last=g;const d=document.createElement("div");d.className="alpha-div";d.setAttribute("aria-hidden","true");const gc=f.filter(x=>ag(x.Land)===g).length;d.innerHTML=`<span class="alpha-letter">${g}</span><span class="alpha-line"></span><span class="cont-count">${gc} ${gc===1?"Staat":"Staaten"}</span>`;main.insertBefore(d,noR);}
-      main.insertBefore(buildCard(l),noR);
-    });
-  } else {
-    const kName=[...curK][0];
-    const g=document.createElement("div");g.className="cont-group";
-    g.innerHTML=`<div class="cont-hdr"><span class="cont-title">${kName}</span><span class="cont-line"></span><span class="cont-count">${f.length} Staaten</span></div>`;
-    f.forEach(l=>g.appendChild(buildCard(l)));
-    main.insertBefore(g,noR);
-  }
+let last="";
+  f.forEach(l=>{
+    const g=ag(l.Land);
+    if(g!==last){last=g;const d=document.createElement("div");d.className="alpha-div";d.setAttribute("aria-hidden","true");const gc=f.filter(x=>ag(x.Land)===g).length;d.innerHTML=`<span class="alpha-letter">${g}</span><span class="alpha-line"></span><span class="cont-count">${gc} ${gc===1?"Staat":"Staaten"}</span>`;main.insertBefore(d,noR);}
+    main.insertBefore(buildCard(l),noR);
+  });
 }
 
 function buildCard(l){
