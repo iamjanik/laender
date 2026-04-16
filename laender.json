@@ -59,7 +59,7 @@
     "Kontinent": "Afrika",
     "Fläche": "28.051 km²",
     "Bevölkerung": "ca. 1,5 Mio.",
-    "Fakt": "Das einzige Land Afrikas, in dem Spanisch Amtssprache ist. Die Stadt Malabo liegt auf einer Vulkaninsel und war bis zum 02.01.2026 die Hauptstadt."
+    "Fakt": "Das einzige Land Afrikas, in dem Spanisch Amtssprache ist. Die Stadt Malabo lag auf einer Vulkaninsel und war bis Januar 2026 die Hauptstadt."
   },
   {
     "Land": "Argentinien",
@@ -248,9 +248,9 @@
     "Kontinent": "Asien",
     "Fläche": "36.193 km²",
     "Bevölkerung": "ca. 23 Mio.",
-    "Fakt": "Taiwan produziert über 90 % der weltweit hergestellten Halbleiter (mit einer Strukturbreite unter 7 nm) und ist trotz geopolitischer Sonderlage eine der größten Volkswirtschaften Asiens.",
+    "Fakt": "Taiwan produziert über 90 % der weltweit hergestellten Halbleiter und ist trotz geopolitischer Sonderlage eine der größten Volkswirtschaften Asiens.",
     "UNStatus": "nicht_anerkannt",
-    "UNStatusText": "Kein UN-Mitglied. Taiwan wird offiziell nur noch von rund 11 Staaten anerkannt, da die Volksrepublik China einen Alleinvertretungsanspruch erhebt. 1971 verlor Taiwan seinen UN-Sitz an die Volksrepublik China (Resolution 2758). De facto ist Taiwan ein unabhängiger, demokratischer Staat."
+    "UNStatusText": "Kein UN-Mitglied. Die Republik China (Taiwan) wird wegen des Alleinvertretungsanspruchs der Volksrepublik China von den meisten Staaten offiziell nicht als unabhängiger Staat anerkannt. Derzeit erkennen nur noch rund 11 Staaten sowie der Heilige Stuhl Taiwan an (Stand: 2024). 1971 verlor Taiwan seinen UN-Sitz an die Volksrepublik China (Resolution 2758). De facto ist Taiwan ein unabhängiger, demokratisch regierter Staat."
   },
   {
     "Land": "China, Volksrepublik",
@@ -259,6 +259,16 @@
     "Fläche": "9.596.960 km²",
     "Bevölkerung": "ca. 1,4 Mrd.",
     "Fakt": "China hat nur eine einzige Zeitzone, obwohl das Land sich über fünf geografische Zeitzonen erstreckt. Die Große Mauer ist das längste Bauwerk der Menschheitsgeschichte."
+  },
+  {
+    "Land": "Cookinseln",
+    "Hauptstadt": "Avarua",
+    "Kontinent": "Ozeanien",
+    "Fläche": "236 km²",
+    "Bevölkerung": "ca. 17.000",
+    "Fakt": "Die Cookinseln befinden sich in freier Assoziierung mit Neuseeland. Über 50 Staaten, darunter Deutschland (2001), erkennen sie als unabhängigen Staat an.",
+    "UNStatus": "teilweise_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied im herkömmlichen Sinne. Die Cookinseln sind ein selbstverwaltetes Territorium in freier Assoziierung mit Neuseeland. Sie sind nach der Drei-Elemente-Lehre unabhängig; mehr als 50 Staaten, darunter Deutschland (seit 2001), haben sie als unabhängigen Staat anerkannt. Die Vereinten Nationen warten mit der Vollmitgliedschaft, bis die Cookinseln die Assoziierung mit Neuseeland eigenständig auflösen."
   },
   {
     "Land": "Costa Rica",
@@ -401,7 +411,7 @@
     "Kontinent": "Asien",
     "Fläche": "69.700 km²",
     "Bevölkerung": "ca. 3,7 Mio.",
-    "Fakt": "Georgien gilt als eine der ältesten Weinbauregionen der Welt – archäologische Funde belegen Weinherstellung seit ca. 6.000 v. Chr."
+    "Fakt": "Georgien gilt als eine der ältesten Weinbauregionen der Welt – archäologische Funde belegen Weinherstellung seit ca. 6.000 v. Chr. Die Fläche Georgiens umfasst laut internationalem Recht auch Abchasien und Südossetien."
   },
   {
     "Land": "Ghana",
@@ -527,7 +537,9 @@
     "Kontinent": "Asien",
     "Fläche": "20.770 km²",
     "Bevölkerung": "ca. 9,7 Mio.",
-    "Fakt": "Israel hat mehr Museen pro Kopf als jedes andere Land. Das Tote Meer ist der tiefstgelegene Punkt der Erde (430 m unter dem Meeresspiegel)."
+    "Fakt": "Israel bezeichnet Jerusalem seit 1980 als seine Hauptstadt (Jerusalemgesetz). Die meisten Staaten erkennen dies nicht an, da sie die Annexion Ostjerusalems ablehnen – daher befinden sich die meisten Botschaften in Tel Aviv. Parlament und Regierung tagen in Jerusalem.",
+    "UNStatus": "teilweise_anerkannt",
+    "UNStatusText": "Vollmitglied der Vereinten Nationen, wird jedoch nicht von allen Staaten anerkannt: Lediglich 162 der anderen UN-Mitgliedstaaten unterhalten diplomatische Beziehungen zu Israel. Der Hauptstadtstatus Jerusalems ist völkerrechtlich umstritten – die meisten Staaten betrachten Tel Aviv als faktischen Regierungssitz und unterhalten ihre Botschaften dort."
   },
   {
     "Land": "Italien",
@@ -551,14 +563,15 @@
     "Kontinent": "Asien",
     "Fläche": "377.975 km²",
     "Bevölkerung": "ca. 124 Mio.",
-    "Fakt": "Japan hat mehr als 6.800 Inseln und verzeichnet durchschnittlich 1.500 Erdbeben pro Jahr. Tokio ist die größte Metropolregion der Welt."
+    "Fakt": "Japan hat mehr als 6.800 Inseln und verzeichnet durchschnittlich 1.500 Erdbeben pro Jahr. Tokio ist die größte Metropolregion der Welt. Ob Tokio de jure die Hauptstadt ist, ist unklar, da es keine explizite Verlegung der Hauptstadt von Kyōto nach Tokio gab."
   },
   {
     "Land": "Jemen",
     "Hauptstadt": "Sanaa (de jure)\nAden (de facto)",
     "Kontinent": "Asien",
     "Fläche": "527.968 km²",
-    "Bevölkerung": "ca. 34 Mio."
+    "Bevölkerung": "ca. 34 Mio.",
+    "Fakt": "Sanaa ist de jure die Hauptstadt des Jemen. Nachdem Huthi-Rebellen die Stadt 2015 besetzten, floh die Regierung nach Aden, das seitdem als Interimshauptstadt gilt."
   },
   {
     "Land": "Jordanien",
@@ -693,7 +706,7 @@
     "Bevölkerung": "ca. 1,8 Mio.",
     "Fakt": "Kosovo erklärte 2008 die Unabhängigkeit und ist eines der jüngsten Länder der Welt. Über 90 % der Bevölkerung sind albanischsprachig.",
     "UNStatus": "teilweise_anerkannt",
-    "UNStatusText": "Kein UN-Mitglied. Kosovo erklärte am 17. Februar 2008 einseitig die Unabhängigkeit von Serbien. Bisher wird er von rund 119 UN-Mitgliedstaaten anerkannt, darunter die USA, Deutschland und die meisten EU-Staaten. Russland, China und Serbien verweigern die Anerkennung."
+    "UNStatusText": "Kein UN-Mitglied. Kosovo erklärte am 17. Februar 2008 einseitig die Unabhängigkeit von Serbien. Bisher wird er von 115 der 193 UN-Mitgliedstaaten anerkannt (Stand: 2024), darunter Deutschland, Österreich, die Schweiz und die meisten EU-Staaten. Serbien, Russland, China und weitere Staaten verweigern die Anerkennung. Der Internationale Gerichtshof stellte 2010 fest, dass die Unabhängigkeitserklärung nicht gegen Völkerrecht verstoße."
   },
   {
     "Land": "Kroatien",
@@ -898,7 +911,7 @@
     "Kontinent": "Europa",
     "Fläche": "2,02 km²",
     "Bevölkerung": "ca. 37.000",
-    "Fakt": "Monaco ist der am dichtesten besiedelte Staat der Welt, hat keine Einkommenssteuer und die niedrigste Kriminalitätsrate Europas."
+    "Fakt": "Monaco ist der am dichtesten besiedelte Staat der Welt, hat keine Einkommenssteuer und die niedrigste Kriminalitätsrate Europas. Monaco hat de jure keine Hauptstadt, da es ein reiner Stadtstaat ist."
   },
   {
     "Land": "Mongolei",
@@ -946,7 +959,7 @@
     "Kontinent": "Ozeanien",
     "Fläche": "21 km²",
     "Bevölkerung": "ca. 10.000",
-    "Fakt": "Durch Phosphatabbau war Nauru in den 1970ern das reichste Land der Welt pro Kopf – heute ist der Reichtum aufgebraucht. Es ist der drittkleinste Staat der Welt."
+    "Fakt": "Durch Phosphatabbau war Nauru in den 1970ern das reichste Land der Welt pro Kopf – heute ist der Reichtum aufgebraucht. Es ist der drittkleinste Staat der Welt. Nauru hat de jure keine Hauptstadt; Yaren gilt als inoffizieller Regierungssitz."
   },
   {
     "Land": "Nepal",
@@ -977,7 +990,7 @@
     "Kontinent": "Europa",
     "Fläche": "41.543 km²",
     "Bevölkerung": "ca. 17,9 Mio.",
-    "Fakt": "Ein Drittel der Niederlande liegt unter dem Meeresspiegel. Amsterdam hat mehr Fahrräder als Einwohner und mehr Grachten als Venedig."
+    "Fakt": "Amsterdam ist de jure die Hauptstadt der Niederlande, der Regierungssitz befindet sich jedoch de facto in Den Haag. Ein Drittel der Niederlande liegt unter dem Meeresspiegel."
   },
   {
     "Land": "Niger",
@@ -994,6 +1007,16 @@
     "Fläche": "923.768 km²",
     "Bevölkerung": "ca. 220 Mio.",
     "Fakt": "Nigeria ist das bevölkerungsreichste Land Afrikas. Nollywood (Nigerias Filmindustrie) produziert mehr Filme als Hollywood."
+  },
+  {
+    "Land": "Niue",
+    "Hauptstadt": "Alofi",
+    "Kontinent": "Ozeanien",
+    "Fläche": "260 km²",
+    "Bevölkerung": "ca. 1.600",
+    "Fakt": "Niue ist eine der größten Koralleninseln der Welt und hat nur etwa 1.600 Einwohner – viele Niuaner leben in Neuseeland.",
+    "UNStatus": "teilweise_anerkannt",
+    "UNStatusText": "Kein UN-Mitglied. Niue ist ein selbstverwaltetes Territorium in freier Assoziierung mit Neuseeland. Bisher haben etwa 20 Staaten Niue als unabhängigen Staat anerkannt (Stand: 2016). Deutschland und Österreich haben Niue bisher nicht anerkannt. Die Vereinten Nationen warten mit der Vollmitgliedschaft, bis Niue die Assoziierung mit Neuseeland eigenständig auflöst."
   },
   {
     "Land": "Nordmazedonien",
@@ -1024,7 +1047,7 @@
     "Kontinent": "Europa",
     "Fläche": "83.871 km²",
     "Bevölkerung": "ca. 9,1 Mio.",
-    "Fakt": "Wien ist die einzige Großstadt der Welt mit signifikantem Weinanbau innerhalb der Stadtgrenzen. Der Wiener Stephansdom hat mehr Besucher als die Schönbrunner Orangerie."
+    "Fakt": "Wien ist die einzige Großstadt der Welt mit signifikantem Weinanbau innerhalb der Stadtgrenzen."
   },
   {
     "Land": "Osttimor / Timor-Leste",
@@ -1041,6 +1064,16 @@
     "Fläche": "881.913 km²",
     "Bevölkerung": "ca. 240 Mio.",
     "Fakt": "Pakistan beherbergt den K2 (8.611 m), den zweithöchsten Berg der Welt, der als technisch schwieriger gilt als der Everest."
+  },
+  {
+    "Land": "Palästina",
+    "Hauptstadt": "Ramallah (de facto)\nOstjerusalem (beansprucht)",
+    "Kontinent": "Asien",
+    "Fläche": "6.020 km²",
+    "Bevölkerung": "ca. 5,4 Mio.",
+    "Fakt": "Der Staat Palästina wird von der UN als Völkerrechtssubjekt anerkannt und beansprucht das Westjordanland, den Gazastreifen und Ostjerusalem. Palästina beansprucht Ostjerusalem als Hauptstadt, als Regierungssitz fungiert jedoch Ramallah.",
+    "UNStatus": "beobachter",
+    "UNStatusText": "Kein UN-Vollmitglied, aber seit 2012 ständiger Beobachterstaat der Vereinten Nationen. Der Staat Palästina wird gegenwärtig von 146 UN-Staaten diplomatisch anerkannt. Die Bundesrepublik Deutschland und Österreich erkennen Palästina nicht als Staat an. Das palästinensische Territorium steht großteils unter israelischer Kontrolle. Der Internationale Gerichtshof stufte die israelische Besetzung der palästinensischen Gebiete im Juli 2024 als illegal ein."
   },
   {
     "Land": "Palau",
@@ -1151,7 +1184,7 @@
     "Kontinent": "Ozeanien",
     "Fläche": "2.842 km²",
     "Bevölkerung": "ca. 220.000",
-    "Fakt": "Samoa übersprung 2011 einen ganzen Tag – von Donnerstag direkt auf Samstag – weil es die Seite der Datumsgrenze wechselte."
+    "Fakt": "Samoa übersprang 2011 einen ganzen Tag – von Donnerstag direkt auf Samstag – weil es die Seite der Datumsgrenze wechselte."
   },
   {
     "Land": "San Marino",
@@ -1160,6 +1193,13 @@
     "Fläche": "61 km²",
     "Bevölkerung": "ca. 34.000",
     "Fakt": "San Marino ist die älteste noch existierende Republik der Welt (gegründet 301 n. Chr.) und eines der wenigen Länder ohne Staatsverschuldung."
+  },
+  {
+    "Land": "São Tomé und Príncipe",
+    "Hauptstadt": "São Tomé",
+    "Kontinent": "Afrika",
+    "Fläche": "964 km²",
+    "Bevölkerung": "ca. 230.000"
   },
   {
     "Land": "Saudi-Arabien",
@@ -1183,7 +1223,7 @@
     "Kontinent": "Europa",
     "Fläche": "41.285 km²",
     "Bevölkerung": "ca. 8,8 Mio.",
-    "Fakt": "Die Schweiz hat seit 1815 keinen Krieg mehr geführt, hat keinen einzelnen Regierungschef (ein 7-köpfiger Bundesrat regiert kollektiv) und gründete 1863 das Rote Kreuz."
+    "Fakt": "Die Schweiz hat seit 1815 keinen Krieg mehr geführt und gründete 1863 das Rote Kreuz. Bern erfüllt de facto die Hauptstadtfunktion als Bundesstadt; de jure hat die Schweiz keine Hauptstadt."
   },
   {
     "Land": "Senegal",
@@ -1229,7 +1269,7 @@
     "Kontinent": "Asien",
     "Fläche": "728 km²",
     "Bevölkerung": "ca. 5,9 Mio.",
-    "Fakt": "Singapur ist der einzige Stadtstaat Asiens. Kaugummi ist dort im Verkauf verboten – und das Kriminalitätsniveau ist eines der niedrigsten der Welt."
+    "Fakt": "Singapur ist der einzige Stadtstaat Asiens und hat de jure keine Hauptstadt, da Stadtgebiet und Staatsgebiet identisch sind. Kaugummi ist dort im Verkauf verboten."
   },
   {
     "Land": "Slowakei",
@@ -1333,13 +1373,6 @@
     "Fläche": "185.180 km²",
     "Bevölkerung": "ca. 22 Mio.",
     "Fakt": "Damaskus gilt als eine der ältesten kontinuierlich bewohnten Städte der Welt, mit einer Geschichte von über 10.000 Jahren."
-  },
-  {
-    "Land": "São Tomé und Príncipe",
-    "Hauptstadt": "São Tomé",
-    "Kontinent": "Afrika",
-    "Fläche": "964 km²",
-    "Bevölkerung": "ca. 230.000"
   },
   {
     "Land": "Tadschikistan",
@@ -1490,9 +1523,9 @@
     "Kontinent": "Europa",
     "Fläche": "0,44 km²",
     "Bevölkerung": "ca. 800",
-    "Fakt": "Der Vatikan ist der kleinste Staat der Welt und der einzige ohne reguläre Staatsbürger von Geburt – man wird durch Amt oder Funktion Bürger.",
+    "Fakt": "Der Vatikan ist der kleinste Staat der Welt und der einzige ohne reguläre Staatsbürger von Geburt – man wird durch Amt oder Funktion Bürger. Die Vatikanstadt hat de jure keine Hauptstadt, da sie ein reiner Stadtstaat ist.",
     "UNStatus": "beobachter",
-    "UNStatusText": "Kein UN-Mitglied, aber ständiger Beobachterstaat. Der Heilige Stuhl vertritt den Vatikan bei den Vereinten Nationen und besitzt seit 2004 alle Rechte eines Mitgliedstaates – mit Ausnahme des Stimmrechts in der Generalversammlung."
+    "UNStatusText": "Kein UN-Mitglied, aber ständiger Beobachterstaat. Der Heilige Stuhl vertritt den Vatikan bei den Vereinten Nationen und besitzt seit 2004 alle Rechte eines Mitgliedstaates – mit Ausnahme des Stimmrechts in der Generalversammlung. Der Heilige Stuhl pflegt diplomatische Beziehungen mit 183 Staaten weltweit."
   },
   {
     "Land": "Venezuela",
@@ -1547,6 +1580,8 @@
     "Kontinent": "Europa",
     "Fläche": "9.251 km²",
     "Bevölkerung": "ca. 1,2 Mio.",
-    "Fakt": "Nikosia ist die letzte geteilte Hauptstadt der Welt – eine Grüne Linie der UN trennt den griechisch-zyprischen und türkisch-zyprischen Teil."
+    "Fakt": "Nikosia ist die letzte geteilte Hauptstadt der Welt – eine UN-Grüne Linie trennt den griechisch-zyprischen und den türkisch-zyprischen Teil. Die Fläche Zyperns umfasst laut internationalem Recht auch das Gebiet der Türkischen Republik Nordzypern (TRNZ), die international nur von der Türkei anerkannt wird.",
+    "UNStatus": "teilweise_anerkannt",
+    "UNStatusText": "Die Republik Zypern ist vollständiges UN-Mitglied und EU-Mitglied. Allerdings kontrolliert sie nur den Südteil der Insel. Der Nordteil wird seit 1974 von der Türkischen Republik Nordzypern (TRNZ) kontrolliert, die international mit Ausnahme der Türkei nicht anerkannt wird. In einer Volksabstimmung 2004 sprach sich die Bevölkerung des Nordens für eine Wiedervereinigung aus, der Süden lehnte den Annan-Plan jedoch ab. Die Insel bleibt faktisch geteilt."
   }
 ]
