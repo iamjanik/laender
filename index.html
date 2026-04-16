@@ -352,21 +352,29 @@ input[type=search]:focus { border-color: var(--accent); }
   flex-shrink: 0;
 }
 
+/* ── Filter-Bar: zwei Zeilen (Kontinent + UN-Status) ── */
 .filter-bar {
   border-top: 1px solid var(--border);
-  padding: 0 20px;
 }
-.filter-inner {
+
+.filter-row {
   display: flex;
   gap: 4px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 8px 0;
+  padding: 7px 20px;
   max-width: 800px;
   margin: 0 auto;
 }
-.filter-inner::-webkit-scrollbar { display: none; }
+.filter-row::-webkit-scrollbar { display: none; }
+
+/* Zweite Zeile (UN) hat etwas weniger Abstand oben */
+.filter-row + .filter-row {
+  padding-top: 0;
+  padding-bottom: 8px;
+  border-top: none;
+}
 
 .filter-btn {
   padding: 5px 14px;
@@ -384,6 +392,14 @@ input[type=search]:focus { border-color: var(--accent); }
 .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
 .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
 .filter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* UN-spezifische Filter-Buttons */
+.filter-btn-un-none.active  { background: var(--un-none-text); border-color: var(--un-none-text); color: white; }
+.filter-btn-un-none:hover   { border-color: var(--un-none-text); color: var(--un-none-text); }
+.filter-btn-un-part.active  { background: var(--un-part-text); border-color: var(--un-part-text); color: white; }
+.filter-btn-un-part:hover   { border-color: var(--un-part-text); color: var(--un-part-text); }
+.filter-btn-un-obs.active   { background: var(--un-obs-text); border-color: var(--un-obs-text); color: white; }
+.filter-btn-un-obs:hover    { border-color: var(--un-obs-text); color: var(--un-obs-text); }
 
 .result-pill {
   margin-left: auto;
@@ -796,7 +812,6 @@ main {
     if (saved === 'dark' || saved === 'light') {
       document.documentElement.setAttribute('data-theme', saved);
     }
-    // is-dark-Klasse für CSS-Selektoren (Systemeinstellung + gespeichert)
     var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     var isDark = saved === 'dark' || (!saved && prefersDark);
     if (isDark) document.documentElement.classList.add('is-dark');
@@ -819,7 +834,7 @@ main {
     </div>
 
     <div class="header-actions">
-<button class="icon-btn" id="searchToggleBtn" aria-label="Suche ein-/ausblenden" aria-expanded="false">
+      <button class="icon-btn" id="searchToggleBtn" aria-label="Suche ein-/ausblenden" aria-expanded="false">
         <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
@@ -836,7 +851,6 @@ main {
 
       <!-- Dark-Mode-Toggle -->
       <button class="icon-btn" id="themeToggleBtn" aria-label="Dark Mode umschalten" aria-pressed="false">
-        <!-- Sonne (Light Mode) -->
         <span class="icon-sun" aria-hidden="true">
           <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="5"/>
@@ -850,7 +864,6 @@ main {
             <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
           </svg>
         </span>
-        <!-- Mond (Dark Mode) -->
         <span class="icon-moon" aria-hidden="true">
           <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -865,7 +878,6 @@ main {
         <span class="btn-label">Lernkarten</span>
       </button>
 
-      <!-- Info-Button -->
       <button class="icon-btn" id="infoBtn" aria-label="Hinweise und Informationen">
         <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="10"/>
@@ -887,14 +899,21 @@ main {
   </div>
 
   <div class="filter-bar">
-    <nav class="filter-inner" aria-label="Nach Kontinent filtern">
-      <button class="filter-btn active" data-filter="Alle">Alle</button>
-      <button class="filter-btn" data-filter="Afrika">Afrika</button>
-      <button class="filter-btn" data-filter="Amerika">Amerika</button>
-      <button class="filter-btn" data-filter="Asien">Asien</button>
-      <button class="filter-btn" data-filter="Europa">Europa</button>
-      <button class="filter-btn" data-filter="Ozeanien">Ozeanien</button>
+    <!-- Zeile 1: Kontinent -->
+    <nav class="filter-row" aria-label="Nach Kontinent filtern">
+      <button class="filter-btn active" data-filter="Alle" data-filter-type="kontinent">Alle</button>
+      <button class="filter-btn" data-filter="Afrika" data-filter-type="kontinent">Afrika</button>
+      <button class="filter-btn" data-filter="Amerika" data-filter-type="kontinent">Amerika</button>
+      <button class="filter-btn" data-filter="Asien" data-filter-type="kontinent">Asien</button>
+      <button class="filter-btn" data-filter="Europa" data-filter-type="kontinent">Europa</button>
+      <button class="filter-btn" data-filter="Ozeanien" data-filter-type="kontinent">Ozeanien</button>
       <span class="result-pill" id="resultPill" aria-live="polite"></span>
+    </nav>
+    <!-- Zeile 2: UN-Status -->
+    <nav class="filter-row" aria-label="Nach UN-Status filtern">
+      <button class="filter-btn filter-btn-un-none" data-filter="nicht_anerkannt" data-filter-type="un">🚫 Nicht anerkannt</button>
+      <button class="filter-btn filter-btn-un-part" data-filter="teilweise_anerkannt" data-filter-type="un">⚠️ Teilweise anerkannt</button>
+      <button class="filter-btn filter-btn-un-obs"  data-filter="beobachter"         data-filter-type="un">👁 UN-Beobachter</button>
     </nav>
   </div>
 </header>
@@ -923,31 +942,32 @@ main {
 
       <div class="info-section">
         <div class="info-label" style="margin-bottom:4px;">📋 Datengrundlage</div>
-        <p>Alle Länderdaten basieren auf der <a href="https://de.wikipedia.org/wiki/Liste_der_Staaten_der_Erde" target="_blank">Liste der Staaten der Erde</a>. Bevölkerungszahlen sind gerundete Schätzwerte.</p>
+        <p>Alle Länderdaten basieren auf der <a href="https://de.wikipedia.org/wiki/Liste_der_Staaten_der_Erde" target="_blank">Liste der Staaten der Erde</a> (Wikipedia). Die Liste umfasst die 193 UN-Mitgliedstaaten sowie weitere Staaten und Territorien mit besonderem Status. Bevölkerungszahlen sind gerundete Schätzwerte.</p>
       </div>
 
       <div class="info-section">
         <div class="info-label" style="margin-bottom:4px;">🇺🇳 UN-Status-Kennzeichnung</div>
-        <p>Länder ohne reguläre UN-Mitgliedschaft sind mit einem <strong>*</strong> markiert und farbig hervorgehoben:</p>
+        <p>Länder ohne reguläre UN-Vollmitgliedschaft sind mit einem <strong>*</strong> markiert und farbig hervorgehoben. Über die Filter in der zweiten Zeile können sie gezielt angezeigt werden:</p>
         <p style="margin-top:6px;">
-          <span style="color:var(--un-none-text); font-weight:600;">● Nicht anerkannt</span> – kein UN-Mitglied, kaum internationale Anerkennung<br>
-          <span style="color:var(--un-part-text); font-weight:600;">● Teilweise anerkannt</span> – von einigen UN-Staaten anerkannt<br>
-          <span style="color:var(--un-obs-text); font-weight:600;">● UN-Beobachter</span> – ständiger Beobachterstatus ohne Stimmrecht
+          <span style="color:var(--un-none-text); font-weight:600;">🚫 Nicht anerkannt</span> – kein UN-Mitglied, kaum internationale Anerkennung (z.&thinsp;B. Taiwan)<br>
+          <span style="color:var(--un-part-text); font-weight:600;">⚠️ Teilweise anerkannt</span> – von einigen UN-Staaten anerkannt oder in freier Assoziierung (z.&thinsp;B. Kosovo, Zypern*, Cookinseln, Niue, Israel*)<br>
+          <span style="color:var(--un-obs-text); font-weight:600;">👁 UN-Beobachter</span> – ständiger Beobachterstatus ohne Stimmrecht (Vatikanstadt, Palästina)
         </p>
+        <p style="margin-top:6px; font-size:.82rem; color:var(--text-muted);">* Zypern ist UN-Mitglied, der Nordteil der Insel wird jedoch von der nur von der Türkei anerkannten TRNZ kontrolliert. Israel ist UN-Mitglied, der Hauptstadtstatus Jerusalems ist jedoch international überwiegend nicht anerkannt.</p>
       </div>
 
       <div class="info-section">
         <div class="info-label" style="margin-bottom:4px;">🏛 Mehrere Hauptstädte</div>
-        <p>Einige Länder haben mehrere Hauptstädte (de jure / de facto). Im Lernkarten-Eingabemodus werden alle Varianten als korrekte Antwort akzeptiert.</p>
-         <p style="margin-top:6px;">
-          <span style="font-weight:600;">● de jure</span> – rechtlich festgelegten Zustand<br>
-          <span style="font-weight:600;">● de facto</span> – tatsächlich gelebten Zustand<br>
+        <p>Einige Länder haben mehrere Hauptstädte (de jure / de facto) oder gar keine formale Hauptstadt (Monaco, Singapur, Nauru, Schweiz, Vatikanstadt). Im Lernkarten-Eingabemodus werden alle Varianten als korrekte Antwort akzeptiert.</p>
+        <p style="margin-top:6px;">
+          <span style="font-weight:600;">● de jure</span> – rechtlich festgelegter Zustand<br>
+          <span style="font-weight:600;">● de facto</span> – tatsächlich gelebter Zustand
         </p>
       </div>
 
       <div class="info-section">
-        <div class="info-label" style="margin-bottom:4px;">⚠️ Bekannte Lücken</div>
-        <p>Palästina fehlt aktuell im Datensatz, obwohl der Vatikan als UN-Beobachter enthalten ist. Das soll in einer späteren Version ergänzt werden.</p>
+        <div class="info-label" style="margin-bottom:4px;">🗺 Umstrittene Gebiete</div>
+        <p>Bei Staaten mit umstrittenen Territorien (z.&thinsp;B. Georgien inkl. Abchasien/Südossetien, Zypern inkl. Nordzypern, Israel inkl. Golanhöhen) entspricht die angegebene Fläche dem völkerrechtlich beanspruchten Gesamtgebiet gemäß internationalem Recht.</p>
       </div>
 
     </div>
@@ -984,14 +1004,12 @@ themeToggleBtn.addEventListener('click', () => {
   applyTheme(current === 'dark' ? 'light' : 'dark', true);
 });
 
-// Systemeinstellung live mithören (wenn keine manuelle Überschreibung gespeichert)
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
   if (!localStorage.getItem('theme')) {
     applyTheme(e.matches ? 'dark' : 'light', false);
   }
 });
 
-// Initial-State setzen (ohne localStorage-Schreiben, nur aria-Attribute)
 applyTheme(getEffectiveTheme(), false);
 
 
@@ -1008,7 +1026,7 @@ const FLAGS = {
   "Botswana":"🇧🇼","Brasilien":"🇧🇷","Brunei":"🇧🇳","Bulgarien":"🇧🇬",
   "Burkina Faso":"🇧🇫","Burundi":"🇧🇮","Chile":"🇨🇱",
   "China, Republik / Taiwan":"🇹🇼","China, Volksrepublik":"🇨🇳",
-  "Costa Rica":"🇨🇷","Dänemark":"🇩🇰","Deutschland":"🇩🇪",
+  "Cookinseln":"🇨🇰","Costa Rica":"🇨🇷","Dänemark":"🇩🇰","Deutschland":"🇩🇪",
   "Dominica":"🇩🇲","Dominikanische Republik":"🇩🇴","Dschibuti":"🇩🇯",
   "Ecuador":"🇪🇨","El Salvador":"🇸🇻","Elfenbeinküste":"🇨🇮",
   "Eritrea":"🇪🇷","Estland":"🇪🇪","Eswatini":"🇸🇿","Fidschi":"🇫🇯",
@@ -1033,9 +1051,9 @@ const FLAGS = {
   "Mongolei":"🇲🇳","Montenegro":"🇲🇪","Mosambik":"🇲🇿","Myanmar":"🇲🇲",
   "Namibia":"🇳🇦","Nauru":"🇳🇷","Nepal":"🇳🇵","Neuseeland":"🇳🇿",
   "Nicaragua":"🇳🇮","Niederlande":"🇳🇱","Niger":"🇳🇪","Nigeria":"🇳🇬",
-  "Nordmazedonien":"🇲🇰","Norwegen":"🇳🇴","Oman":"🇴🇲",
+  "Niue":"🇳🇺","Nordmazedonien":"🇲🇰","Norwegen":"🇳🇴","Oman":"🇴🇲",
   "Osttimor / Timor-Leste":"🇹🇱","Österreich":"🇦🇹","Pakistan":"🇵🇰",
-  "Palau":"🇵🇼","Panama":"🇵🇦","Papua-Neuguinea":"🇵🇬","Paraguay":"🇵🇾",
+  "Palästina":"🇵🇸","Palau":"🇵🇼","Panama":"🇵🇦","Papua-Neuguinea":"🇵🇬","Paraguay":"🇵🇾",
   "Peru":"🇵🇪","Philippinen":"🇵🇭","Polen":"🇵🇱","Portugal":"🇵🇹",
   "Ruanda":"🇷🇼","Rumänien":"🇷🇴","Russland":"🇷🇺","Salomonen":"🇸🇧",
   "Sambia":"🇿🇲","Samoa":"🇼🇸","San Marino":"🇸🇲",
@@ -1127,9 +1145,10 @@ function escapeHTML(str = "") {
 function cssId(name) { return name.replace(/[^a-z0-9]/gi,"_").toLowerCase(); }
 
 let LAENDER = [];
-let currentFilter = "Alle";
-let currentSearch  = "";
-const activeCards  = new Set();
+let currentFilter   = "Alle";   // Kontinent-Filter
+let currentUNFilter = null;     // UN-Status-Filter (null = kein Filter)
+let currentSearch   = "";
+const activeCards   = new Set();
 
 async function loadData() {
   try {
@@ -1151,8 +1170,9 @@ function getFiltered() {
   const q = currentSearch.toLowerCase();
   return LAENDER.filter(l => {
     const mc = currentFilter === "Alle" || l.Kontinent === currentFilter;
+    const mu = currentUNFilter === null || l.UNStatus === currentUNFilter;
     const ms = !q || l.Land.toLowerCase().includes(q) || l.Hauptstadt.toLowerCase().includes(q);
-    return mc && ms;
+    return mc && mu && ms;
   });
 }
 
@@ -1171,6 +1191,25 @@ function renderList() {
 
   if (!filtered.length) { noResults.style.display = "block"; return; }
   noResults.style.display = "none";
+
+  // UN-Filter aktiv → immer alphabetisch sortiert mit Buchstaben-Divider
+  if (currentUNFilter !== null) {
+    let lastGroup = "";
+    filtered.forEach(land => {
+      const g = alphaGroup(land.Land);
+      if (g !== lastGroup) {
+        lastGroup = g;
+        const div = document.createElement("div");
+        div.className = "alpha-divider";
+        div.setAttribute("aria-hidden", "true");
+        const groupCount = filtered.filter(l => alphaGroup(l.Land) === g).length;
+        div.innerHTML = `<span class="alpha-letter">${g}</span><span class="alpha-line"></span><span class="continent-count">${groupCount} ${groupCount === 1 ? 'Land' : 'Länder'}</span>`;
+        main.insertBefore(div, noResults);
+      }
+      main.insertBefore(buildCard(land), noResults);
+    });
+    return;
+  }
 
   if (currentFilter === "Alle") {
     let lastGroup = "";
@@ -1301,12 +1340,37 @@ searchToggleBtn.addEventListener("click", () => {
 searchInput.addEventListener("input", debounce(e => { currentSearch = e.target.value; renderList(); }, 150));
 searchInputMob.addEventListener("input", debounce(e => { currentSearch = e.target.value; renderList(); }, 150));
 
-document.querySelectorAll(".filter-btn").forEach(btn => {
+/* ── Kontinent-Filter ── */
+document.querySelectorAll(".filter-btn[data-filter-type='kontinent']").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".filter-btn").forEach(b => { b.classList.remove("active"); b.removeAttribute("aria-current"); });
+    document.querySelectorAll(".filter-btn[data-filter-type='kontinent']").forEach(b => {
+      b.classList.remove("active"); b.removeAttribute("aria-current");
+    });
     btn.classList.add("active");
     btn.setAttribute("aria-current", "true");
     currentFilter = btn.dataset.filter;
+    renderList();
+    updateToggleAllBtn();
+  });
+});
+
+/* ── UN-Status-Filter ── */
+document.querySelectorAll(".filter-btn[data-filter-type='un']").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const val = btn.dataset.filter;
+    if (currentUNFilter === val) {
+      // Zweiter Klick: Filter deaktivieren
+      btn.classList.remove("active");
+      btn.removeAttribute("aria-current");
+      currentUNFilter = null;
+    } else {
+      document.querySelectorAll(".filter-btn[data-filter-type='un']").forEach(b => {
+        b.classList.remove("active"); b.removeAttribute("aria-current");
+      });
+      btn.classList.add("active");
+      btn.setAttribute("aria-current", "true");
+      currentUNFilter = val;
+    }
     renderList();
     updateToggleAllBtn();
   });
