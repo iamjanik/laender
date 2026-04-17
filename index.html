@@ -541,11 +541,10 @@ function renderStart(){
       </div>
     </div>
     <div class="fc-list" id="fcList" role="listbox" aria-multiselectable="true" aria-label="Staaten auswählen"></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;min-height:26px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;min-height:26px;">
       <span class="fc-pick-count" id="fcCount">${selCount} von ${sorted.length} ausgewählt</span>
       <button class="fc-pick-action" id="fcRangeApply" type="button" style="display:none;">Bereich auswählen</button>
     </div>
-    <div style="font-size:.72rem;color:var(--muted);margin-bottom:10px;min-height:1.2em;" id="fcRangeHint"></div>
     <div class="fc-warn" id="fcW" role="alert" aria-live="polite"></div>
     ${brow([{t:"Abbrechen",c:"fc-sec",id:"fcCancel"},{t:"Starten",c:"fc-pri",id:"fcStart"}])}
   `;
@@ -564,17 +563,20 @@ function renderStart(){
 
     row.addEventListener("click",e=>{
       const name=l.Land;
-      if(FC.rangeStart>=0&&FC.rangeStart!==i){
-        /* Zweiter Klick: Endpunkt merken, aber noch nicht auswählen */
+      if(FC.rangeStart>=0&&!FC.sel.has(name)&&i!==FC.rangeStart){
+        /* Zweiter Klick auf nicht-ausgewähltes Land: Endpunkt setzen */
         FC.rangeEnd=i;
-      } else if(FC.rangeStart===i){
-        /* Startpunkt erneut klicken: Auswahl aufheben */
-        FC.rangeStart=-1;FC.rangeEnd=-1;
-        if(FC.sel.has(name))FC.sel.delete(name);else FC.sel.add(name);
       } else {
-        /* Normaler Klick: togglen und als möglichen Startpunkt merken */
-        if(FC.sel.has(name)){FC.sel.delete(name);FC.rangeStart=-1;FC.rangeEnd=-1;}
-        else{FC.sel.add(name);FC.rangeStart=i;FC.rangeEnd=-1;}
+        /* Normaler Toggle */
+        if(FC.sel.has(name)){
+          FC.sel.delete(name);
+          if(FC.rangeStart===i){FC.rangeStart=-1;FC.rangeEnd=-1;}
+          if(FC.rangeEnd===i){FC.rangeEnd=-1;}
+        } else {
+          FC.sel.add(name);
+          if(FC.rangeStart<0){FC.rangeStart=i;FC.rangeEnd=-1;}
+          else if(FC.rangeEnd<0&&i!==FC.rangeStart){FC.rangeEnd=i;}
+        }
       }
       refreshPickList(sorted);
     });
@@ -607,7 +609,6 @@ function refreshPickList(sorted){
 
   /* Zeige "Bereich auswählen"-Button wenn Start und Ende gesetzt */
   const applyBtn=document.getElementById("fcRangeApply");
-  const hint=document.getElementById("fcRangeHint");
   if(applyBtn){
     if(FC.rangeStart>=0&&FC.rangeEnd>=0&&FC.rangeStart!==FC.rangeEnd){
       const a=Math.min(FC.rangeStart,FC.rangeEnd),b=Math.max(FC.rangeStart,FC.rangeEnd);
@@ -619,13 +620,8 @@ function refreshPickList(sorted){
         FC.rangeStart=-1;FC.rangeEnd=-1;
         refreshPickList(sorted);
       };
-      if(hint)hint.textContent=`Von „${sorted[FC.rangeStart].Land}" bis „${sorted[FC.rangeEnd].Land}"`;
-    } else if(FC.rangeStart>=0){
-      applyBtn.style.display="none";
-      if(hint)hint.textContent=`Startpunkt: „${sorted[FC.rangeStart].Land}" – jetzt Endpunkt anklicken`;
     } else {
       applyBtn.style.display="none";
-      if(hint)hint.textContent="Bereichsauswahl: erstes Land anklicken, dann letztes";
     }
   }
 
