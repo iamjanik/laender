@@ -258,15 +258,63 @@ main{max-width:800px;margin:0 auto;padding:10px 14px 60px;}
 
 .info-sec p{margin:0;font-size:.875rem;line-height:1.65;color:var(--text);}
 @media(max-width:500px){.cbody{padding-left:14px;}.igrid{grid-template-columns:1fr 1fr;}.fc-btn{padding:9px 14px;font-size:.82rem;}}
-.fc-wrong-row .fc-wrong-eingabe{color:var(--un-n-tx);font-style:italic;flex-shrink:0;}
-.fc-alpha-sep{display:flex;align-items:center;gap:8px;padding:6px 12px 3px;pointer-events:none;}
-.fc-alpha-letter{font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.06em;flex-shrink:0;}
+/* Buchstaben-Trenner in FC-Liste */
+.fc-alpha-sep{display:flex;align-items:center;gap:7px;padding:5px 12px 2px;pointer-events:none;}
+.fc-alpha-letter{font-size:.7rem;font-weight:700;color:var(--muted);letter-spacing:.06em;flex-shrink:0;}
 .fc-alpha-line{flex:1;height:1px;background:var(--border);}
-.fc-alpha-count{font-size:.7rem;color:var(--muted);flex-shrink:0;}
+.fc-alpha-count{font-size:.68rem;color:var(--muted);flex-shrink:0;}
+/* Falsch-gemacht Eingabe in Ergebnisliste */
+.fc-wrong-row .fc-wrong-eingabe{color:var(--un-n-tx);font-style:italic;flex-shrink:0;}
 /* Range-Auswahl: Startpunkt-Hervorhebung */
 .fc-item.range-from{background:var(--acc-light);}
 a.nice-link{color:var(--acc);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;font-weight:500;}
 a.nice-link:hover{opacity:.75;}
+/* ── Multiple Choice ── */
+.fc-mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px;}
+@media(max-width:400px){.fc-mc-grid{grid-template-columns:1fr;}}
+.fc-mc-opt{padding:11px 14px;border-radius:10px;border:2px solid var(--border);background:var(--bg);font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;color:var(--text);text-align:center;line-height:1.3;transition:border-color .15s,background .15s;}
+.fc-mc-opt:hover:not(:disabled){border-color:var(--acc);background:var(--acc-light);}
+.fc-mc-opt.mc-ok{border-color:#2d7a2d;background:#e8f5e8;color:#1a4a1a;cursor:default;}
+.fc-mc-opt.mc-err{border-color:#c0392b;background:#fdecea;color:#6a1a14;cursor:default;}
+.fc-mc-opt:disabled{cursor:default;}
+[data-theme="dark"] .fc-mc-opt.mc-ok,.is-dark .fc-mc-opt.mc-ok{background:#0e2a0e;color:#6aca6a;}
+[data-theme="dark"] .fc-mc-opt.mc-err,.is-dark .fc-mc-opt.mc-err{background:#2a0e0e;color:#e07070;}
+/* ── Statistik-Tab im FC-Overlay ── */
+.fc-nav{display:flex;gap:0;margin-bottom:20px;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.fc-nav-btn{flex:1;padding:8px 10px;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;color:var(--muted);transition:background .15s,color .15s;}
+.fc-nav-btn:not(:last-child){border-right:1.5px solid var(--border);}
+.fc-nav-btn.active{background:var(--acc);color:white;font-weight:600;}
+.fc-nav-btn:hover:not(.active){background:var(--surface2);color:var(--text);}
+.st-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.st-tile{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:11px 12px;text-align:center;}
+.st-tile .st-val{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--acc);line-height:1.1;}
+.st-tile .st-lbl{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:3px;}
+.st-tile.st-red .st-val{color:#c0392b;}
+[data-theme="dark"] .st-tile.st-red .st-val,.is-dark .st-tile.st-red .st-val{color:#e07070;}
+.st-highlight{display:flex;gap:8px;margin-bottom:16px;}
+.st-hl-tile{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;min-width:0;}
+.st-hl-tile .st-hl-label{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px;}
+.st-hl-tile .st-hl-val{font-size:.84rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.st-hl-tile .st-hl-sub{font-size:.72rem;color:var(--muted);margin-top:1px;}
+.st-hl-tile.st-best .st-hl-label{color:#2d7a2d;}
+[data-theme="dark"] .st-hl-tile.st-best .st-hl-label,.is-dark .st-hl-tile.st-best .st-hl-label{color:#6aaa60;}
+.st-hl-tile.st-worst .st-hl-label{color:#c0392b;}
+[data-theme="dark"] .st-hl-tile.st-worst .st-hl-label,.is-dark .st-hl-tile.st-worst .st-hl-label{color:#e07070;}
+.st-section-hdr{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:14px 0 6px;}
+.st-weak-list{display:flex;flex-direction:column;gap:5px;max-height:180px;overflow-y:auto;margin-bottom:14px;}
+.st-weak-row{display:flex;align-items:center;gap:8px;font-size:.82rem;}
+.st-weak-row .fi{font-size:1rem;flex-shrink:0;}
+.st-weak-row .fn{flex:1;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.st-weak-bar-wrap{width:50px;height:5px;background:var(--border);border-radius:3px;flex-shrink:0;}
+.st-weak-bar{height:5px;border-radius:3px;background:#c0392b;}
+[data-theme="dark"] .st-weak-bar,.is-dark .st-weak-bar{background:#e07070;}
+.st-weak-pct{font-size:.7rem;color:var(--muted);width:28px;text-align:right;flex-shrink:0;}
+.st-empty{font-size:.83rem;color:var(--muted);text-align:center;padding:16px 0;}
+/* ── Falsch-Filter Chip in Auswahl ── */
+.fc-filter-row{display:flex;gap:6px;margin-bottom:10px;}
+.fc-fchip{padding:4px 12px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);}
+.fc-fchip.active{background:var(--acc);border-color:var(--acc);color:white;font-weight:600;}
+.fc-fchip:hover:not(.active){border-color:var(--acc);color:var(--acc);}
 </style>
 <script>
 (function(){try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')document.documentElement.setAttribute('data-theme',s);var pd=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(!s&&pd))document.documentElement.classList.add('is-dark');}catch(e){}})();
@@ -422,6 +470,83 @@ function brow(items){return`<div class="fcrow">${items.map(b=>`<button class="fc
 function esc(s=""){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function cid(n){return n.replace(/[^a-z0-9]/gi,"_").toLowerCase();}
 
+/* ── Lernfortschritt (localStorage) ── */
+const PROG_KEY="laender_progress";
+function loadProg(){try{return JSON.parse(localStorage.getItem(PROG_KEY)||"{}");}catch{return{};}}
+function saveProg(p){try{localStorage.setItem(PROG_KEY,JSON.stringify(p));}catch{}}
+function recordResult(land,ok){
+  const p=loadProg();
+  if(!p[land])p[land]={ok:0,wr:0};
+  if(ok)p[land].ok++;else p[land].wr++;
+  saveProg(p);
+}
+function getWeakLands(){
+  const p=loadProg();
+  return Object.entries(p).filter(([,v])=>v.wr>0).map(([k,v])=>k);
+}
+
+/* ── Statistik ── */
+function renderStats(container){
+  const p=loadProg();
+  const entries=Object.entries(p);
+  const totalUniq=entries.length;
+  const totalOk=entries.reduce((s,[,v])=>s+v.ok,0);
+  const totalWr=entries.reduce((s,[,v])=>s+v.wr,0);
+  const totalAns=totalOk+totalWr;
+  const pct=totalAns>0?Math.round(totalOk/totalAns*100):0;
+  const pctBad=totalAns>0?Math.round(totalWr/totalAns*100):0;
+
+  /* Bestes Land: nur richtig, mind. 1 Antwort, kein Fehler */
+  const perfect=entries.filter(([,v])=>v.wr===0&&v.ok>0).sort((a,b)=>b[1].ok-a[1].ok);
+  const bestLand=perfect.length?perfect[0]:null;
+  /* Schlechtestes Land: höchste absolute Fehleranzahl */
+  const worst=entries.filter(([,v])=>v.wr>0).sort((a,b)=>b[1].wr-a[1].wr);
+  const worstLand=worst.length?worst[0]:null;
+
+  /* Top-10 schwächste nach Fehlerquote */
+  const weak=entries
+    .filter(([,v])=>v.wr>0)
+    .map(([k,v])=>({land:k,ok:v.ok,wr:v.wr,rate:v.wr/(v.ok+v.wr)}))
+    .sort((a,b)=>b.rate-a.rate)
+    .slice(0,10);
+
+  const bestHTML=bestLand
+    ?`<div class="st-hl-val">${gF(bestLand[0])} ${esc(bestLand[0])}</div><div class="st-hl-sub">${bestLand[1].ok}× richtig</div>`
+    :`<div class="st-hl-val" style="color:var(--muted)">–</div>`;
+  const worstHTML=worstLand
+    ?`<div class="st-hl-val">${gF(worstLand[0])} ${esc(worstLand[0])}</div><div class="st-hl-sub">${worstLand[1].wr}× falsch</div>`
+    :`<div class="st-hl-val" style="color:var(--muted)">–</div>`;
+
+  const weakRows=weak.length
+    ?weak.map(w=>{const pW=Math.round(w.rate*100);return `<div class="st-weak-row"><span class="fi">${gF(w.land)}</span><span class="fn">${esc(w.land)}</span><div class="st-weak-bar-wrap"><div class="st-weak-bar" style="width:${pW}%"></div></div><span class="st-weak-pct">${pW}\u00a0%</span></div>`;}).join("")
+    :`<div class="st-empty">Noch keine Fehler – weiter so! 🎉</div>`;
+
+  container.innerHTML=`
+    <div class="st-grid">
+      <div class="st-tile"><div class="st-val">${totalAns}</div><div class="st-lbl">Antworten gesamt</div></div>
+      <div class="st-tile"><div class="st-val">${totalUniq}</div><div class="st-lbl">Einzigartige Länder</div></div>
+      <div class="st-tile"><div class="st-val">${totalOk}</div><div class="st-lbl">Richtig</div></div>
+      <div class="st-tile st-red"><div class="st-val">${totalWr}</div><div class="st-lbl">Falsch</div></div>
+    </div>
+    <div class="st-highlight">
+      <div class="st-hl-tile st-best"><div class="st-hl-label">🏆 Bestes Land</div>${bestHTML}</div>
+      <div class="st-hl-tile st-worst"><div class="st-hl-label">⚠️ Schlechtestes Land</div>${worstHTML}</div>
+    </div>
+    <div class="st-section-hdr">Schwächste Länder (Fehlerquote)</div>
+    <div class="st-weak-list">${weakRows}</div>
+    <div class="fcrow" id="stResetRow">
+      <button class="fc-btn fc-sec" id="stClose2" type="button">Schließen</button><button class="fc-btn fc-sec" id="stReset" type="button">Fortschritt zurücksetzen</button>
+    </div>
+  `;
+  document.getElementById("stClose2").addEventListener("click",closeFC);
+  document.getElementById("stReset").addEventListener("click",()=>{
+    const row=document.getElementById("stResetRow");
+    row.innerHTML=`<span style="font-size:.8rem;color:var(--muted);flex:1;">Wirklich alles löschen?</span><button class="fc-btn fc-sec" id="stResetNo" type="button">Abbrechen</button><button class="fc-btn fc-wr" id="stResetYes" type="button">Löschen</button>`;
+    document.getElementById("stResetNo").addEventListener("click",()=>{renderStats(container);});
+    document.getElementById("stResetYes").addEventListener("click",()=>{saveProg({});renderStats(container);});
+  });
+}
+
 let LD=[], curK=new Set(), curU=new Set(), curS="";
 const openCards=new Set();
 
@@ -517,24 +642,37 @@ document.getElementById("togAllBtn").addEventListener("click",()=>{const any=get
 
 /* ══ FLASHCARDS ══ */
 const fcOv=document.getElementById("fcOv"),fcBox=document.getElementById("fcBox");
-const FC={pool:[],origPool:[],idx:0,ok:0,wr:0,wrong:[],mode:"type",sel:new Set()};
+const FC={pool:[],origPool:[],idx:0,ok:0,wr:0,wrong:[],mode:"type",sel:new Set(),listFilter:"all"};
 function openFC(){fcOv.classList.add("active");fcBox.focus();}
 function closeFC(){fcOv.classList.remove("active");}
 
-function renderStart(){
+function renderStart(tab){
+  tab=tab||"learn";
   const filt=getFilt();
   const sorted=[...filt].sort((a,b)=>{const ka=ag(a.Land)+a.Land,kb=ag(b.Land)+b.Land;return ka<kb?-1:ka>kb?1:0;});
-
-  /* Standardmäßig keine Auswahl; ungültige Einträge bereinigen */
   FC.sel=new Set([...FC.sel].filter(n=>sorted.some(l=>l.Land===n)));
+  const weakSet=new Set(getWeakLands());
+  const weakInPool=sorted.filter(l=>weakSet.has(l.Land));
+  if(FC.listFilter==="wrong"&&weakInPool.length===0)FC.listFilter="all";
+  const listSrc=FC.listFilter==="wrong"?weakInPool:sorted;
+
+  const navHTML=`<div class="fc-nav"><button class="fc-nav-btn${tab==="learn"?" active":""}" data-tab="learn" type="button">Lernkarten</button><button class="fc-nav-btn${tab==="stats"?" active":""}" data-tab="stats" type="button">Statistik</button></div>`;
+
+  if(tab==="stats"){
+    fcBox.innerHTML=navHTML+`<div id="stContent"></div>`;
+    fcBox.querySelectorAll(".fc-nav-btn").forEach(b=>b.addEventListener("click",()=>renderStart(b.dataset.tab)));
+    renderStats(document.getElementById("stContent"));
+    return;
+  }
 
   const selCount=FC.sel.size;
   fcBox.innerHTML=`
-    <div class="fc-title">Lernkarten</div>
+    ${navHTML}
     <div class="fc-mode-row">
       <div class="fc-mode-lbl">Modus</div>
       <div class="fc-mode-btns">
         <button class="fc-mbtn${FC.mode==="reveal"?" active":""}" data-m="reveal" type="button">Aufdecken</button>
+        <button class="fc-mbtn${FC.mode==="mc"?" active":""}" data-m="mc" type="button">Multiple Choice</button>
         <button class="fc-mbtn${FC.mode==="type"?" active":""}" data-m="type" type="button">Eingabe</button>
       </div>
     </div>
@@ -545,25 +683,32 @@ function renderStart(){
         <button class="fc-pick-action" id="fcSelNone" type="button">Keine</button>
       </div>
     </div>
+    <div class="fc-filter-row">
+      <button class="fc-fchip${FC.listFilter==="all"?" active":""}" data-f="all" type="button">Alle (${sorted.length})</button>
+      <button class="fc-fchip${FC.listFilter==="wrong"?" active":""}" data-f="wrong" type="button"${weakInPool.length===0?" disabled":""}>Falsch gemacht (${weakInPool.length})</button>
+    </div>
     <div class="fc-list" id="fcList" role="listbox" aria-multiselectable="true" aria-label="Staaten auswählen"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;min-height:26px;">
-      <span class="fc-pick-count" id="fcCount">${selCount} von ${sorted.length} ausgewählt</span>
+      <span class="fc-pick-count" id="fcCount">${selCount} von ${listSrc.length} ausgewählt</span>
       <button class="fc-pick-action" id="fcRangeApply" type="button" style="display:none;">Bereich auswählen</button>
     </div>
     <div class="fc-warn" id="fcW" role="alert" aria-live="polite"></div>
-    ${brow([{t:"Abbrechen",c:"fc-sec",id:"fcCancel"},{t:"Starten",c:"fc-pri",id:"fcStart"}])}
+    ${brow([{t:"Schließen",c:"fc-sec",id:"fcCancel"},{t:"Starten",c:"fc-pri",id:"fcStart"}])}
   `;
+
+  fcBox.querySelectorAll(".fc-nav-btn").forEach(b=>b.addEventListener("click",()=>renderStart(b.dataset.tab)));
+  fcBox.querySelectorAll(".fc-mbtn").forEach(b=>b.addEventListener("click",()=>{FC.mode=b.dataset.m;fcBox.querySelectorAll(".fc-mbtn").forEach(x=>x.classList.toggle("active",x===b));}));
+  fcBox.querySelectorAll(".fc-fchip").forEach(b=>b.addEventListener("click",()=>{if(b.disabled)return;FC.listFilter=b.dataset.f;renderStart("learn");}));
 
   const list=document.getElementById("fcList");
   let lastG="";
-  sorted.forEach((l,i)=>{
+  listSrc.forEach((l,i)=>{
     const g=ag(l.Land);
     if(g!==lastG){
       lastG=g;
-      const gc=sorted.filter(x=>ag(x.Land)===g).length;
+      const gc=listSrc.filter(x=>ag(x.Land)===g).length;
       const sep=document.createElement("div");
-      sep.className="fc-alpha-sep";
-      sep.setAttribute("aria-hidden","true");
+      sep.className="fc-alpha-sep";sep.setAttribute("aria-hidden","true");
       sep.innerHTML=`<span class="fc-alpha-letter">${g}</span><span class="fc-alpha-line"></span><span class="fc-alpha-count">${gc}</span>`;
       list.appendChild(sep);
     }
@@ -572,32 +717,23 @@ function renderStart(){
     row.dataset.name=l.Land;row.dataset.idx=i;
     row.setAttribute("role","option");
     row.setAttribute("aria-selected",String(FC.sel.has(l.Land)));
-    row.innerHTML=
-      '<input type="checkbox" '+(FC.sel.has(l.Land)?'checked':'')+' tabindex="-1" aria-hidden="true">'+
-      '<span class="fi">'+gF(l.Land)+'</span>'+
-      '<span class="fn">'+esc(l.Land)+'</span>';
-
-    row.addEventListener("click",e=>{
-      const name=l.Land;
-      if(FC.sel.has(name))FC.sel.delete(name);else FC.sel.add(name);
-      refreshPickList(sorted);
-    });
-
+    const wrBadge=weakSet.has(l.Land)?`<span style="font-size:.65rem;color:#c0392b;flex-shrink:0;">✗</span>`:"";
+    row.innerHTML='<input type="checkbox" '+(FC.sel.has(l.Land)?'checked':'')+' tabindex="-1" aria-hidden="true"><span class="fi">'+gF(l.Land)+'</span><span class="fn">'+esc(l.Land)+'</span>'+wrBadge;
+    row.addEventListener("click",()=>{if(FC.sel.has(l.Land))FC.sel.delete(l.Land);else FC.sel.add(l.Land);refreshPickList(listSrc);});
     list.appendChild(row);
   });
 
-  fcBox.querySelectorAll(".fc-mbtn").forEach(b=>b.addEventListener("click",()=>{FC.mode=b.dataset.m;fcBox.querySelectorAll(".fc-mbtn").forEach(x=>x.classList.toggle("active",x===b));}));
-  document.getElementById("fcSelAll").addEventListener("click",()=>{FC.sel=new Set(sorted.map(l=>l.Land));refreshPickList(sorted);});
-  document.getElementById("fcSelNone").addEventListener("click",()=>{FC.sel=new Set();refreshPickList(sorted);});
+  document.getElementById("fcSelAll").addEventListener("click",()=>{FC.sel=new Set(listSrc.map(l=>l.Land));refreshPickList(listSrc);});
+  document.getElementById("fcSelNone").addEventListener("click",()=>{FC.sel=new Set();refreshPickList(listSrc);});
   document.getElementById("fcStart").addEventListener("click",()=>{
-    const pool=sorted.filter(l=>FC.sel.has(l.Land));
+    const pool=listSrc.filter(l=>FC.sel.has(l.Land));
     if(!pool.length){document.getElementById("fcW").textContent="Bitte mindestens einen Staat auswählen.";return;}
     FC.pool=shuffle(pool);FC.origPool=[...FC.pool];FC.idx=0;FC.ok=0;FC.wr=0;FC.wrong=[];renderCard();
   });
   document.getElementById("fcCancel").addEventListener("click",closeFC);
 }
 
-function refreshPickList(sorted){
+function refreshPickList(listSrc){
   const list=document.getElementById("fcList");
   list.querySelectorAll(".fc-item").forEach(row=>{
     const name=row.dataset.name;
@@ -606,55 +742,62 @@ function refreshPickList(sorted){
     row.setAttribute("aria-selected",String(on));
     row.classList.toggle("range-from",false);
   });
-
-  /* Bereichs-Button: zeigen wenn mind. 2 ausgewählt und eine Lücke dazwischen */
   const applyBtn=document.getElementById("fcRangeApply");
   if(applyBtn){
-    const selIdxs=sorted.map((l,i)=>FC.sel.has(l.Land)?i:-1).filter(i=>i>=0);
+    const selIdxs=listSrc.map((l,i)=>FC.sel.has(l.Land)?i:-1).filter(i=>i>=0);
     if(selIdxs.length>=2){
       const first=selIdxs[0],last=selIdxs[selIdxs.length-1];
-      const totalInRange=last-first+1;
-      const gap=totalInRange-selIdxs.length;
-      if(gap>0){
-        applyBtn.style.display="inline";
-        applyBtn.textContent=`Bereich auswählen (+${gap})`;
-        applyBtn.onclick=()=>{
-          for(let x=first;x<=last;x++)FC.sel.add(sorted[x].Land);
-          refreshPickList(sorted);
-        };
-      } else {
-        applyBtn.style.display="none";
-      }
-    } else {
-      applyBtn.style.display="none";
-    }
+      const gap=(last-first+1)-selIdxs.length;
+      if(gap>0){applyBtn.style.display="inline";applyBtn.textContent=`Bereich auswählen (+${gap})`;applyBtn.onclick=()=>{for(let x=first;x<=last;x++)FC.sel.add(listSrc[x].Land);refreshPickList(listSrc);};}
+      else applyBtn.style.display="none";
+    } else applyBtn.style.display="none";
   }
-
   const c=document.getElementById("fcCount");
-  if(c)c.textContent=`${FC.sel.size} von ${sorted.length} ausgewählt`;
+  if(c)c.textContent=`${FC.sel.size} von ${listSrc.length} ausgewählt`;
 }
-
 
 
 function renderCard(){
   if(FC.idx>=FC.pool.length){renderResult();return;}
   const l=FC.pool[FC.idx];const flag=gF(l.Land);
   const prog=`${FC.idx+1} / ${FC.pool.length} · ✓ ${FC.ok} · ✗ ${FC.wr}`;
-  if(FC.mode==="reveal")renderReveal(l,flag,prog);else renderType(l,flag,prog);
+  if(FC.mode==="reveal")renderReveal(l,flag,prog);else if(FC.mode==="mc")renderMC(l,flag,prog);else renderType(l,flag,prog);
 }
 function renderReveal(l,flag,prog){
   fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div>${brow([{t:"Abbrechen",c:"fc-sec",id:"fcAb"},{t:"Antwort zeigen",c:"fc-rev",id:"fcRev"}])}`;
   document.getElementById("fcRev").addEventListener("click",()=>{
     fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><div class="fc-ans">${esc(l.Hauptstadt)}</div>${brow([{t:"✗ Nicht gewusst",c:"fc-wr",id:"fcNo"},{t:"✓ Gewusst",c:"fc-ok",id:"fcYes"}])}`;
-    document.getElementById("fcYes").addEventListener("click",()=>{FC.ok++;FC.idx++;renderCard();});
-    document.getElementById("fcNo").addEventListener("click",()=>{FC.wr++;FC.wrong.push(l);FC.idx++;renderCard();});
+    document.getElementById("fcYes").addEventListener("click",()=>{FC.ok++;recordResult(l.Land,true);FC.idx++;renderCard();});
+    document.getElementById("fcNo").addEventListener("click",()=>{FC.wr++;FC.wrong.push(l);recordResult(l.Land,false);FC.idx++;renderCard();});
   });
   document.getElementById("fcAb").addEventListener("click",closeFC);
 }
+function renderMC(l,flag,prog){
+  const others=shuffle(FC.pool.filter(x=>x.Land!==l.Land)).slice(0,3);
+  const opts=shuffle([l,...others]);
+  const grid=opts.map(o=>`<button class="fc-mc-opt" data-land="${esc(o.Land)}" type="button">${esc(hsvs(o.Hauptstadt)[0])}</button>`).join("");
+  fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><div class="fc-mc-grid">${grid}</div><div class="fc-fb" id="fcFb" role="status" aria-live="polite"></div>`;
+  fcBox.querySelectorAll(".fc-mc-opt").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const ok=btn.dataset.land===l.Land;
+      fcBox.querySelectorAll(".fc-mc-opt").forEach(b=>{b.disabled=true;if(b.dataset.land===l.Land)b.classList.add("mc-ok");else if(b===btn&&!ok)b.classList.add("mc-err");});
+      const fb=document.getElementById("fcFb");
+      fb.textContent=ok?"Richtig!":"Richtig wäre: "+hsvs(l.Hauptstadt)[0];
+      fb.className="fc-fb "+(ok?"ok":"err");
+      if(ok)FC.ok++;else{FC.wr++;FC.wrong.push(l);}
+      recordResult(l.Land,ok);
+      const row=document.createElement("div");row.className="fcrow";
+      row.innerHTML=`<button class="fc-btn fc-pri" type="button">Weiter</button>`;
+      row.querySelector("button").addEventListener("click",()=>{FC.idx++;renderCard();});
+      fcBox.appendChild(row);row.querySelector("button").focus();
+    });
+  });
+}
+
 function renderType(l,flag,prog){
   fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><input class="fc-inp" id="fcIn" type="text" placeholder="Hauptstadt eingeben …" autocomplete="off" spellcheck="false"><div class="fc-fb" id="fcFb" role="status" aria-live="polite"></div>${brow([{t:"Abbrechen",c:"fc-sec",id:"fcAb"},{t:"Prüfen",c:"fc-rev",id:"fcCk"}])}`;
   const inp=document.getElementById("fcIn");inp.focus();
-  const check=()=>{const v=inp.value.trim();if(!v)return;const ni=norm(v);const vs=hsvs(l.Hauptstadt);const ok=vs.some(x=>norm(x)===ni);inp.classList.add(ok?"ok":"err");inp.disabled=true;const fb=document.getElementById("fcFb");fb.textContent=ok?"Richtig!":"Richtig wäre: "+(vs.length>1?vs.join(" / "):l.Hauptstadt);fb.className="fc-fb "+(ok?"ok":"err");if(ok)FC.ok++;else{FC.wr++;FC.wrong.push({...l,_eingabe:v});}fcBox.querySelector(".fcrow").innerHTML=`<button class="fc-btn fc-pri" id="fcNx" type="button">Weiter</button>`;document.getElementById("fcNx").addEventListener("click",()=>{FC.idx++;renderCard();});document.getElementById("fcNx").focus();};
+  const check=()=>{const v=inp.value.trim();if(!v)return;const ni=norm(v);const vs=hsvs(l.Hauptstadt);const ok=vs.some(x=>norm(x)===ni);inp.classList.add(ok?"ok":"err");inp.disabled=true;const fb=document.getElementById("fcFb");fb.textContent=ok?"Richtig!":"Richtig wäre: "+(vs.length>1?vs.join(" / "):l.Hauptstadt);fb.className="fc-fb "+(ok?"ok":"err");if(ok)FC.ok++;else{FC.wr++;FC.wrong.push({...l,_eingabe:v});}recordResult(l.Land,ok);fcBox.querySelector(".fcrow").innerHTML=`<button class="fc-btn fc-pri" id="fcNx" type="button">Weiter</button>`;document.getElementById("fcNx").addEventListener("click",()=>{FC.idx++;renderCard();});document.getElementById("fcNx").focus();};
   inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
   document.getElementById("fcCk").addEventListener("click",check);
   document.getElementById("fcAb").addEventListener("click",closeFC);
@@ -666,7 +809,7 @@ function renderResult(){
   if(hasWrong){
     const rows=FC.wrong.map(l=>{
       const cap=esc(l.Hauptstadt).replace(/\n/g," / ");
-      const eingabe=l._eingabe?`<span class="fc-wrong-eingabe">„${esc(l._eingabe)}"</span><span class="fc-sep">→</span>`:"";
+      const eingabe=l._eingabe?`<span class="fc-wrong-eingabe">„${esc(l._eingabe)}“</span><span class="fc-sep">→</span>`:"";
       return `<div class="fc-wrong-row"><span class="fi" aria-hidden="true">${gF(l.Land)}</span><span class="fn">${esc(l.Land)}</span><span class="fc-sep">·</span>${eingabe}<span class="fa">${cap}</span></div>`;
     }).join("");
     wrongBox=`<div class="fc-wrong-box"><div class="fc-wrong-hdr">Nicht gewusst (${FC.wrong.length})</div><div class="fc-wrong-list">${rows}</div></div>`;
@@ -683,10 +826,9 @@ function renderResult(){
 }
 
 document.getElementById("fcBtn").addEventListener("click",()=>{
-  /* Selektion zurücksetzen beim Öffnen */
   FC.sel=new Set();
   openFC();
-  renderStart();
+  renderStart("learn");
 });
 fcOv.addEventListener("click",e=>{if(e.target===fcOv)closeFC();});
 fcOv.addEventListener("keydown",e=>{if(e.key==="Escape")closeFC();});
