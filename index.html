@@ -541,7 +541,7 @@ function renderStats(container){
   document.getElementById("stClose2").addEventListener("click",closeFC);
   document.getElementById("stReset").addEventListener("click",()=>{
     const row=document.getElementById("stResetRow");
-    row.innerHTML=`<span style="font-size:.8rem;color:var(--muted);flex:1;">Wirklich alles löschen?</span><button class="fc-btn fc-sec" id="stResetNo" type="button">Abbrechen</button><button class="fc-btn fc-wr" id="stResetYes" type="button">Löschen</button>`;
+    row.innerHTML=`<button class="fc-btn fc-sec" id="stResetNo" type="button">Abbrechen</button><button class="fc-btn fc-wr" id="stResetYes" type="button">Löschen</button>`;
     document.getElementById("stResetNo").addEventListener("click",()=>{renderStats(container);});
     document.getElementById("stResetYes").addEventListener("click",()=>{saveProg({});renderStats(container);});
   });
