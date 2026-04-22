@@ -860,16 +860,17 @@ function renderType(l,flag,prog){
     const val=inp.value.trim();if(!val)return;
     const ni=norm(val);const vs=hsvs(l.Hauptstadt);const ok=vs.some(x=>norm(x)===ni);
     inp.classList.add(ok?"ok":"err");inp.disabled=true;
-    const fb=document.getElementById("fcFb");
-    fb.textContent=ok?"Richtig!":"Richtig w\u00e4re: "+(vs.length>1?vs.join(" / "):l.Hauptstadt);
-    fb.className="fc-fb "+(ok?"ok":"err");
-    onAnswer(l,ok,ok?null:val);
-    let t=setTimeout(()=>{
-      FC._advClick=()=>{if(FC._advKey)document.removeEventListener("keydown",FC._advKey);FC._advClick=FC._advKey=null;renderCard();};
-      FC._advKey=(e)=>{if(e.key==="Enter"){fcBox.removeEventListener("click",FC._advClick);FC._advClick=FC._advKey=null;document.removeEventListener("keydown",FC._advKey);renderCard();}};
-      fcBox.addEventListener("click",FC._advClick,{once:true});
-      document.addEventListener("keydown",FC._advKey);
-    },300);
+    if(ok){
+      onAnswer(l,true);
+    } else {
+      const fb=document.getElementById("fcFb");
+      fb.textContent="Richtig w\u00e4re: "+(vs.length>1?vs.join(" / "):l.Hauptstadt);
+      fb.className="fc-fb err";
+      recordOnly(l,false,val);
+      fcBox.querySelector(".fcrow").innerHTML=`<button class="fc-btn fc-pri" id="fcNx" type="button">Weiter</button>`;
+      document.getElementById("fcNx").addEventListener("click",()=>renderCard());
+      document.getElementById("fcNx").focus();
+    }
   };
   inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
   document.getElementById("fcCk").addEventListener("click",check);
