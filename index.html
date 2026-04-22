@@ -3,1010 +3,970 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quizabend – Lernübersicht</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+<title>Länder</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg:#0d1018; --card:#1a2030; --cardh:#1f2640; --surf:#141820;
-  --acc:#f5c842; --red:#e05c3a; --teal:#4ec9b0; --pur:#b48ef5; --blue:#5ba4f5;
-  --txt:#d8dce8; --mut:#6a7080;
-  --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.13);
+:root{
+  --bg:#f4f1eb;--surface:#fffef9;--surface2:#f0ede4;--border:#ddd8cc;
+  --text:#1a1814;--muted:#7a7468;
+  --acc:#2d5a27;--acc-light:#e8f0e7;--acc-hover:#246020;
+  --tag-EU-bg:#e8eef7;--tag-EU-fg:#1a3a6b;
+  --tag-AS-bg:#f7e8e8;--tag-AS-fg:#6b1a1a;
+  --tag-AF-bg:#f7f0d8;--tag-AF-fg:#5a4000;
+  --tag-AM-bg:#e8f4f0;--tag-AM-fg:#1a5a4a;
+  --tag-OZ-bg:#ede8f7;--tag-OZ-fg:#3a1a6b;
+  --un-n-bg:#fdf0e3;--un-n-bd:#e8a87a;--un-n-tx:#7a3200;
+  --un-o-bg:#e8f0f7;--un-o-bd:#7aaee8;--un-o-tx:#1a3a6b;
+  --un-p-bg:#fdf7e3;--un-p-bd:#e8c97a;--un-p-tx:#5a4000;
+  --un-m-tx:#1a4a7a;
+  --sh:0 2px 12px rgba(0,0,0,.07);--sh2:0 6px 24px rgba(0,0,0,.12);
+  --r:12px;--tr:.18s cubic-bezier(.4,0,.2,1);
+  --ttr:background-color .25s ease,color .25s ease,border-color .25s ease;
 }
-html { scroll-behavior: smooth; }
-body { background:var(--bg); color:var(--txt); font-family:'DM Sans',sans-serif; min-height:100vh; }
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#181612;--surface:#1f1d19;--surface2:#272420;--border:#38342c;
+  --text:#ede9e0;--muted:#948e84;
+  --acc:#6aaa60;--acc-light:#1a2b18;--acc-hover:#7aba70;
+  --tag-EU-bg:#16243e;--tag-EU-fg:#7aa4e4;--tag-AS-bg:#2a1616;--tag-AS-fg:#e08080;
+  --tag-AF-bg:#2a2010;--tag-AF-fg:#d4aa50;--tag-AM-bg:#102820;--tag-AM-fg:#5aaa90;
+  --tag-OZ-bg:#1c1030;--tag-OZ-fg:#9a74d4;
+  --un-n-bg:#2a1a0a;--un-n-bd:#8a4820;--un-n-tx:#f0a870;
+  --un-o-bg:#0e1e30;--un-o-bd:#3a6ea8;--un-o-tx:#7ab0e8;
+  --un-p-bg:#2a2008;--un-p-bd:#8a7820;--un-p-tx:#d4b850;
+  --un-m-tx:#5a9ad4;
+  --sh:0 2px 12px rgba(0,0,0,.28);--sh2:0 6px 24px rgba(0,0,0,.44);
+}}
+:root[data-theme="dark"]{
+  --bg:#181612;--surface:#1f1d19;--surface2:#272420;--border:#38342c;
+  --text:#ede9e0;--muted:#948e84;
+  --acc:#6aaa60;--acc-light:#1a2b18;--acc-hover:#7aba70;
+  --tag-EU-bg:#16243e;--tag-EU-fg:#7aa4e4;--tag-AS-bg:#2a1616;--tag-AS-fg:#e08080;
+  --tag-AF-bg:#2a2010;--tag-AF-fg:#d4aa50;--tag-AM-bg:#102820;--tag-AM-fg:#5aaa90;
+  --tag-OZ-bg:#1c1030;--tag-OZ-fg:#9a74d4;
+  --un-n-bg:#2a1a0a;--un-n-bd:#8a4820;--un-n-tx:#f0a870;
+  --un-o-bg:#0e1e30;--un-o-bd:#3a6ea8;--un-o-tx:#7ab0e8;
+  --un-p-bg:#2a2008;--un-p-bd:#8a7820;--un-p-tx:#d4b850;
+  --un-m-tx:#5a9ad4;
+  --sh:0 2px 12px rgba(0,0,0,.28);--sh2:0 6px 24px rgba(0,0,0,.44);
+}
+:root[data-theme="light"]{
+  --bg:#f4f1eb;--surface:#fffef9;--surface2:#f0ede4;--border:#ddd8cc;
+  --text:#1a1814;--muted:#7a7468;
+  --acc:#2d5a27;--acc-light:#e8f0e7;--acc-hover:#246020;
+  --tag-EU-bg:#e8eef7;--tag-EU-fg:#1a3a6b;--tag-AS-bg:#f7e8e8;--tag-AS-fg:#6b1a1a;
+  --tag-AF-bg:#f7f0d8;--tag-AF-fg:#5a4000;--tag-AM-bg:#e8f4f0;--tag-AM-fg:#1a5a4a;
+  --tag-OZ-bg:#ede8f7;--tag-OZ-fg:#3a1a6b;
+  --un-n-bg:#fdf0e3;--un-n-bd:#e8a87a;--un-n-tx:#7a3200;
+  --un-o-bg:#e8f0f7;--un-o-bd:#7aaee8;--un-o-tx:#1a3a6b;
+  --un-p-bg:#fdf7e3;--un-p-bd:#e8c97a;--un-p-tx:#5a4000;
+  --un-m-tx:#1a4a7a;
+  --sh:0 2px 12px rgba(0,0,0,.07);--sh2:0 6px 24px rgba(0,0,0,.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;transition:var(--ttr);}
+.country-card,.card-trigger,.seg-btn,.un-chip,.icon-btn,.fc-btn,.fc-input,.info-block,.fakt-block,.un-block,header,main{transition:background-color .25s,color .25s,border-color .25s,box-shadow .25s;}
+.chevron{transition:transform .25s cubic-bezier(.4,0,.2,1)!important;}
+.country-card.open .chevron{transform:rotate(180deg);}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-/* ── HEADER ── */
-header {
-  background:linear-gradient(150deg,#161d2e 0%,#0d1018 70%);
-  border-bottom:1px solid var(--bdr);
-  padding:22px 24px 20px;
-  position:relative; overflow:hidden;
-  display:flex; align-items:center; justify-content:space-between; gap:20px;
-}
-header::after {
-  content:'?'; position:absolute; right:-10px; top:-44px;
-  font-size:280px; font-family:'Playfair Display',serif;
-  color:rgba(245,200,66,.035); font-weight:900; pointer-events:none; line-height:1; z-index:0;
-}
-.header-title { position:relative; z-index:1; }
-header h1 { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,3.5vw,2.2rem); font-weight:900; color:#fff; line-height:1.15; }
-header h1 em { color:var(--acc); font-style:normal; }
-/* header search (desktop) */
-.header-search { position:relative; z-index:1; flex-shrink:0; width:280px; }
-.header-search svg {
-  position:absolute; left:11px; top:50%; transform:translateY(-50%);
-  width:15px; height:15px; stroke:var(--mut); fill:none;
-  stroke-width:2; stroke-linecap:round; pointer-events:none;
-}
-#searchInput {
-  width:100%; background:rgba(255,255,255,0.07);
-  border:1.5px solid rgba(255,255,255,0.12); border-radius:100px;
-  padding:9px 36px 9px 34px;
-  font-family:'DM Sans',sans-serif; font-size:13px; color:var(--txt);
-  outline:none; transition:border-color .15s, background .15s;
-}
-#searchInput::placeholder { color:var(--mut); }
-#searchInput:focus { border-color:rgba(245,200,66,0.5); background:rgba(255,255,255,0.1); }
-.search-clear {
-  display:none; position:absolute; right:11px; top:50%; transform:translateY(-50%);
-  background:none; border:none; cursor:pointer; color:var(--mut);
-  font-size:18px; line-height:1; padding:0; transition:color .15s;
-}
-.search-clear:hover { color:var(--txt); }
-.search-clear.vis { display:block; }
-/* mobile nav search (identical sizing) */
-.nav-search-wrap { position:relative; }
-#searchInputMob {
-  width:100%; background:rgba(255,255,255,0.07);
-  border:1.5px solid rgba(255,255,255,0.12); border-radius:100px;
-  padding:9px 36px 9px 34px;
-  font-family:'DM Sans',sans-serif; font-size:13px; color:var(--txt);
-  outline:none; transition:border-color .15s, background .15s;
-}
-#searchInputMob::placeholder { color:var(--mut); }
-#searchInputMob:focus { border-color:rgba(245,200,66,0.5); background:rgba(255,255,255,0.1); }
+/* ══ HEADER ══ */
+header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:var(--sh);}
+.hbar{display:flex;align-items:center;padding:0 16px;height:56px;gap:6px;max-width:800px;margin:0 auto;width:100%;min-width:0;}
+h1{font-family:'DM Serif Display',serif;font-size:1.38rem;letter-spacing:-.02em;line-height:1;white-space:nowrap;flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;}
+.hspc{flex:1;min-width:4px;}
+.swrap{position:relative;flex-shrink:1;min-width:0;}
+.swrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;}
+input[type=search]{padding:7px 10px 7px 30px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);font-family:'DM Sans',sans-serif;font-size:.84rem;color:var(--text);outline:none;-webkit-appearance:none;appearance:none;width:170px;min-width:60px;}
+input[type=search]::-webkit-search-cancel-button{display:none;}
+input[type=search]:focus{border-color:var(--acc);}
+@media(min-width:600px){#sWrapI{display:block!important;}#sWrapM{display:none!important;}#sTglBtn{display:none!important;}}
+@media(max-width:599px){#sWrapI{display:none!important;}#sWrapM{display:none;padding:7px 12px 9px;border-top:1px solid var(--border);}#sWrapM.open{display:block;}#sWrapM .si{position:relative;}#sWrapM .si svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;}#sWrapM input[type=search]{width:100%;min-width:0;}}
+.hacts{display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.icon-btn{background:none;border:none;cursor:pointer;color:var(--muted);padding:8px 9px;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;white-space:nowrap;min-width:36px;min-height:36px;}
+@media(max-width:599px){.icon-btn{min-width:42px;min-height:42px;padding:8px;}}
+.icon-btn:hover{background:var(--surface2);color:var(--text);}
+.icon-btn.active{color:var(--acc);background:var(--acc-light);}
+.icon-btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px;}
+.icon-btn .lbl{display:none;}
+#thBtn{position:relative;overflow:hidden;width:36px;height:36px;padding:0;}
+@media(max-width:599px){#thBtn{width:42px;height:42px;}}
+#thBtn .sun,#thBtn .moon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .3s cubic-bezier(.4,0,.2,1);}
+#thBtn .sun{opacity:1;transform:rotate(0) scale(1);}
+#thBtn .moon{opacity:0;transform:rotate(-90deg) scale(.6);}
+[data-theme="dark"] #thBtn .sun,.is-dark #thBtn .sun{opacity:0;transform:rotate(90deg) scale(.6);}
+[data-theme="dark"] #thBtn .moon,.is-dark #thBtn .moon{opacity:1;transform:rotate(0) scale(1);}
+.btnFC{color:var(--acc);border:1.5px solid var(--border);}
+.btnFC:hover{background:var(--acc-light);border-color:var(--acc);}
+.hdiv{width:1px;height:20px;background:var(--border);margin:0 3px;flex-shrink:0;}
 
-/* ── NAV ── */
-.nav-wrap {
-  position:sticky; top:0; z-index:60;
-  background:var(--surf); border-bottom:1px solid var(--bdr);
-  padding:0 16px;
-}
-/* mobile: search row inside nav (hidden on desktop) */
-.nav-search-row {
-  display:none; padding:10px 0 0;
-}
-.nav-search-wrap { position:relative; }
-.nav-search-wrap svg {
-  position:absolute; left:11px; top:50%; transform:translateY(-50%);
-  width:15px; height:15px; stroke:var(--mut); fill:none;
-  stroke-width:2; stroke-linecap:round; pointer-events:none;
-}
-.result-count { font-size:11.5px; font-weight:600; color:var(--mut); white-space:nowrap; padding: 10px 0 0; }
-.result-count span { color:var(--acc); }
-.chip-row {
-  display:flex; gap:7px; overflow-x:auto; scrollbar-width:none; align-items:center;
-  padding:10px 0;
-}
-.chip-row::-webkit-scrollbar { display:none; }
-.chip {
-  flex-shrink:0;
-  background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.1);
-  border-radius:100px; padding:7px 16px;
-  font-family:'DM Sans',sans-serif; font-size:12.5px; font-weight:600;
-  color:var(--mut); cursor:pointer; transition:all .15s; white-space:nowrap;
-}
-.chip:hover { color:var(--txt); border-color:rgba(255,255,255,0.22); }
-.chip.on { background:var(--acc); border-color:var(--acc); color:#111; }
-.card mark { background:rgba(245,200,66,0.3); color:inherit; border-radius:2px; padding:0 1px; }
-.no-results { grid-column:1/-1; text-align:center; padding:48px 16px; color:var(--mut); }
-.no-results strong { display:block; font-size:1.1rem; color:var(--txt); margin-bottom:6px; }
+/* ══ FILTER AREA ══ */
+.filter-area{border-top:1px solid var(--border);}
+.filter-inner{max-width:800px;margin:0 auto;padding:0 16px;}
+.seg-row{display:flex;align-items:center;gap:5px;padding:7px 0 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.seg-row::-webkit-scrollbar{display:none;}
+.seg-btn{display:inline-flex;align-items:center;padding:5px 13px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;color:var(--muted);white-space:nowrap;flex-shrink:0;touch-action:manipulation;}
+.seg-btn:hover{border-color:var(--acc);color:var(--acc);}
+.seg-btn.active{background:var(--acc);border-color:var(--acc);color:white;font-weight:600;}
+.seg-btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px;}
+.pill-spc{flex:1;min-width:8px;}
+.result-pill{flex-shrink:0;font-size:.68rem;color:var(--muted);padding:3px 10px;background:var(--surface2);border-radius:20px;border:1px solid var(--border);display:none;}
+.result-pill.vis{display:block;}
+.un-row{display:flex;align-items:center;gap:5px;padding:0 0 7px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.un-row::-webkit-scrollbar{display:none;}
+.un-row-label{font-size:.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;flex-shrink:0;padding-right:2px;}
+.un-chip{display:inline-flex;align-items:center;padding:5px 13px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;color:var(--muted);white-space:nowrap;flex-shrink:0;touch-action:manipulation;}
+.un-chip:focus-visible{outline:2px solid var(--acc);outline-offset:2px;}
+.un-chip.cm:hover{border-color:var(--un-m-tx);color:var(--un-m-tx);}
+.un-chip.cm.active{background:var(--un-m-tx);border-color:var(--un-m-tx);color:white;}
+.un-chip.co:hover{border-color:var(--un-o-tx);color:var(--un-o-tx);}
+.un-chip.co.active{background:var(--un-o-tx);border-color:var(--un-o-tx);color:white;}
+.un-chip.cp:hover{border-color:var(--un-p-tx);color:var(--un-p-tx);}
+.un-chip.cp.active{background:var(--un-p-tx);border-color:var(--un-p-tx);color:white;}
+.un-chip.cn:hover{border-color:var(--un-n-tx);color:var(--un-n-tx);}
+.un-chip.cn.active{background:var(--un-n-tx);border-color:var(--un-n-tx);color:white;}
 
-/* ── CONTENT ── */
-.content { padding:24px 18px 64px; max-width:1040px; margin:0 auto; }
+/* ══ MAIN ══ */
+main{max-width:800px;margin:0 auto;padding:10px 14px 60px;}
+.loading{text-align:center;padding:80px 20px;color:var(--muted);font-size:.95rem;}
+.alpha-div{display:flex;align-items:center;gap:10px;margin:10px 0 8px;}
+.alpha-div:first-child{margin-top:0;}
+.alpha-letter{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--acc);min-width:22px;}
+.alpha-line{flex:1;height:1px;background:var(--border);}
+.cont-count{font-size:.72rem;color:var(--muted);font-weight:500;}
+.country-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);margin-bottom:7px;overflow:hidden;}
+.country-card:hover{box-shadow:var(--sh2);border-color:#c5bfb5;}
+.country-card.open{border-color:var(--acc);}
+[data-theme="dark"] .country-card:hover,.is-dark .country-card:hover{border-color:#504a40;}
+.country-card.un-n{border-color:var(--un-n-bd);}
+.country-card.un-n:hover{border-color:#c86030;}
+.country-card.un-n.open{border-color:var(--acc);}
+.country-card.un-o{border-color:var(--un-o-bd);}
+.country-card.un-o:hover{border-color:#4a8ed8;}
+.country-card.un-o.open{border-color:var(--acc);}
+.country-card.un-p{border-color:var(--un-p-bd);}
+.country-card.un-p:hover{border-color:#c8a84a;}
+.country-card.un-p.open{border-color:var(--acc);}
+.card-trigger{display:flex;align-items:center;padding:12px 14px;cursor:pointer;gap:12px;width:100%;background:none;border:none;font-family:'DM Sans',sans-serif;text-align:left;color:var(--text);touch-action:manipulation;}
+.card-trigger:focus-visible{outline:2px solid var(--acc);outline-offset:-2px;border-radius:var(--r);}
+.flag{font-size:1.4rem;line-height:1;flex-shrink:0;width:30px;text-align:center;}
+.cname{font-weight:600;font-size:.95rem;flex:1;}
+.un-dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-left:4px;margin-bottom:1px;}
+.un-dot.dn{background:var(--un-n-tx);}
+.un-dot.do{background:var(--un-o-tx);}
+.un-dot.dp{background:var(--un-p-tx);}
+.ctag{font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+.tag-Europa{color:var(--tag-EU-fg);background:var(--tag-EU-bg);}
+.tag-Asien{color:var(--tag-AS-fg);background:var(--tag-AS-bg);}
+.tag-Afrika{color:var(--tag-AF-fg);background:var(--tag-AF-bg);}
+.tag-Amerika{color:var(--tag-AM-fg);background:var(--tag-AM-bg);}
+.tag-Ozeanien{color:var(--tag-OZ-fg);background:var(--tag-OZ-bg);}
+.cbody{display:none;padding:0 14px 14px 56px;animation:sd .2s ease;}
+.country-card.open .cbody{display:block;}
+@keyframes sd{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-top:2px;}
+.iblock{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;}
+.ilabel{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:3px;}
+.ivalue{font-size:.88rem;font-weight:500;color:var(--text);line-height:1.35;}
+.ivalue.ml{white-space:pre-line;}
+.fakt-b{background:var(--acc-light);border:1px solid #b8d4b5;border-radius:8px;padding:10px 13px;grid-column:1/-1;}
+[data-theme="dark"] .fakt-b,.is-dark .fakt-b{border-color:#2a4a28;}
+.fakt-b .ilabel{color:var(--acc);}
+.fakt-b .ivalue{font-size:.85rem;font-weight:400;line-height:1.5;color:var(--text);}
+.un-block{border-radius:8px;padding:10px 13px;grid-column:1/-1;}
+.un-block .ivalue{font-size:.85rem;font-weight:400;line-height:1.5;}
+.un-block.un-n{background:var(--un-n-bg);border:1px solid var(--un-n-bd);}
+.un-block.un-n .ilabel,.un-block.un-n .ivalue{color:var(--un-n-tx);}
+.un-block.un-o{background:var(--un-o-bg);border:1px solid var(--un-o-bd);}
+.un-block.un-o .ilabel,.un-block.un-o .ivalue{color:var(--un-o-tx);}
+.un-block.un-p{background:var(--un-p-bg);border:1px solid var(--un-p-bd);}
+.un-block.un-p .ilabel,.un-block.un-p .ivalue{color:var(--un-p-tx);}
+.un-hint{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 13px;grid-column:1/-1;}
+.un-hint .ilabel{color:var(--muted);}
+.un-hint .ivalue{font-size:.85rem;font-weight:400;line-height:1.5;color:var(--text);}
+.no-results{text-align:center;padding:60px 20px;color:var(--muted);display:none;}
 
-/* ── CARDS GRID ── */
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:13px; }
+/* ══ OVERLAY ══ */
+.ov{display:none;position:fixed;inset:0;background:rgba(20,18,12,.78);z-index:300;align-items:center;justify-content:center;padding:16px;}
+.ov.active{display:flex;}
+.fc-box{background:var(--surface);border-radius:20px;padding:32px 28px 28px;max-width:460px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.3);border:1px solid var(--border);max-height:90vh;overflow-y:auto;}
+.fc-prog{font-size:.75rem;color:var(--muted);margin-bottom:20px;font-weight:500;}
+.fc-flag{font-size:2.6rem;line-height:1;display:block;margin-bottom:8px;}
+.fc-q{font-family:'DM Serif Display',serif;font-size:clamp(1.25rem,5vw,1.75rem);margin-bottom:24px;line-height:1.25;color:var(--text);}
+.fc-ans{background:var(--acc-light);border:2px solid var(--acc);border-radius:10px;padding:12px 20px;font-size:1.1rem;font-weight:600;color:var(--acc);margin-bottom:20px;white-space:pre-line;}
+.fc-inp{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--text);background:var(--bg);outline:none;text-align:center;margin-bottom:8px;}
+.fc-inp:focus{border-color:var(--acc);}
+.fc-inp.ok{border-color:#2d7a2d;background:#e8f5e8;color:#1a4a1a;}
+.fc-inp.err{border-color:#c0392b;background:#fdecea;color:#6a1a14;}
+[data-theme="dark"] .fc-inp.ok,.is-dark .fc-inp.ok{background:#0e2a0e;color:#6aca6a;}
+[data-theme="dark"] .fc-inp.err,.is-dark .fc-inp.err{background:#2a0e0e;color:#e07070;}
+.fc-inp:disabled{cursor:default;}
+.fc-fb{font-size:.88rem;margin-bottom:14px;font-weight:500;min-height:1.4em;color:var(--muted);}
+.fc-fb.ok{color:#2d7a2d;}
+.fc-fb.err{color:#c0392b;}
+[data-theme="dark"] .fc-fb.ok,.is-dark .fc-fb.ok{color:#6aaa60;}
+[data-theme="dark"] .fc-fb.err,.is-dark .fc-fb.err{color:#e07070;}
+.fcrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px;}
+.fc-btn{padding:10px 22px;border-radius:10px;border:2px solid;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap;touch-action:manipulation;}
+.fc-btn:focus-visible{outline:3px solid var(--acc);outline-offset:2px;}
+.fc-sec{border-color:var(--border);color:var(--muted);background:transparent;}
+.fc-sec:hover{border-color:var(--muted);}
+.fc-rev{border-color:var(--acc);color:var(--acc);background:transparent;}
+.fc-rev:hover{background:var(--acc-light);}
+.fc-pri{border-color:var(--acc);color:white;background:var(--acc);}
+.fc-pri:hover{background:var(--acc-hover);}
+.fc-ok{border-color:#2d7a2d;color:white;background:#2d7a2d;}
+.fc-ok:hover{background:#256025;}
+.fc-wr{border-color:#c0392b;color:white;background:#c0392b;}
+.fc-wr:hover{background:#a93226;}
+.fc-warn{color:#c0392b;font-size:.82rem;margin-top:8px;min-height:1.2em;}
+[data-theme="dark"] .fc-warn,.is-dark .fc-warn{color:#e07070;}
+.fc-title{font-family:'DM Serif Display',serif;font-size:1.25rem;margin-bottom:20px;color:var(--text);}
+.fc-mode-row{margin-bottom:18px;}
+.fc-mode-lbl{font-size:.78rem;color:var(--muted);margin-bottom:7px;font-weight:500;}
+.fc-mode-btns{display:flex;gap:7px;justify-content:center;}
+.fc-mbtn{padding:6px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:500;cursor:pointer;color:var(--muted);touch-action:manipulation;}
+.fc-mbtn.active{border-color:var(--acc);color:var(--acc);background:var(--acc-light);}
+.fc-pick-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.fc-pick-lbl{font-size:.78rem;color:var(--muted);font-weight:500;}
+.fc-pick-actions{display:flex;gap:6px;}
+.fc-pick-action{font-size:.72rem;color:var(--acc);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;padding:2px 6px;border-radius:4px;touch-action:manipulation;}
+.fc-pick-action:hover{background:var(--acc-light);}
+.fc-pick-count{font-size:.78rem;color:var(--muted);font-weight:500;}
+.fc-list{max-height:240px;overflow-y:auto;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);margin-bottom:6px;text-align:left;}
+.fc-list::-webkit-scrollbar{width:4px;}
+.fc-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.fc-item{display:flex;align-items:center;gap:9px;padding:7px 12px;cursor:pointer;font-size:.84rem;color:var(--text);user-select:none;touch-action:manipulation;}
+.fc-item:hover{background:var(--surface2);}
+.fc-item input[type=checkbox]{width:15px;height:15px;accent-color:var(--acc);cursor:pointer;flex-shrink:0;}
+.fc-item .fi{font-size:1.1rem;flex-shrink:0;}
+.fc-item .fn{flex:1;font-weight:500;}
+.fc-result-t{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:6px;color:var(--text);}
+.fc-result-s{font-size:.85rem;color:var(--muted);margin-bottom:22px;}
+.fc-wrong-list{display:flex;flex-direction:column;gap:0;}
+.fc-wrong-row{display:flex;flex-direction:column;gap:2px;padding:7px 0;border-bottom:1px solid var(--border);font-size:.85rem;color:var(--text);line-height:1.4;}
+.fc-wrong-row:last-child{border-bottom:none;}
+.fc-wrong-row-top{display:flex;align-items:center;gap:8px;}
+.fc-wrong-row .fi{font-size:1.05rem;flex-shrink:0;}
+.fc-wrong-row .fn{font-weight:600;}
+.fc-wrong-row-answer{padding-left:4px;font-size:.82rem;color:var(--muted);}
+.fc-wrong-row .fc-wrong-eingabe{color:var(--un-n-tx);font-style:italic;}
+.fc-wrong-row .fc-sep{color:var(--muted);margin:0 3px;}
+.info-sec{display:flex;flex-direction:column;gap:4px;}
+.ov-close-x{position:absolute;top:12px;right:12px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--muted);cursor:pointer;border-radius:6px;padding:0;}
+.ov-close-x:hover{background:var(--surface2);color:var(--text);}
 
-.card {
-  background:var(--card); border:1px solid var(--bdr); border-radius:12px;
-  padding:18px 20px; transition:transform .15s,border-color .15s,background .15s;
-}
-.card:hover { transform:translateY(-2px); border-color:var(--bdr2); background:var(--cardh); }
+.info-sec p{margin:0;font-size:.875rem;line-height:1.65;color:var(--text);font-family:'DM Sans',sans-serif;}
+@media(max-width:500px){.cbody{padding-left:14px;}.igrid{grid-template-columns:1fr 1fr;}.fc-btn{padding:9px 14px;font-size:.82rem;}}
+/* Buchstaben-Trenner in FC-Liste */
+.fc-alpha-sep{display:flex;align-items:center;gap:7px;padding:8px 12px 3px;pointer-events:none;}
+.fc-alpha-letter{font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.07em;flex-shrink:0;}
+.fc-alpha-line{flex:1;height:1px;background:var(--border);}
+.fc-alpha-count{font-size:.65rem;color:var(--muted);flex-shrink:0;opacity:.6;}
+/* Falsch-gemacht Eingabe in Ergebnisliste */
+.fc-wrong-row .fc-wrong-eingabe{color:var(--un-n-tx);font-style:italic;flex-shrink:0;}
+/* Range-Auswahl: Startpunkt-Hervorhebung */
+.fc-item.range-from{background:var(--acc-light);}
+a.nice-link{color:var(--acc);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;font-weight:500;}
+a.nice-link:hover{opacity:.75;}
+/* ── Multiple Choice ── */
+.fc-mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px;}
+@media(max-width:400px){.fc-mc-grid{grid-template-columns:1fr;}}
+.fc-mc-opt{padding:11px 14px;border-radius:10px;border:2px solid var(--border);background:var(--bg);font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;color:var(--text);text-align:center;line-height:1.3;transition:border-color .15s,background .15s;touch-action:manipulation;}
+.fc-mc-opt:hover:not(:disabled){border-color:var(--acc);background:var(--acc-light);}
+.fc-mc-opt.mc-ok{border-color:#2d7a2d;background:#e8f5e8;color:#1a4a1a;cursor:default;}
+.fc-mc-opt.mc-err{border-color:#c0392b;background:#fdecea;color:#6a1a14;cursor:default;}
+.fc-mc-opt:disabled{cursor:default;}
+[data-theme="dark"] .fc-mc-opt.mc-ok,.is-dark .fc-mc-opt.mc-ok{background:#0e2a0e;color:#6aca6a;}
+[data-theme="dark"] .fc-mc-opt.mc-err,.is-dark .fc-mc-opt.mc-err{background:#2a0e0e;color:#e07070;}
+/* ── Statistik-Tab im FC-Overlay ── */
+.fc-nav{display:flex;gap:0;margin-bottom:20px;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.fc-nav-btn{flex:1;padding:8px 10px;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;color:var(--muted);transition:background .15s,color .15s;touch-action:manipulation;}
+.fc-nav-btn:not(:last-child){border-right:1.5px solid var(--border);}
+.fc-nav-btn.active{background:var(--acc);color:white;font-weight:600;}
+.fc-nav-btn:hover:not(.active){background:var(--surface2);color:var(--text);}
+.st-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.st-tile{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:11px 12px;text-align:center;}
+.st-tile .st-val{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--acc);line-height:1.1;}
+.st-tile .st-lbl{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:3px;}
+.st-tile.st-red .st-val{color:#c0392b;}
+[data-theme="dark"] .st-tile.st-red .st-val,.is-dark .st-tile.st-red .st-val{color:#e07070;}
+.st-section-hdr{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:14px 0 6px;}
+.st-land-list{display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto;margin-bottom:14px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);}
+.st-land-list::-webkit-scrollbar{width:4px;}
+.st-land-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.st-land-row{display:flex;align-items:center;gap:8px;font-size:.82rem;padding:6px 10px;border-bottom:1px solid var(--border);}
+.st-land-row:last-child{border-bottom:none;}
+.st-land-row .fi{font-size:1rem;flex-shrink:0;}
+.st-land-row .fn{flex:1;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.st-streak-dots{display:flex;gap:3px;flex-shrink:0;}
+.st-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.st-dot.on{background:var(--acc);}
+.st-dot.off{background:var(--border);}
+.st-empty{font-size:.83rem;color:var(--muted);text-align:center;padding:14px 0;}
+.st-pct-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.st-pct-bar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
+.st-pct-bar{height:7px;border-radius:4px;background:var(--acc);transition:width .5s ease;}
+.st-pct-lbl{font-size:.75rem;font-weight:600;color:var(--acc);white-space:nowrap;}
+/* ── Ergebnis-Boxen (Richtig / Falsch) ── */
+.fc-res-box{border-radius:10px;padding:10px 14px;margin-bottom:10px;text-align:left;max-height:180px;overflow-y:auto;}
+.fc-res-box::-webkit-scrollbar{width:4px;}
+.fc-res-box::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.fc-res-hdr{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
+.fc-res-mastered{background:var(--acc-light);border:1px solid #b8d4b5;}
+.fc-res-mastered .fc-res-hdr{color:var(--acc);}
+[data-theme="dark"] .fc-res-mastered,.is-dark .fc-res-mastered{border-color:#2a4a28;}
 
-/* card header row */
-.card-head { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:10px; }
-.card-head-left { display:flex; flex-direction:column; gap:6px; }
+.fc-res-wr{background:var(--un-n-bg);border:1px solid var(--un-n-bd);}
+.fc-res-wr .fc-res-hdr{color:var(--un-n-tx);}
 
-.badge-new { display:inline-block; background:var(--acc); color:#111; font-size:9px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; padding:2px 6px; border-radius:6px; width:fit-content; }
-.tag { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:3px 9px; border-radius:20px; display:inline-block; }
-.tg{background:rgba(78,201,176,.14);color:var(--teal);}
-.th{background:rgba(229,92,58,.14);color:var(--red);}
-.ts{background:rgba(180,142,245,.14);color:var(--pur);}
-.tc{background:rgba(245,200,66,.14);color:var(--acc);}
-.tp{background:rgba(229,92,58,.11);color:#f07a60;}
-.tb{background:rgba(91,164,245,.14);color:var(--blue);}
-.tt{background:rgba(180,142,245,.11);color:#c9a8ff;}
-.tf{background:rgba(78,201,176,.11);color:#6dd9c0;}
-.tn{background:rgba(245,200,66,.18);color:#d4a830;}
-.tw{background:rgba(255,255,255,.08);color:#aab0c0;}
-
-.card h3 { font-size:13.5px; font-weight:600; color:#fff; margin-bottom:9px; line-height:1.3; }
-
-/* bullet list */
-.card ul { list-style:none; display:flex; flex-direction:column; gap:5px; }
-.card ul li { font-size:12.5px; line-height:1.45; color:var(--txt); padding-left:14px; position:relative; }
-.card ul li::before { content:'›'; position:absolute; left:0; color:var(--mut); font-weight:700; }
-.card ul li strong { color:var(--acc); font-weight:600; }
-.card ul li em { color:var(--mut); font-style:normal; font-size:11.5px; }
-
-/* numbered list */
-.card ol { list-style:decimal; padding-left:26px; display:flex; flex-direction:column; gap:4px; }
-.card ol li { font-size:12px; line-height:1.45; color:var(--txt); padding-left:2px; }
-.card ol li strong { color:var(--acc); font-weight:600; }
-.card ol li em { color:var(--mut); font-style:normal; font-size:11px; }
-
-/* ── Wahl bar chart ── */
-.wahl-bars { display:flex; flex-direction:column; gap:7px; margin-top:4px; }
-.wahl-row { display:flex; align-items:center; gap:8px; }
-.wahl-label { font-size:11.5px; font-weight:600; color:var(--txt); width:44px; flex-shrink:0; }
-.wahl-bar-bg { flex:1; background:rgba(255,255,255,.07); border-radius:4px; height:8px; overflow:hidden; }
-.wahl-bar-fill { height:100%; border-radius:4px; transition:width .4s ease; }
-.wahl-pct { font-size:11px; font-weight:700; color:var(--mut); width:38px; text-align:right; flex-shrink:0; }
-.wahl-change { font-size:10px; font-weight:600; width:36px; text-align:right; flex-shrink:0; }
-.wahl-change.up { color:#4ec9b0; }
-.wahl-change.dn { color:var(--red); }
-
-/* ── responsive ── */
-@media(max-width:680px){
-  header { padding:18px 16px 16px; flex-direction:column; align-items:flex-start; gap:12px; }
-  .header-search { display:none; }       /* hide header search on mobile */
-  .nav-search-row { display:block; }     /* show nav search on mobile */
-  .content { padding:18px 12px 48px; }
-  .grid { grid-template-columns:1fr; }
-}
-@media(min-width:681px){
-  .nav-search-row { display:none; }      /* hide nav search on desktop */
-}
+.fc-filter-row{display:flex;gap:6px;margin-bottom:10px;}
+.fc-fchip{padding:4px 12px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);touch-action:manipulation;}
+.fc-fchip.active{background:var(--acc);border-color:var(--acc);color:white;font-weight:600;}
+.fc-fchip:hover:not(.active){border-color:var(--acc);color:var(--acc);}
 </style>
+<script>
+(function(){try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')document.documentElement.setAttribute('data-theme',s);var pd=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(!s&&pd))document.documentElement.classList.add('is-dark');}catch(e){}})();
+</script>
 </head>
 <body>
-
 <header>
-  <div class="header-title">
-    <h1>Wissen für den <em>Quizabend</em></h1>
+  <div class="hbar">
+    <h1>Länder</h1>
+    <div class="hspc"></div>
+    <div class="swrap" id="sWrapI" role="search">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="sI" placeholder="Suchen …" autocomplete="off" aria-label="Staat oder Hauptstadt suchen">
+    </div>
+    <div class="hacts">
+      <button class="icon-btn" id="sTglBtn" aria-label="Suche" aria-expanded="false">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="icon-btn" id="togAllBtn" aria-label="Alle aufklappen">
+        <svg id="togAllIco" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform .3s cubic-bezier(.4,0,.2,1)"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg>
+        <span class="lbl" id="togAllLbl">Aufklappen</span>
+      </button>
+      <button class="icon-btn btnFC" id="fcBtn" aria-label="Lernkarten">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <span class="lbl">Lernkarten</span>
+      </button>
+      <div class="hdiv"></div>
+      <button class="icon-btn" id="thBtn" aria-label="Dark Mode" aria-pressed="false">
+        <span class="sun"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        <span class="moon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+      </button>
+      <button class="icon-btn" id="infoBtn" aria-label="Info">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12.01" y2="8" stroke-linecap="round" stroke-width="2.5"/><polyline points="11 12 12 12 12 16"/></svg>
+        <span class="lbl">Info</span>
+      </button>
+    </div>
   </div>
-  <div class="header-search">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="searchInput" placeholder="Suchen…">
-    <button class="search-clear" id="searchClear" title="Löschen">&#x2715;</button>
+  <div id="sWrapM" role="search">
+    <div class="si">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="sIM" placeholder="Suchen …" autocomplete="off" aria-label="Suchen">
+    </div>
+  </div>
+  <div class="filter-area">
+    <div class="filter-inner">
+      <div class="seg-row" role="group" aria-label="Nach Kontinent filtern">
+        <span class="un-row-label">Kontinent</span>
+        <button class="seg-btn" data-k="Afrika">Afrika</button>
+        <button class="seg-btn" data-k="Amerika">Amerika</button>
+        <button class="seg-btn" data-k="Asien">Asien</button>
+        <button class="seg-btn" data-k="Europa">Europa</button>
+        <button class="seg-btn" data-k="Ozeanien">Ozeanien</button>
+      </div>
+      <div class="un-row" role="group" aria-label="Nach UN-Status filtern">
+        <span class="un-row-label">UN-Status</span>
+        <button class="un-chip cm" data-u="un_member">UN-Mitglieder</button>
+        <button class="un-chip co" data-u="beobachter">Beobachter</button>
+        <button class="un-chip cp" data-u="teilweise_anerkannt">Teilweise anerkannt</button>
+        <button class="un-chip cn" data-u="nicht_anerkannt">Nicht anerkannt</button>
+      </div>
+    </div>
   </div>
 </header>
 
-<div class="nav-wrap">
-  <div class="nav-search-row">
-    <div class="nav-search-wrap">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="searchInputMob" placeholder="Suchen…">
-      <button class="search-clear" id="searchClearMob" title="Löschen">&#x2715;</button>
-    </div>
-  </div>
-  <div class="result-count" id="resultCount"></div>
-  <div class="chip-row" id="chipRow"></div>
+<main id="main" aria-live="polite">
+  <div class="loading" id="loadMsg" role="status">Daten werden geladen …</div>
+  <div class="no-results" id="noRes" role="status"><svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>Keine Länder gefunden.</p></div>
+</main>
+
+<div class="ov" id="fcOv" role="dialog" aria-modal="true" aria-label="Lernkarten">
+  <div class="fc-box" id="fcBox"></div>
 </div>
 
-<div class="content">
-  <div class="grid" id="grid"></div>
+<div class="ov" id="infoOv" role="dialog" aria-modal="true" aria-label="Informationen">
+  <div class="fc-box" style="text-align:left;max-width:530px;max-height:90vh;display:flex;flex-direction:column;padding:0;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px 16px;border-bottom:1px solid var(--border);flex-shrink:0;">
+      <div class="fc-title" style="margin:0;">Hinweise &amp; Informationen</div>
+      <button class="ov-close-x" id="infoCloseX" aria-label="Schließen" type="button" style="position:static;flex-shrink:0;margin-left:12px;"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div style="overflow-y:auto;padding:20px 24px 24px;flex:1;">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="info-sec">
+        <div class="ilabel" style="margin-bottom:4px;">Zur Sprache</div>
+        <p>Der Begriff <strong>„Land"</strong> wird hier synonym für <strong>„Staat"</strong> verwendet. Gemeint sind souveräne Staaten und anerkannte Territorien – nicht Bundesländer, Provinzen o. Ä.</p>
+      </div>
+      <div class="info-sec">
+        <div class="ilabel" style="margin-bottom:4px;">Datengrundlage</div>
+        <p>Alle Daten basieren auf der <a class="nice-link" href="https://de.wikipedia.org/wiki/Liste_der_Staaten_der_Erde" target="_blank">Liste der Staaten der Erde</a> (Wikipedia). Die Liste umfasst die 193 UN-Mitgliedstaaten, 2 UN-Beobachterstaaten sowie weitere teilweise anerkannte und De-facto-Staaten – insgesamt 205 Einträge. Bevölkerungszahlen sind gerundete Schätzwerte.</p>
+        <p style="margin-top:8px;font-size:.8rem;color:var(--muted);">Datenstand: April 2026</p>
+      </div>
+      <div class="info-sec">
+        <div class="ilabel" style="margin-bottom:4px;">UN-Status-Filter</div>
+        <p>Die zweite Filterzeile unterscheidet vier Kategorien:</p>
+        <p style="margin-top:5px;line-height:1.8;">
+          <span style="color:var(--un-m-tx);font-weight:600;">UN-Mitglieder</span> – die 193 regulären UN-Mitgliedstaaten<br>
+          <span style="color:var(--un-o-tx);font-weight:600;">Beobachter</span> – ständige Beobachterstaaten ohne Stimmrecht (Vatikanstadt, Palästina)<br>
+          <span style="color:var(--un-p-tx);font-weight:600;">Teilweise anerkannt</span> – von einigen Staaten anerkannt oder in freier Assoziierung (Taiwan, Kosovo, Cookinseln, Niue, Westsahara)<br>
+          <span style="color:var(--un-n-tx);font-weight:600;">Nicht anerkannt</span> – De-facto-Regime ohne breite internationale Anerkennung (Abchasien, Südossetien, Nordzypern, Somaliland, Transnistrien)
+        </p>
+        <p style="margin-top:6px;font-size:.82rem;color:var(--muted);">Zypern und Israel sind UN-Vollmitglieder, werden aber mit einem Hinweisblock versehen, da ihre Territorien international umstritten sind.</p>
+      </div>
+      <div class="info-sec">
+        <div class="ilabel" style="margin-bottom:4px;">Lernkarten</div>
+        <p>Die Lernkarten helfen dabei, Hauptstädte systematisch zu lernen. Es stehen drei Modi zur Verfügung: <strong>Aufdecken</strong> (Antwort aufdecken und selbst bewerten), <strong>Multiple Choice</strong> (aus vier Optionen wählen) und <strong>Eingabe</strong> (Hauptstadt eintippen).</p>
+        <p style="margin-top:6px;">Jede Session fragt jedes ausgewählte Land <strong>genau einmal</strong> ab. Am Ende gibt es eine Übersicht der falsch beantworteten Länder sowie – wenn vorhanden – neu gemeisterter Länder. Über <strong>„Falsche wiederholen"</strong> können nur die Fehler nochmals geübt werden.</p>
+        <p style="margin-top:6px;">Ein Land gilt als <strong>gemeistert</strong>, sobald es <strong>5-mal hintereinander</strong> richtig beantwortet wurde. Der aktuelle Streak (z. B. <em>3/5</em>) ist in der Länderauswahl sichtbar, ein ✓ zeigt gemeisterte Länder an. Der Filter <strong>„Noch offen"</strong> zeigt nur Länder, die noch nicht gemeistert sind.</p>
+        <p style="margin-top:6px;">Die <strong>Statistik</strong> zeigt den Lernfortschritt (Anteil gemeisterter Länder) sowie eine Liste aller offenen Länder mit ihrem aktuellen Streak.</p>
+      </div>
+      <div class="info-sec">
+        <div class="ilabel" style="margin-bottom:4px;">Zur Hauptstadt</div>
+        <p>In einigen Staaten ist die Hauptstadtfrage nicht eindeutig geregelt: Es kann mehrere Hauptstädte geben, offizielle (de jure) und tatsächliche Regierungssitze (de facto) auseinanderfallen oder eine Hauptstadt ganz fehlen:<br>
+          <span style="font-weight:600;">Elfenbeinküste</span> – Yamoussoukro ist die offizielle Hauptstadt, jedoch bleibt Abidjan das politische Zentrum.<br>
+          <span style="font-weight:600;">Israel</span> – Jerusalem ist Regierungssitz, viele Botschaften befinden sich jedoch in Tel Aviv.<br>
+          <span style="font-weight:600;">Jemen</span> – Sanaa ist die offizielle Hauptstadt, während Aden als Interimssitz dient.<br>
+          <span style="font-weight:600;">Japan</span> – Hauptstadtfunktion von 23 Stadtbezirken Tokios (seit 1943 nach Auflösung der Stadt), jedoch ohne formelle Festlegung, da die Verlegung von Kyōto nach Tokio nie offiziell beschlossen wurde.<br>
+          <span style="font-weight:600;">Monaco</span> – Kein offizieller Hauptstadtsitz, da Stadtstaat.<br>
+          <span style="font-weight:600;">Nauru</span> – Keine offizielle Hauptstadt; Yaren gilt als inoffizieller Regierungssitz.<br>
+          <span style="font-weight:600;">Niederlande</span> – Amsterdam ist offiziell Hauptstadt, während Den Haag der Regierungssitz ist.<br>
+          <span style="font-weight:600;">Palästina</span> – Ostjerusalem wird als Hauptstadt beansprucht, während Ramallah Regierungssitz ist.<br>
+          <span style="font-weight:600;">Schweiz</span> – Bern ist de facto Regierungssitz, jedoch keine offizielle Hauptstadt.<br>
+          <span style="font-weight:600;">Singapur</span> – Kein offizieller Hauptstadtsitz, da Stadtstaat.<br>
+          <span style="font-weight:600;">Vatikanstadt</span> – Kein offizieller Hauptstadtsitz, da Stadtstaat.
+        </p>
+        <p style="margin-top:6px;font-size:.82rem;color:var(--muted);">Im Lernkarten-Eingabemodus werden alle Varianten akzeptiert.</p>
+      </div>
+      <div class="info-sec">
+        <div class="ilabel" style="margin-bottom:4px;">Zur Flächenangabe</div>
+        <p>Bei Staaten mit umstrittenen Territorien entspricht die Fläche dem völkerrechtlich beanspruchten Gesamtgebiet (z. B. Georgien inkl. Abchasien/Südossetien, Zypern inkl. Nordzypern).</p>
+      </div>
+      <div class="info-sec">
+        <div class="ilabel" style="margin-bottom:4px;">Haftungsausschluss</div>
+        <p>Diese App dient ausschließlich zu privaten Lern- und Informationszwecken. Trotz sorgfältiger Recherche wird keine Gewähr für die Vollständigkeit, Richtigkeit oder Aktualität der Angaben übernommen. Politische Statusangaben (UN-Mitgliedschaft, Anerkennung, Hauptstädte) können sich ändern. Maßgeblich ist stets die jeweils aktuelle Fassung der offiziellen Quellen.</p>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:.72rem;color:var(--muted);">Version 1.5</p>
+    </div><!-- scroll area -->
+  </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════════════════
-function b(s){ return '<strong>'+s+'</strong>'; }
-function em(s){ return '<em>'+s+'</em>'; }
+/* ── Theme ── */
+const thBtn=document.getElementById('thBtn');
+function getTheme(){const s=localStorage.getItem('theme');if(s==='dark'||s==='light')return s;return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+function applyTheme(t,save){const d=t==='dark';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.toggle('is-dark',d);thBtn.setAttribute('aria-pressed',String(d));if(save)localStorage.setItem('theme',t);}
+thBtn.addEventListener('click',()=>applyTheme(getTheme()==='dark'?'light':'dark',true));
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{if(!localStorage.getItem('theme'))applyTheme(e.matches?'dark':'light',false);});
+applyTheme(getTheme(),false);
 
-// ══════════════════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════════════════
-// card: { cat, tag, tc, title, hot?, ol?, collapsible?, funfact?, items[], wahlData? }
+/* ── Helpers ── */
+const FLAGS={"Abchasien":"🏴","Afghanistan":"🇦🇫","Albanien":"🇦🇱","Algerien":"🇩🇿","Andorra":"🇦🇩","Angola":"🇦🇴","Antigua und Barbuda":"🇦🇬","Argentinien":"🇦🇷","Armenien":"🇦🇲","Aserbaidschan":"🇦🇿","Australien":"🇦🇺","Bahamas":"🇧🇸","Bahrain":"🇧🇭","Bangladesch":"🇧🇩","Barbados":"🇧🇧","Belarus":"🇧🇾","Belgien":"🇧🇪","Belize":"🇧🇿","Benin":"🇧🇯","Bhutan":"🇧🇹","Bolivien":"🇧🇴","Bosnien und Herzegowina":"🇧🇦","Botswana":"🇧🇼","Brasilien":"🇧🇷","Brunei":"🇧🇳","Bulgarien":"🇧🇬","Burkina Faso":"🇧🇫","Burundi":"🇧🇮","Chile":"🇨🇱","China, Republik / Taiwan":"🇹🇼","China, Volksrepublik":"🇨🇳","Cookinseln":"🇨🇰","Costa Rica":"🇨🇷","Dänemark":"🇩🇰","Deutschland":"🇩🇪","Dominica":"🇩🇲","Dominikanische Republik":"🇩🇴","Dschibuti":"🇩🇯","Ecuador":"🇪🇨","El Salvador":"🇸🇻","Elfenbeinküste":"🇨🇮","Eritrea":"🇪🇷","Estland":"🇪🇪","Eswatini":"🇸🇿","Fidschi":"🇫🇯","Finnland":"🇫🇮","Frankreich":"🇫🇷","Gabun":"🇬🇦","Gambia":"🇬🇲","Georgien":"🇬🇪","Ghana":"🇬🇭","Grenada":"🇬🇩","Griechenland":"🇬🇷","Guatemala":"🇬🇹","Guinea":"🇬🇳","Guinea-Bissau":"🇬🇼","Guyana":"🇬🇾","Haiti":"🇭🇹","Honduras":"🇭🇳","Indien":"🇮🇳","Indonesien":"🇮🇩","Irak":"🇮🇶","Iran":"🇮🇷","Irland":"🇮🇪","Island":"🇮🇸","Israel":"🇮🇱","Italien":"🇮🇹","Jamaika":"🇯🇲","Japan":"🇯🇵","Jemen":"🇾🇪","Jordanien":"🇯🇴","Kambodscha":"🇰🇭","Kamerun":"🇨🇲","Kanada":"🇨🇦","Kap Verde":"🇨🇻","Kasachstan":"🇰🇿","Katar":"🇶🇦","Kenia":"🇰🇪","Kirgisistan":"🇰🇬","Kiribati":"🇰🇮","Kolumbien":"🇨🇴","Komoren":"🇰🇲","Kongo, Demokratische Republik":"🇨🇩","Kongo, Republik":"🇨🇬","Korea, Nord (Nordkorea)":"🇰🇵","Korea, Süd (Südkorea)":"🇰🇷","Kosovo":"🇽🇰","Kroatien":"🇭🇷","Kuba":"🇨🇺","Kuwait":"🇰🇼","Laos":"🇱🇦","Lesotho":"🇱🇸","Lettland":"🇱🇻","Libanon":"🇱🇧","Liberia":"🇱🇷","Libyen":"🇱🇾","Liechtenstein":"🇱🇮","Litauen":"🇱🇹","Luxemburg":"🇱🇺","Madagaskar":"🇲🇬","Malawi":"🇲🇼","Malaysia":"🇲🇾","Malediven":"🇲🇻","Mali":"🇲🇱","Malta":"🇲🇹","Marokko":"🇲🇦","Marshallinseln":"🇲🇭","Mauretanien":"🇲🇷","Mauritius":"🇲🇺","Mexiko":"🇲🇽","Mikronesien":"🇫🇲","Moldau":"🇲🇩","Monaco":"🇲🇨","Mongolei":"🇲🇳","Montenegro":"🇲🇪","Mosambik":"🇲🇿","Myanmar":"🇲🇲","Namibia":"🇳🇦","Nauru":"🇳🇷","Nepal":"🇳🇵","Neuseeland":"🇳🇿","Nicaragua":"🇳🇮","Niederlande":"🇳🇱","Niger":"🇳🇪","Nigeria":"🇳🇬","Niue":"🇳🇺","Nordmazedonien":"🇲🇰","Nordzypern":"🏴","Norwegen":"🇳🇴","Oman":"🇴🇲","Osttimor / Timor-Leste":"🇹🇱","Österreich":"🇦🇹","Pakistan":"🇵🇰","Palästina":"🇵🇸","Palau":"🇵🇼","Panama":"🇵🇦","Papua-Neuguinea":"🇵🇬","Paraguay":"🇵🇾","Peru":"🇵🇪","Philippinen":"🇵🇭","Polen":"🇵🇱","Portugal":"🇵🇹","Ruanda":"🇷🇼","Rumänien":"🇷🇴","Russland":"🇷🇺","Salomonen":"🇸🇧","Sambia":"🇿🇲","Samoa":"🇼🇸","San Marino":"🇸🇲","São Tomé und Príncipe":"🇸🇹","Saudi-Arabien":"🇸🇦","Schweden":"🇸🇪","Schweiz":"🇨🇭","Senegal":"🇸🇳","Serbien":"🇷🇸","Seychellen":"🇸🇨","Sierra Leone":"🇸🇱","Simbabwe":"🇿🇼","Singapur":"🇸🇬","Slowakei":"🇸🇰","Slowenien":"🇸🇮","Somalia":"🇸🇴","Somaliland":"🏴","Spanien":"🇪🇸","Sri Lanka":"🇱🇰","St. Kitts und Nevis":"🇰🇳","St. Lucia":"🇱🇨","St. Vincent und die Grenadinen":"🇻🇨","Sudan":"🇸🇩","Suriname":"🇸🇷","Syrien":"🇸🇾","Südafrika":"🇿🇦","Südossetien":"🏴","Südsudan":"🇸🇸","Tadschikistan":"🇹🇯","Tansania":"🇹🇿","Thailand":"🇹🇭","Togo":"🇹🇬","Tonga":"🇹🇴","Transnistrien":"🏴","Trinidad und Tobago":"🇹🇹","Tschad":"🇹🇩","Tschechien":"🇨🇿","Tunesien":"🇹🇳","Turkmenistan":"🇹🇲","Tuvalu":"🇹🇻","Türkei":"🇹🇷","Uganda":"🇺🇬","Ukraine":"🇺🇦","Ungarn":"🇭🇺","Uruguay":"🇺🇾","Usbekistan":"🇺🇿","Vanuatu":"🇻🇺","Vatikanstadt":"🇻🇦","Venezuela":"🇻🇪","Vereinigte Arabische Emirate":"🇦🇪","Vereinigte Staaten":"🇺🇸","Vereinigtes Königreich":"🇬🇧","Vietnam":"🇻🇳","Westsahara":"🏴","Zentralafrikanische Republik":"🇨🇫","Zypern":"🇨🇾","Ägypten":"🇪🇬","Äquatorialguinea":"🇬🇶","Äthiopien":"🇪🇹"};
+const UN_CFG={"nicht_anerkannt":{cc:"un-n",mc:"dn",bc:"un-n",icon:"",label:"UN-Status"},"beobachter":{cc:"un-o",mc:"do",bc:"un-o",icon:"",label:"UN-Status"},"teilweise_anerkannt":{cc:"un-p",mc:"dp",bc:"un-p",icon:"",label:"UN-Status"}};
 
-const CARDS = [
 
-// ── AKTUELLES ─────────────────────────────────────────
-{ cat:'news', hot:true, tag:'Apr 2026', tc:'tn', title:'Buckelwal „Timmy" in der Ostsee', items:[
-  b('Buckelwal „Timmy"')+' irrte seit März 2026 durch die Ostsee – für Buckelwale artfremd',
-  'Strandete vor der Insel '+b('Poel')+' (Wismarbucht), ca. 12 Tonnen',
-  'Private Rettungsinitiative: finanziert von MediaMarkt-Gründer '+b('Walter Gunz'),
-  'Plan: Netz unter den Wal, mit Schwimmpontons zur '+b('Nordsee')+' schleppen',
-  '20. April 2026: Timmy schwamm kurz frei – strandete danach erneut',
-  'Umweltminister '+b('Till Backhaus (SPD)')+' übernachtete auf einem Fischereiboot',
-  b('Greenpeace')+': Überlebenschancen gering – Wal fraß kaum',
-  'Debatte: „selektive Tierempathie" (Wal vs. Ostseedorsch / Wolf)',
-]},
-{ cat:'news', hot:true, tag:'Mai 2025', tc:'tn', title:'Neuer Papst: Leo XIV.', items:[
-  'Papst '+b('Franziskus')+' starb am '+b('21. April 2025')+', 88 Jahre (Schlaganfall, Vatikan)',
-  'Erster Papst aus '+b('Südamerika')+' & erster Jesuit auf dem Papststuhl (seit 2013)',
-  'Über '+b('250.000 Menschen')+' bei der Trauerfeier auf dem Petersplatz',
-  'Nachfolger: Kardinal '+b('Robert Francis Prevost')+' (USA, Augustiner)',
-  'Gewählt am '+b('8. Mai 2025')+' – eines der kürzesten Konklaves',
-  'Name: '+b('Papst Leo XIV.')+' – erster US-amerikanischer Papst aller Zeiten',
-  'Erste Worte: '+b('„Friede sei mit euch"'),
-]},
-{ cat:'news', hot:true, tag:'2025/26', tc:'tn', title:'Trump-Zölle & Handelskrieg', items:[
-  b('"Liberation Day"')+': Trump kündigt am 2. April 2025 weltweite Gegenzölle an',
-  'Zölle gegen China: bis zu '+b('145 %')+' – China antwortete mit Gegenzöllen',
-  'EU: Trump drohte mit '+b('30 %')+' Zöllen, mehrfach ausgesetzt',
-  'Stahl & Aluminium: '+b('25 %')+' Zoll auf alle Importe (inkl. Verbündete)',
-  'EU plante '+b('72 Mrd. €')+' Gegenzölle auf US-Produkte',
-  'US Supreme Court erklärte Teile der Zölle für '+b('unrechtmäßig'),
-  'Folge: Globale Börsenturbulenzen, Rezessionsängste',
-]},
-{ cat:'news', hot:true, tag:'Feb 2025', tc:'tn', title:'Bundestagswahl 2025 & neue GroKo', items:[
-  'Wahl: '+b('23. Februar 2025'),
-  'Stärkste Kraft: '+b('CDU/CSU')+' – neuer Kanzler: '+b('Friedrich Merz')+' (CDU)',
-  'Koalition: '+b('CDU/CSU + SPD')+' (Große Koalition)',
-  'AfD zweitstärkste Kraft – von allen anderen Parteien nicht koaliert',
-  'BSW knapp an der '+b('5%-Hürde')+' gescheitert',
-  'Dt. Wirtschaft nach Rezessionsjahren: leichtes Wachstum '+b('+0,6–1,2 %')+' erwartet',
-  'Entlastungspaket: geplanter '+b('Tankrabatt')+' Mai–Juni 2026',
-]},
-{ cat:'news', hot:true, tag:'2022–laufend', tc:'tn', title:'Ukraine-Krieg & Weltpolitik', items:[
-  'Russland begann Angriff am '+b('24. Februar 2022')+' – Krieg dauert an',
-  'USA unter Trump: Militärhilfe für Ukraine '+b('eingefroren / reduziert')+' (2025)',
-  'Europa rüstet auf – erstmals viele NATO-Länder beim '+b('2 %-BIP-Ziel'),
-  b('40 Jahre Tschernobyl')+': Jahrestag am 26. April 2026',
-  'US-Militär enterte '+b('iranisches Frachtschiff')+' (April 2026)',
-  'Gaza-Waffenstillstand brach mehrfach zusammen',
-]},
+function gF(n){return FLAGS[n]||"🌐";}
+function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+function norm(s){return s.toLowerCase().trim().replace(/\s+/g,"").replace(/[^a-z0-9äöüéèàâêîôûñ]/g,"");}
+function hsvs(h){return h.split(/[\n/,]/).map(s=>s.replace(/\(.*?\)/g,"").trim()).filter(Boolean);}
+function deb(fn,d=150){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),d);};}
+function normSort(s){return s.toLowerCase().replace(/ä/g,"a\u0001").replace(/ö/g,"o\u0001").replace(/ü/g,"u\u0001").replace(/é|è|ê/g,"e").replace(/ñ/g,"n");}
+function ag(l){const c=l[0].toUpperCase();return{"Ä":"A","Ö":"O","Ü":"U","É":"E","È":"E","Ñ":"N"}[c]??c;}
+function brow(items){return`<div class="fcrow">${items.map(b=>`<button class="fc-btn ${b.c}"${b.id?` id="${b.id}"`:""} type="button">${b.t}</button>`).join("")}</div>`;}
+function esc(s=""){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function cid(n){return n.replace(/[^a-z0-9]/gi,"_").toLowerCase();}
 
-{ cat:'news', hot:true, tag:'2025/26', tc:'tn', title:'Weitere aktuelle Ereignisse', items:[
-  b('EU AI Act')+': Weltweit erstes KI-Gesetz, trat 2024 in Kraft',
-  b('Sudan-Krieg')+' seit April 2023: SAF vs. RSF-Miliz, Millionen auf der Flucht',
-  b('Grönland')+': Trump äußerte Interesse an Annexion – Dänemark & NATO lehnten ab',
-  b('Ungarnwahl April 2026')+': Orbán unter Druck durch Opposition (Péter Magyar)',
-  b('Starlink')+' (SpaceX): größtes Satellitennetz der Welt (~6.000+ Satelliten)',
-  b('Syrischer Bürgerkrieg')+': Assad-Regime fiel Dezember 2024, neue Machthaber',
-]},
+/* ── Lernfortschritt (localStorage) ── */
+/* Schema: { [land]: { streak: number, totalOk: number, totalWr: number } }
+   streak = aktuelle hintereinander-Richtig-Serie; reset auf 0 bei Falsch
+   Gemeistert wenn streak >= 5 */
+const PROG_KEY="laender_progress";
+const STREAK_GOAL=5;
+function loadProg(){try{const d=JSON.parse(localStorage.getItem(PROG_KEY)||"{}");/* Migration alter Einträge {ok,wr} → neues Format */Object.keys(d).forEach(k=>{const v=d[k];if(v.streak===undefined){d[k]={streak:0,totalOk:v.ok||0,totalWr:v.wr||0};}});return d;}catch{return{};}}
+function saveProg(p){try{localStorage.setItem(PROG_KEY,JSON.stringify(p));}catch{}}
+function isMastered(v){return v&&v.streak>=STREAK_GOAL;}
+function getOpenLands(){const p=loadProg();return Object.entries(p).filter(([,v])=>!isMastered(v)&&(v.totalOk+v.totalWr)>0).map(([k])=>k);}
+/* Für Auswahlliste: Länder die noch nicht gemeistert sind (inkl. nie versucht) */
+function isWeak(v){return v&&!isMastered(v)&&(v.totalOk+v.totalWr)>0;}
+function getWeakLands(){return getOpenLands();}
 
-// ── GEOGRAFIE ─────────────────────────────────────────
-{ cat:'geo', tag:'Hauptstädte', tc:'tg', title:'Knifflige Hauptstädte', items:[
-  b('Australien')+' → Canberra '+em('(nicht Sydney!)'),
-  b('Schweiz')+' → Bern '+em('(nicht Zürich!)'),
-  b('Brasilien')+' → Brasília '+em('(nicht Rio!)'),
-  b('Kanada')+' → Ottawa '+em('(nicht Toronto!)'),
-  b('Neuseeland')+' → Wellington '+em('(nicht Auckland!)'),
-  b('Niederlande')+' → Amsterdam; Regierungssitz: Den Haag',
-  b('Südafrika')+' → 3 Hpst.: Pretoria, Kapstadt, Bloemfontein',
-  b('USA')+' → Washington D.C. '+em('(nicht New York!)'),
-  b('Türkei')+' → Ankara '+em('(nicht Istanbul!)'),
-  b('Kasachstan')+' → Astana '+em('(früher Nursultan)'),
-  b('Myanmar')+' → Naypyidaw '+em('(nicht Rangun)'),
-  b('Bern')+' – Schweiz · '+b('Valletta')+' – Malta · '+b('Nikosia')+' – Zypern (geteilt)',
-]},
-{ cat:'geo', tag:'Weltrekorde', tc:'tg', title:'Geografische Weltrekorde', items:[
-  'Längster Fluss: '+b('Nil')+' (~6.650 km) · Wasserreichster: '+b('Amazonas'),
-  'Größter See: '+b('Kaspisches Meer')+' · Tiefster: '+b('Baikalsee')+' (1.620 m)',
-  'Höchster Berg: '+b('Mount Everest')+' (8.849 m)',
-  'Größtes Land: '+b('Russland')+' · Kleinstes: '+b('Vatikan'),
-  'Bevölkerungsreichstes: '+b('Indien')+' (seit 2023 vor China)',
-  'Tiefster Punkt Erdoberfläche: '+b('Totes Meer')+' (–430 m)',
-  'Tiefster Punkt Ozeane: '+b('Marianengraben')+' (11.034 m)',
-  '7 Kontinente: '+b('Asien · Afrika · N-Amerika · S-Amerika · Antarktika · Europa · Australien'),
-  'Größte Wüste gesamt: '+b('Antarktis')+' · Größte Heiße Wüste: '+b('Sahara'),
-  'Donau: fließt durch '+b('10 Länder')+' (Weltrekord) · Wolga: längster Fluss Europas',
-]},
-{ cat:'geo', tag:'Deutschland', tc:'tg', title:'Deutschland – Grundfakten', items:[
-  '16 Bundesländer · Hauptstadt '+b('Berlin')+' · Fläche: '+b('357.376 km²'),
-  'Bevölkerung: ca. '+b('84 Mio.')+' · 9 Nachbarstaaten',
-  'Höchster Berg: '+b('Zugspitze')+' (2.962 m) · Größter See: '+b('Bodensee'),
-  'Größtes BL: '+b('Bayern')+' · Bevölkerungsreichstes: '+b('NRW')+' · Kleinstes: '+b('Bremen'),
-  'Größte Städte: Berlin · Hamburg · München · Köln · '+b('Frankfurt'),
-  'Finanzmetropole: '+b('Frankfurt')+' (EZB, Deutsche Börse)',
-  'Höchster Harzgipfel: '+b('Brocken')+' (1.141 m) · Schwarzwald: '+b('Feldberg')+' (1.493 m)',
-]},
-{ cat:'geo', tag:'Länder & Grenzen', tc:'tg', title:'Länder, Grenzen & Besonderheiten', items:[
-  'Meiste Nachbarländer: '+b('China & Russland')+' (je 14)',
-  'Einziger Staat der Welt innerhalb eines anderen: '+b('San Marino')+' (in Italien)',
-  'Vatikan: kleinster Staat der Welt · unabhängig seit '+b('1929')+' (Lateranvertrag)',
-  'Einziger Staat ohne Zugang zum Meer, der von einem Binnenstaat umgeben: '+b('Lesotho')+' (in Südafrika)',
-  'Längstes Land (N–S): '+b('Chile')+' (~4.300 km) · Breitestes: '+b('Russland')+' (~9.000 km)',
-  'Einzige Länder ohne Nationalflagge mit Rechteck: '+b('Nepal')+' (doppeltes Dreieck) & Schweiz/Vatikan (Quadrat)',
-  'Einziger Kontinent ohne eigene Nation: '+b('Antarktika'),
-  'Älteste Hauptstadt der Welt: '+b('Damaskus')+' (Syrien, ~3.000 Jahre kontinuierlich bewohnt)',
-]},
-{ cat:'geo', tag:'Planet Erde', tc:'tg', title:'Planet Erde – Daten & Fakten', items:[
-  'Gesamtfläche: '+b('510 Mio. km²')+' · Wasserfläche: '+b('70,7 %')+' · Landfläche: '+b('29,3 %'),
-  'Form: keine ideale Kugel – Äquatorumfang ca. '+b('67 km länger')+' als Polumfang (Abplattung)',
-  'Erde umrundet die Sonne in '+b('365,256 Tagen')+' · Entfernung zur Sonne: '+b('~149,6 Mio. km'),
-  'Mittlere Temperatur Erdoberfläche: '+b('+15 °C'),
-  'Heißester je gemessener Ort: '+b('Death Valley')+' +56,7 °C (10. Juli 1913)',
-  'Kältester je gemessener Ort: '+b('Wostok-Station')+' (Antarktis) −89,2 °C (21. Juli 1983)',
-  'Erdkern (fest, innen): Radius ~'+b('1.250 km')+', v.a. Eisen (86 %) & Nickel (7 %)',
-  'Erdmantel: '+b('2.900 km')+' mächtig · Erdkruste: relativ dünn, Silikate & Oxide',
-  'Häufigste Elemente im Erdinneren: '+b('Eisen, Sauerstoff, Silicium, Magnesium')+' (~93 %)',
-  'Häufigstes Element der Erdkruste: '+b('Sauerstoff'),
-]},
-{ cat:'geo', tag:'Erdoberfläche', tc:'tg', title:'Ozeane, Berge & Wüsten', items:[
-  'Durchschnittliche Meerestiefe: '+b('3.800 m'),
-  'Tiefste Stelle: '+b('Marianengraben')+' ~11.000 m (Pazifik)',
-  'Höchster Berg: '+b('Mount Everest')+' 8.849 m',
-  'Tiefster Punkt Festland: '+b('Totes Meer')+' −430 m',
-  'Größte Wüste (Kälte): '+b('Antarktis')+' · Größte Heiße Wüste: '+b('Sahara')+' (Afrika)',
-  'Größte Insel: '+b('Grönland')+' · Bevölkerungsreichste Insel: '+b('Java')+' (131 Mio. Einwohner)',
-  'Längster Fluss: '+b('Nil')+' ~6.650 km · Tiefster See: '+b('Baikalsee')+' 1.620 m',
-  'Höchster Wasserfall: '+b('Angel Falls')+' (Venezuela) 979 m',
-  'Größte Halbinsel: '+b('Arabische Halbinsel')+' (~3,2 Mio. km²)',
-]},
-{ cat:'geo', tag:'Atmosphäre', tc:'tg', title:'Erdatmosphäre', items:[
-  'Troposphäre: bodennahe Schicht, 8–18 km Höhe – hier findet '+b('Wetter')+' statt',
-  'Stratosphäre: bis ~'+b('50 km')+' Höhe – enthält die Ozonschicht',
-  'Mesosphäre: 50–'+b('80–90 km')+' · Thermosphäre: darüber',
-  'Atmosphärische Zusammensetzung: '+b('~78 % Stickstoff, ~21 % Sauerstoff, ~1 % Argon')+', Rest CO₂ etc.',
-  'CO₂-Anteil heute: ~'+b('420 ppm')+' (vorindustriell: ~280 ppm)',
-  'Wasserdampf: bis zu 4 Vol.-%, Mittelwert ca. '+b('1,3 %')+' in Bodennähe',
-  'Schallgeschwindigkeit (15 °C): ~'+b('340 m/s')+' auf Meereshöhe',
-]},
-{ cat:'geo', tag:'Bevölkerung & Sprachen', tc:'tg', title:'Weltbevölkerung, Sprachen & Städte', items:[
-  'Weltbevölkerung: ca. '+b('8 Mrd. Menschen')+' (2023)',
-  'Bevölkerungsreichstes Land: '+b('Indien')+' · Größtes Land: '+b('Russland')+' (17,1 Mio. km²)',
-  'Am dichtesten besiedelt: '+b('Monaco')+' (z.Vgl. Deutschland: ~230 Einwohner/km²)',
-  'Meistgesprochene Sprachen weltweit: '+b('Englisch')+' (Zweit-/Muttersprache), Mandarin (meiste Muttersprachler)',
-  'Größte Metropolregionen: '+b('Tokio')+' (~38 Mio.), Delhi (~32 Mio.), Shanghai (~28 Mio.)',
-  'Höchstgelegene Großstadt: '+b('Lhasa')+' (Tibet, ~3.650 m ü. M.)',
-  'Weltreligionen: '+b('Christentum')+' (~2,4 Mrd.), Islam (~1,9 Mrd.), Hinduismus, Buddhismus',
-]},
-{ cat:'geo', tag:'Funfact', tc:'tg', title:'Geografie-Funfacts', funfact:true, items:[
-  'Australien ist breiter als der Mond (ca. 4.000 km vs. 3.474 km Durchmesser)',
-  'Norwegen hat eine längere Küstenlinie als die USA (ca. '+b('100.000 km')+')',
-  'Der Nil fließt entgegen der meisten Flüsse von '+b('Süd nach Nord'),
-  'In Finnland gibt es mehr Saunen als Autos (ca. '+b('3 Mio. Saunen')+')',
-  'Island: kein Eis – '+b('Grönland')+' hat Eis · Island hat grüne Täler (Wikinger-Marketing)',
-  'Der Äquatorumfang der Erde ist ca. '+b('67 km länger')+' als der Polumfang – die Erde ist leicht abgeplattet',
-  'Die Kälteste Temperatur je auf der Erde: '+b('−89,2 °C')+' – in der Antarktis, 1983',
-  'Das Tote Meer sinkt jedes Jahr um ca. '+b('1 Meter')+' (Wasserentzug durch Umleitung des Jordan)',
-]},
-
-// ── GESCHICHTE ────────────────────────────────────────
-{ cat:'hist', tag:'Antike', tc:'th', title:'Antike & Mittelalter', items:[
-  'Älteste Hochkultur: '+b('Mesopotamien')+' (Sumerer, ~3500 v. Chr.)',
-  'Cheops-Pyramide: ca. '+b('2560 v. Chr.')+' – einziges erhaltenes Weltwunder',
-  'Julius Caesar ermordet: '+b('44 v. Chr.')+' (Iden des März)',
-  'Untergang Westroms: '+b('476 n. Chr.'),
-  'Magna Carta: '+b('1215')+', England',
-  'Schwarzer Tod: Pest 1347–51, ~'+b('1/3 Europas'),
-  'Kolumbus in Amerika: '+b('12. Oktober 1492'),
-  'Luthers Thesenanschlag: '+b('31. Oktober 1517'),
-  'Dreißigjähriger Krieg: 1618–'+b('1648'),
-]},
-{ cat:'hist', tag:'Neuzeit & 20. Jh.', tc:'th', title:'Neuzeit bis Moderne', items:[
-  'Amerikanische Unabhängigkeit: '+b('4. Juli 1776'),
-  'Französische Revolution: '+b('1789')+' (Bastille: 14. Juli)',
-  'Dt. Kaiserreich: '+b('18. Januar 1871')+' · Erster Reichskanzler: '+b('Bismarck'),
-  '1. WK: 1914–'+b('1918')+' · Beginn: Attentat auf Franz Ferdinand',
-  '2. WK: 1939–'+b('1945')+' · D-Day: 6. Juni 1944',
-  'Mauerbau: '+b('13. August 1961')+' · Mauerfall: '+b('9. November 1989'),
-  'Deutsche Einheit: '+b('3. Oktober 1990'),
-  'Ende Kalter Krieg: '+b('1991')+' (Auflösung UdSSR)',
-]},
-{ cat:'hist', tag:'Alle Bundeskanzler', tc:'th', title:'Alle Bundeskanzler Deutschlands', ol:true, collapsible:true, items:[
-  b('Konrad Adenauer')+' (CDU) 1949–1963',
-  b('Ludwig Erhard')+' (CDU) 1963–1966 – „Wirtschaftswunder"',
-  b('Kurt Georg Kiesinger')+' (CDU) 1966–1969',
-  b('Willy Brandt')+' (SPD) 1969–1974 – Kniefall Warschau, Friedensnobelpreis',
-  b('Helmut Schmidt')+' (SPD) 1974–1982',
-  b('Helmut Kohl')+' (CDU) 1982–1998 – „Kanzler der Einheit"',
-  b('Gerhard Schröder')+' (SPD) 1998–2005 – Agenda 2010',
-  b('Angela Merkel')+' (CDU) 2005–2021 – 16 Jahre Amtszeit',
-  b('Olaf Scholz')+' (SPD) 2021–2025',
-  b('Friedrich Merz')+' (CDU) seit Februar 2025',
-]},
-{ cat:'hist', tag:'Wichtige Personen', tc:'th', title:'Bedeutende historische Personen', items:[
-  b('Sokrates')+' (~470–399 v. Chr.) – griech. Philosoph, hingerichtet',
-  b('Kleopatra VII.')+' (69–30 v. Chr.) – letzte Pharaonin Ägyptens',
-  b('Dschingis Khan')+' (~1162–1227) – gründete größtes Landreich der Geschichte (Mongolisches Reich)',
-  b('Leonardo da Vinci')+' (1452–1519) – Künstler, Erfinder, Wissenschaftler',
-  b('Galileo Galilei')+' (1564–1642) – Heliozentrismus; Hausarrest durch die Inquisition',
-  b('Marie Curie')+' (1867–1934) – einzige Person mit Nobelpreis in 2 Naturwissenschaften',
-  b('Nelson Mandela')+' (1918–2013) – 27 Jahre Haft, dann Präsident Südafrikas',
-  b('Mahatma Gandhi')+' (1869–1948) – gewaltloser Widerstand gegen brit. Kolonialherrschaft',
-]},
-{ cat:'hist', tag:'Funfact', tc:'th', title:'Geschichte-Funfacts', funfact:true, items:[
-  'Kleopatra lebte zeitlich näher am iPhone (2007) als an den Pyramiden von Gizeh',
-  'Als die Mammuts ausstarben (~1650 v. Chr.), existierten bereits die Pyramiden',
-  'Oxford University ist älter als die Azteken – Gründung '+b('~1096')+', Azteken ~1300',
-  'Die Titanic sank 1912 – da gab es noch Wolhynsche Gouvernements der Zaren, aber schon '+b('Telefon und Radio'),
-  'Napoleon war nicht besonders klein – er war mit ~1,70 m für seine Zeit '+b('durchschnittlich groß'),
-  'Der Erste Weltkrieg begann wegen eines '+b('Sandwich')+': Franz Ferdinand hätte nach dem ersten Attentat die Route geändert, der Attentäter war beim Mittagessen als die Kutsche vorbeifuhr',
-]},
-
-// ── WISSENSCHAFT ──────────────────────────────────────
-{ cat:'sci', tag:'Biologie & Körper', tc:'ts', title:'Biologie & Menschlicher Körper', items:[
-  'DNA: Doppelhelix, entdeckt '+b('1953')+' (Watson & Crick)',
-  'Menschliche Chromosomen: '+b('46')+' (23 Paare)',
-  'Evolution: Darwin, „On the Origin of Species", '+b('1859'),
-  'Klassifikation: Reich → Stamm → Klasse → Ordnung → Familie → '+b('Gattung → Art'),
-  'Knochen: '+b('206')+' beim Erwachsenen (Baby: ~270)',
-  'Größtes Organ: '+b('Haut')+' (~1,5–2 m²)',
-  'Blutgruppen: '+b('A, B, AB, 0')+' · Universalspender: 0 negativ',
-  'Neuronen im Gehirn: ~'+b('86 Mrd.')+' · Herzschläge: ~'+b('100.000')+'/Tag',
-  'Schnellstes Tier: '+b('Gepard')+' (~112 km/h) · In der Luft: '+b('Wanderfalke')+' (~320 km/h)',
-  'Größtes Tier: '+b('Blauwal')+' · Ältestes: '+b('Grönlandhai')+' (400+ Jahre)',
-]},
-{ cat:'sci', tag:'Physik & Chemie', tc:'ts', title:'Physik, Chemie & Farben', items:[
-  'Lichtgeschwindigkeit: '+b('~300.000 km/s')+' · Schall (Luft): '+b('~343 m/s'),
-  'E = mc²: Einstein, '+b('1905'),
-  'Absoluter Nullpunkt: '+b('–273,15 °C')+' (= 0 Kelvin)',
-  'Netzspannung D: '+b('230 V / 50 Hz')+' · USA: 120 V / 60 Hz',
-  'Farben des Regenbogens: '+b('Rot · Orange · Gelb · Grün · Blau · Indigo · Violett'),
-  'Licht (additiv): '+b('Rot + Grün + Blau')+' = Weiß',
-  'Malerei (subtraktiv): '+b('Magenta + Cyan + Gelb')+' = Schwarz',
-  'Periodensystem: '+b('118 Elemente')+' · Häufigstes im Universum: '+b('Wasserstoff'),
-  'Wasser: '+b('H₂O')+' · Siedep. 100°C · Dichtemaximum bei 4°C',
-  'pH < 7 = '+b('sauer')+' · pH 7 = neutral · pH > 7 = basisch',
-]},
-{ cat:'sci', tag:'Planeten (Reihenfolge)', tc:'ts', title:'Planeten (innen → außen)', ol:true, items:[
-  b('Merkur')+' – kleinster Planet, sonnennächster',
-  b('Venus')+' – heißester Planet (~465°C), Treibhauseffekt',
-  b('Erde')+' – einziger bekannt bewohnter Planet',
-  b('Mars')+' – „Roter Planet", 2 Monde',
-  b('Jupiter')+' – größter Planet, großer roter Fleck',
-  b('Saturn')+' – markanteste Ringe',
-  b('Uranus')+' – rotiert auf der Seite',
-  b('Neptun')+' – weiteste von der Sonne',
-]},
-{ cat:'sci', tag:'Raumfahrt', tc:'ts', title:'Raumfahrt & Universum', items:[
-  '1. Satellit: '+b('Sputnik 1')+' – UdSSR, 4. Oktober 1957',
-  '1. Mensch im All: '+b('Juri Gagarin')+' – 12. April 1961',
-  'Mondlandung: '+b('Neil Armstrong')+' – 20. Juli 1969 · 2.: '+b('Buzz Aldrin'),
-  '1. Foto eines Schwarzen Lochs: '+b('2019')+' (M87*)',
-  'ISS: bewohnt seit '+b('November 2000'),
-  'Erde–Mond: ~'+b('384.400 km')+' · Erde–Sonne: ~'+b('150 Mio. km'),
-  'Alter des Universums: ~'+b('13,8 Mrd. Jahre'),
-  'Nächster Stern nach Sonne: '+b('Proxima Centauri')+' (4,24 Lichtjahre)',
-]},
-{ cat:'sci', tag:'Jahrestiere & Bäume 2026', tc:'ts', title:'„...des Jahres 2026" – Natur', items:[
-  b('Tier des Jahres 2026')+': Rothirsch (Dt. Wildtier Stiftung)',
-  'Rothirsch: größtes Landsäugetier Deutschlands · ca. '+b('220.000')+' in D',
-  'Vogel des Jahres 2026: '+b('Rebhuhn'),
-  'Baum des Jahres 2026: '+b('Zitterpappel (Espe)'),
-  'Fisch des Jahres 2026: '+b('Europäischer Wels'),
-  'Schmetterling des Jahres 2026: '+b('Dunkler Wiesenknopf-Ameisenbläuling'),
-  'Insekt des Jahres 2026: '+b('Warzenbeißer'),
-  'Tier des Jahres 2025: '+b('Alpenschneehase')+' · 2024: '+b('Braunbrustigel'),
-  'Baum des Jahres 2025: '+b('Roteiche')+' (aus Amerika stammend)',
-]},
-{ cat:'sci', tag:'Tierrekorde', tc:'ts', title:'Tierrekorde & Tierfakten', items:[
-  b('Größtes Tier')+': Blauwal (bis 33 m, 190 t) – Herz so groß wie ein Auto',
-  b('Schnellstes Tier')+': Gepard (~112 km/h) · in der Luft: Wanderfalke (~320 km/h)',
-  b('Giftigstes Tier')+': Würfelqualle · giftigste Landschlange: Inlandtaipan (Australien)',
-  b('Ältestes Tier')+': Grönlandhai (400+ Jahre) · älteste Landschildkröte: Jonathan (~192 J.)',
-  b('Höchstes Tier')+': Giraffe (bis 6 m)',
-  b('Schwerster Vogel')+': Strauß (bis 156 kg) – kann nicht fliegen',
-  b('Schnellster Vogel im Flug')+': Mauersegler (~170 km/h horizontal)',
-  b('Tiere mit meisten Beinen')+': Tausendfüßer (Illacme plenipes: bis zu 750 Beine)',
-  b('Tier mit größten Augen')+': Riesenkalmar (so groß wie ein Fußball)',
-]},
-{ cat:'sci', tag:'Medizin', tc:'ts', title:'Medizin & Entdeckungen', items:[
-  'Penicillin: '+b('Alexander Fleming')+', 1928',
-  '1. Herztransplantation: '+b('1967')+' (Christiaan Barnard, Südafrika)',
-  'Röntgen: '+b('Wilhelm Röntgen')+', 1895 (Nobelpreis 1901)',
-  '1. Impfung: '+b('Edward Jenner')+', Pocken 1796',
-  'mRNA-Impfstoffe: breite Anwendung ab '+b('2020/21')+' (COVID-19)',
-  'Humangenomprojekt: abgeschlossen '+b('2003'),
-]},
-{ cat:'sci', tag:'Nobelpreise', tc:'ts', title:'Nobelpreise – Wissenswertes', items:[
-  'Gestiftet von '+b('Alfred Nobel')+' (Dynamit-Erfinder) · Erstmals vergeben: '+b('1901'),
-  'Kategorien: Physik · Chemie · Medizin · Literatur · '+b('Frieden')+' · Wirtschaft (ab 1969)',
-  b('Friedensnobelpreis')+': vergeben in '+b('Oslo')+' – alle anderen in Stockholm',
-  b('Marie Curie')+': einzige Person mit Preis in zwei Naturwiss. (Physik 1903, Chemie 1911)',
-  b('Jüngste Preisträgerin')+': Malala Yousafzai (Frieden 2014, mit 17 Jahren)',
-  b('Ältester Preisträger')+': John Goodenough (Chemie 2019, mit 97 Jahren)',
-  'Keine Verleihung: 1940–1942 (2. Weltkrieg)',
-  'Preisgeld 2024: je '+b('11 Mio. Schwedische Kronen')+' (~1 Mio. €)',
-]},
-{ cat:'sci', tag:'Funfact', tc:'ts', title:'Wissenschafts-Funfacts', funfact:true, items:[
-  b('Honig')+' verdirbt nie – in Pharaonengräbern gefundener Honig (~3.000 Jahre) war noch essbar',
-  'Ein Tag auf der Venus (Eigenrotation) ist länger als ein Jahr auf der Venus (Umlauf)',
-  'Das menschliche Auge kann ca. '+b('10 Mio. Farben')+' unterscheiden',
-  'Octopusse haben '+b('drei Herzen')+' und blaues Blut (Hämocyanin statt Hämoglobin)',
-  'Schmetterlinge schmecken mit ihren '+b('Füßen'),
-  'Ein Blitz ist 5× heißer als die Oberfläche der Sonne (~30.000 K)',
-  'Bananen sind leicht '+b('radioaktiv')+' (Kalium-40) – unbedenklich',
-  b('Cleopatra')+' lebte näher am Mondlandung als an den Pyramiden (nur 300 Jahre nach Bau vs. 2.500 davor)',
-]},
-
-// ── KULTUR ────────────────────────────────────────────
-{ cat:'cult', tag:'Film & TV', tc:'tc', title:'Film, Oscars & Serien', items:[
-  'Erfolgreichster Film: '+b('Avatar')+' (James Cameron, ~2,9 Mrd. $)',
-  'Meiste Oscar-Siege: '+b('Ben-Hur, Titanic, Lord of the Rings')+' (je 11)',
-  'Oscar „Bester Film" 2024: '+b('Oppenheimer')+' (Regie: Christopher Nolan)',
-  'Berlinale-Hauptpreis: '+b('Goldener Bär')+' · Cannes: '+b('Goldene Palme'),
-  'James Bond: '+b('6 Darsteller')+', 25+ Filme · 1. Bond: '+b('Sean Connery'),
-  'Meistgeschaute Netflix-Serie: '+b('Squid Game')+' (2021)',
-  'Längste US-Zeichentrickserie: '+b('The Simpsons')+' (seit 1989)',
-]},
-{ cat:'cult', tag:'Musik', tc:'tc', title:'Musik – Klassik bis Pop', items:[
-  b('Beethoven')+' – 9. Sinfonie taub komponiert · Ode an die Freude: '+b('EU-Hymne'),
-  b('Mozart')+' – starb mit nur '+b('35 Jahren')+' (1756–1791)',
-  b('Bach')+' – Barockkomponist, Matthäuspassion',
-  'Tonarten: '+b('Dur')+' (hell/fröhlich) vs. '+b('Moll')+' (dunkel/traurig)',
-  'Stimmton: '+b('440 Hz')+' = Kammerton A',
-  'Meistverkauftes Album: '+b('Thriller')+' – Michael Jackson (~70 Mio.)',
-  'Meistverkaufter Künstler: '+b('The Beatles')+' (~600 Mio. Alben)',
-  'ESC erstmals: '+b('1956')+' · Deutschland siegte '+b('1982')+' (Nicole)',
-  'Meiste ESC-Siege: '+b('Irland & Schweden')+' (je 7×)',
-  'Saxofon erfunden von: '+b('Adolphe Sax')+' (1840er) – trotz Blattmundstück: Holzbläser',
-]},
-{ cat:'cult', tag:'Berühmte Gemälde', tc:'tc', title:'Berühmte Gemälde & Künstler', items:[
-  b('Mona Lisa')+' – Leonardo da Vinci (~1503–06) · im Louvre Paris · Modell: Lisa del Giocondo',
-  b('Sternennacht')+' – Vincent van Gogh (1889) · gemalt in der Nervenheilanstalt Saint-Rémy',
-  b('Der Schrei')+' – Edvard Munch (1893) · Norwegen · Symbol existenzieller Angst',
-  b('Das letzte Abendmahl')+' – Leonardo da Vinci (1495–98) · Mailand (Fresko, kein Gemälde)',
-  b('Mädchen mit dem Perlohrring')+' – Jan Vermeer (~1665) · Den Haag',
-  b('Der Kuss')+' – Gustav Klimt (1907–08) · Wien · Goldene Periode',
-  b('Wasserlilien')+' – Claude Monet (~1906) · impressionistische Serie',
-  b('Guernica')+' – Pablo Picasso (1937) · Antikriegsbild, Anlass: Bombardierung Guernicas',
-  b('Die Erschaffung Adams')+' – Michelangelo (1508–12) · Sixtinische Kapelle',
-  b('Campbells Soup Cans')+' – Andy Warhol (1962) · Pop Art',
-]},
-{ cat:'cult', tag:'Literatur & Kunst', tc:'tc', title:'Literatur, Kunst & Bauwerke', items:[
-  'Meistverkauftes Buch: '+b('Bibel')+' (>5 Mrd.) · Meistverkaufter Roman: '+b('Don Quijote'),
-  'Shakespeare: '+b('37 Stücke')+' (Hamlet, Othello, Romeo & Julia, Macbeth…)',
-  'Mona Lisa: '+b('Leonardo da Vinci')+', im Louvre Paris',
-  'Sixtinische Kapelle: '+b('Michelangelo')+', 1508–1512',
-  'Louvre Paris: '+b('meistbesuchtes Museum')+' der Welt',
-  'Eiffelturm: '+b('1889')+' · Sagrada Família (Gaudí): noch unfertig',
-  'Chinesische Mauer: ~'+b('21.196 km')+' · Taj Mahal: Agra, Indien, 1632–1653',
-]},
-{ cat:'cult', tag:'Essen & Trinken', tc:'tf', title:'Essen & Trinken', items:[
-  b('Pizza')+' – Neapel, Italien',
-  b('Sushi')+' – Japan (urspr. Konservierung in Reis)',
-  b('Currywurst')+' – erfunden 1949 von '+b('Herta Heuwer')+', Berlin',
-  b('Döner Kebab')+' (heutige Form) – in Berlin der 1970er entwickelt',
-  b('Croissant')+' – österr. Ursprung (Kipferl), in Frankreich berühmt',
-  'Reinheitsgebot: seit '+b('1516')+' · Champagner: nur aus der '+b('Champagne'),
-  'Kaffee: ursprünglich aus '+b('Äthiopien')+' · Schokolade: von '+b('Azteken/Maya'),
-  'Teuerstes Gewürz: '+b('Safran')+' · Tomaten: botanisch '+b('Obst'),
-]},
-{ cat:'cult', tag:'Mythologie & Religion', tc:'tc', title:'Weltreligionen & Mythologie', items:[
-  'Weltreligionen nach Anhängern: '+b('Christentum')+' (~2,4 Mrd.) · Islam (~1,9 Mrd.) · Hinduismus (~1,2 Mrd.) · Buddhismus (~500 Mio.)',
-  b('Islam')+': Heilige Stadt Mekka · 5 Säulen: Bekenntnis, Gebet, Fasten, Almosen, Pilgerfahrt',
-  b('Christentum')+': größte Konfessionen: Katholisch, Orthodox, Protestantisch',
-  'Olympische Götter (12): Zeus, Hera, Poseidon, '+b('Athene')+', Apollo, Artemis, Ares, Aphrodite, Hephaistos, Hermes, Demeter, Dionysos',
-  'Wikinger-Götter: '+b('Odin')+' (Allvater, Weisheit) · Thor (Donner) · Loki (Trickster) · Freya (Liebe)',
-  'Ägyptische Götter: Ra (Sonne) · '+b('Osiris')+' (Totengott) · Isis · Anubis (Totenrichter)',
-  b('Konfuzius')+' (551–479 v. Chr.) – chinesischer Philosoph, Grundlage des Konfuzianismus',
-]},
-{ cat:'cult', tag:'Royals & Promis', tc:'tc', title:'Britische Royals – aktuell', items:[
-  b('König Charles III.')+': Krönung Mai 2023 · Krebsdiagnose 2024, Behandlung erfolgreich',
-  b('Prinzessin Kate')+': Krebsdiagnose 2024 · Remission Jan. 2025 · langsame Rückkehr zu Pflichten',
-  b('Prinz Harry & Meghan')+': verließen Königshaus Jan. 2020 · leben in Montecito (Kalifornien)',
-  b('Harry-Versöhnung')+': Wiedersehen mit Charles Sept. 2025 · Verhältnis zu William weiter angespannt',
-  b('Prinz Andrew')+': verlor Nov. 2025 alle Prinzentitel (Epstein-Skandal)',
-  b('Thronfolge')+': Charles → William → George → Charlotte → Louis',
-  b('Queen Elizabeth II.')+': starb 8. Sept. 2022 mit 96 Jahren – 70 Jahre Regentschaft',
-  b('Meghan-Netflix-Show')+' „With Love, Meghan" startete 2025 · Lifestyle-Format',
-]},
-{ cat:'cult', tag:'Prominente & Pop-Kultur', tc:'tc', title:'Prominente & Pop-Kultur', items:[
-  b('Taylor Swift')+': meistgestreamte Künstlerin weltweit (2023–24) · 4× Grammy Album des Jahres',
-  b('Beyoncé')+': meiste Grammy-Gewinne aller Zeiten (32+)',
-  b('Elon Musk')+': CEO Tesla & SpaceX, Eigentümer von X (ehem. Twitter) · zeitweise reichster Mensch',
-  b('Kim Kardashian')+': ~370 Mio. Instagram-Follower · SKIMS-Gründerin',
-  b('Lionel Messi')+': 8x Weltfußballer (Ballon dOr) · WM 2022 Sieger',
-  b('Cristiano Ronaldo')+': meistgefolgte Person Instagram (>620 Mio.)',
-  b('Rihanna')+': Halftime Show Super Bowl 2023 · enthüllte dabei Schwangerschaft',
-  b('Adele')+': Brit-Künstlerin mit weltweit ~120 Mio. verkauften Alben',
-]},
-{ cat:'cult', tag:'Funfact', tc:'tc', title:'Kultur-Funfacts', funfact:true, items:[
-  b('Nintendo')+' wurde 1889 gegründet – als Spielkartenhersteller',
-  b('Oxford')+' ist älter als die Azteken (Gründung ~1096, Azteken ~1300)',
-  'Wasser hat keine eigene Farbe – es erscheint leicht bläulich wegen der Lichtabsorption',
-  'Das Wort '+b('"Nerd"')+' taucht erstmals 1950 in einem Dr. Seuss-Buch auf',
-  b('Honey Bees')+' müssen ca. 55.000 Meilen fliegen und 2 Mio. Blüten besuchen für 1 Pfund Honig',
-  'In Frankreich ist es '+b('illegal')+', ein Schwein "Napoleon" zu nennen',
-  'Die erste Webcam wurde 1991 aufgestellt – zur '+b('Kaffeeüberwachung')+' in Cambridge',
-]},
-
-// ── SPORT ─────────────────────────────────────────────
-{ cat:'sport', tag:'WM-Sieger 1930–2026', tc:'tb', title:'FIFA WM-Sieger (alle)', ol:true, collapsible:true, items:[
-  '1930 Uruguay – '+b('Uruguay'),
-  '1934 Italien – '+b('Italien'),
-  '1938 Frankreich – '+b('Italien'),
-  '1950 Brasilien – '+b('Uruguay'),
-  '1954 Schweiz – '+b('Deutschland')+' '+em('(Wunder von Bern)'),
-  '1958 Schweden – '+b('Brasilien'),
-  '1962 Chile – '+b('Brasilien'),
-  '1966 England – '+b('England'),
-  '1970 Mexiko – '+b('Brasilien'),
-  '1974 Deutschland – '+b('Deutschland'),
-  '1978 Argentinien – '+b('Argentinien'),
-  '1982 Spanien – '+b('Italien'),
-  '1986 Mexiko – '+b('Argentinien')+' '+em('(Maradona)'),
-  '1990 Italien – '+b('Deutschland'),
-  '1994 USA – '+b('Brasilien'),
-  '1998 Frankreich – '+b('Frankreich'),
-  '2002 Japan/Korea – '+b('Brasilien'),
-  '2006 Deutschland – '+b('Italien'),
-  '2010 Südafrika – '+b('Spanien'),
-  '2014 Brasilien – '+b('Deutschland'),
-  '2018 Russland – '+b('Frankreich'),
-  '2022 Katar – '+b('Argentinien'),
-  '2026 USA/KAN/MEX – '+b('?'),
-]},
-{ cat:'sport', tag:'Fußball', tc:'tb', title:'Fußball-Rekorde', items:[
-  'Meiste WM-Titel: '+b('Brasilien')+' (5×) · Deutschland & Italien (je 4×)',
-  'Bester WM-Torschütze: '+b('Miroslav Klose')+' (16 Tore, D)',
-  'Jüngster WM-Torschütze: '+b('Pelé')+' (17 Jahre, 1958)',
-  'Bundesliga Rekordmeister: '+b('Bayern München')+' (32+ Titel)',
-  'Bundesliga Rekord-Tore: '+b('Gerd Müller')+' (365)',
-  'Saison-Rekord: '+b('Lewandowski')+' 41 Tore (20/21)',
-  'Meiste CL-Titel: '+b('Real Madrid')+' (15+)',
-  'Meiste Länderspiele: '+b('Cristiano Ronaldo')+' (>210)',
-]},
-{ cat:'sport', tag:'Olympia', tc:'tb', title:'Olympische Spiele', items:[
-  'Erste moderne Olympiade: '+b('Athen 1896'),
-  'Motto: „Citius, Altius, Fortius" = Schneller, Höher, '+b('Stärker'),
-  'Farben Olympia-Ringe: '+b('Blau · Gelb · Schwarz · Grün · Rot')+' (auf weiß)',
-  'Meiste Goldmedaillen (Person): '+b('Michael Phelps')+' (Schwimmen, 23 Gold)',
-  'Sommer 2024: '+b('Paris')+' · Sommer 2028: Los Angeles',
-  'Winter 2026: '+b('Mailand-Cortina'),
-  'Dt. Rekord: '+b('Birgit Fischer')+' (Kanu, 8 Gold)',
-]},
-{ cat:'sport', tag:'Tennis & F1', tc:'tb', title:'Tennis, F1 & Leichtathletik', items:[
-  'Meiste Grand-Slam-Titel Herren: '+b('Novak Djokovic')+' (24+)',
-  'Wimbledon: ältestes Grand-Slam-Turnier ('+b('1877')+')',
-  '4 Grand Slams: '+b('Australian Open · Roland Garros · Wimbledon · US Open'),
-  'Boris Becker: jüngster Wimbledon-Sieger mit '+b('17 Jahren')+' (1985)',
-  'Steffi Graf: einzige Spielerin mit '+b('Golden Slam')+' (alle 4 GS + Olympia, 1988)',
-  'Meiste F1-Titel: '+b('Schumacher & Hamilton')+' (je 7)',
-  'Jüngster F1-Weltmeister: '+b('Max Verstappen')+' (24 Jahre, 2021)',
-  '100m-Weltrekord: '+b('Usain Bolt')+' (9,58 s, 2009)',
-  'Marathon-Weltrekord: '+b('Kelvin Kiptum')+' (2:00:35, 2023)',
-]},
-
-{ cat:'sport', tag:'Sport-Rekorde & Besonderheiten', tc:'tb', title:'Sport-Rekorde & Kurioses', items:[
-  b('Höchster Fußball-Sieg')+': Australien 31:0 gegen Amerikanisch-Samoa (2001)',
-  b('Längste Sportveranstaltung')+': Tour de France (seit 1903, jährlich ~3.500 km)',
-  b('Meistbesuchtes Sportevent')+': Formel-1-Saison (mehrere Mio. Zuschauer gesamt)',
-  b('Snooker')+': Maximum Break = 147 Punkte (15× Schwarz nach Roter)',
-  b('Sumo')+': Höchste Klasse heißt Yokozuna – Japan',
-  b('Schachrekord')+': längste Partie (Nikolic vs. Arsovic, 1989): 269 Züge',
-  b('Cricket')+': beliebteste Sportart in Indien, Pakistan, Australien, England',
-  b('NFL Super Bowl')+': meistgeschautes jährliches Sportevent der USA',
-]},
-
-// ── POLITIK ───────────────────────────────────────────
-{ cat:'pol', tag:'System & Parteien', tc:'tp', title:'Deutsches Politisches System', items:[
-  'Staatsform: '+b('Parlamentarische Bundesrepublik'),
-  'Grundgesetz: '+b('23. Mai 1949'),
-  'Bundestag: Volkskammer · Bundesrat: '+b('16 Länder'),
-  'Bundesverfassungsgericht: Sitz '+b('Karlsruhe'),
-  '5%-Hürde für Einzug in den '+b('Bundestag'),
-  b('CDU/CSU')+' – konservativ · '+b('SPD')+' – sozialdemokr. (gegr. 1863)',
-  b('Grüne')+' – gegr. 1980 · '+b('FDP')+' – liberal',
-  b('AfD')+' – gegr. 2013 · '+b('BSW')+' – gegr. 2024 (Sahra Wagenknecht)',
-]},
-{ cat:'pol', tag:'Europa & Welt', tc:'tp', title:'EU, NATO & Weltpolitik', items:[
-  'EU: '+b('27 Mitgliedsstaaten')+' (nach Brexit 2020) · Eurozone: '+b('20 Länder'),
-  'EU-Kommissionspräsidentin: '+b('Ursula von der Leyen'),
-  'EU-Parlament: Sitz in '+b('Straßburg')+' (und Brüssel)',
-  'NATO: '+b('4. April 1949')+' · Hauptquartier: Brüssel',
-  'NATO-Generalsekretär: '+b('Mark Rutte')+' (NL, seit 2024)',
-  'UN gegründet: '+b('26. Juni 1945')+' · Generalsekretär: '+b('António Guterres'),
-  'UN-Sicherheitsrat (ständig): USA, UK, FR, Russland, '+b('China'),
-  'USA: '+b('Donald Trump')+' (seit Jan. 2025) · UK: '+b('Keir Starmer'),
-  'Papst: '+b('Leo XIV.')+' (Robert F. Prevost, USA, seit 8. Mai 2025)',
-]},
-
-{ cat:'pol', tag:'Flaggen & Symbole', tc:'tp', title:'Flaggen & Staatssymbole', items:[
-  b('Älteste Nationalflagge')+': Dänemark (Dannebrog) – seit ca. 1370 unverändert',
-  'Einzige nicht-rechteckige Nationalflagge: '+b('Nepal')+' (doppeltes Dreieck)',
-  'Quadratische Nationalflaggen: '+b('Schweiz')+' und Vatikan',
-  b('Dt. Nationalhymne')+': 3. Strophe des Deutschlandlieds (Fallersleben, 1841)',
-  b('Marseillaise')+' (Frankreich): Nationalhymne mit dem blutigsten Text',
-  b('Freiheitsstatue')+': Geschenk Frankreichs, eingeweiht 1886 · Höhe mit Sockel: 93 m',
-  b('Rotes Kreuz')+': gegründet von Henry Dunant, 1863 (Genf) – umgekehrte Schweizer Flagge',
-  b('UN-Flagge')+': Weltkarte + Olivenzweige (Symbol des Friedens)',
-]},
-{ cat:'pol', tag:'Wahlen & Demokratie', tc:'tp', title:'Wahlen & Demokratie weltweit', items:[
-  b('Älteste Demokratie')+': Island – Althing gegründet ~930 n. Chr.',
-  b('Erste Demokratie der Neuzeit')+': USA (1776) – England (Magna Carta 1215 als Vorläufer)',
-  b('Frauenwahlrecht')+': Neuseeland 1893 als erstes Land weltweit',
-  'Deutschland: Frauenwahlrecht seit '+b('12. November 1918'),
-  b('Wahlpflicht')+' gibt es in: Belgien, Brasilien, Australien, Luxemburg u.a.',
-  b('Verhältniswahl')+' (D) vs. '+b('Mehrheitswahl')+' (UK/USA): verschiedene Demokratiemodelle',
-  'Bundestag: '+b('598 Regelmandate')+', oft durch Überhangmandate mehr (2021: 736 Abgeordnete)',
-]},
-
-// ── TECHNIK ───────────────────────────────────────────
-{ cat:'tech', tag:'Internet & Smartphones', tc:'tt', title:'Internet, Tech-Firmen & KI', items:[
-  'WWW erfunden: '+b('Tim Berners-Lee')+', 1989 (CERN, Genf)',
-  'Apple: '+b('1976')+' (Wozniak & Jobs) · Microsoft: '+b('1975')+' · Google: '+b('1998'),
-  'Facebook: '+b('2004')+' · YouTube: 2005 · Twitter/X: 2006 · TikTok: '+b('ByteDance'),
-  'Erstes iPhone: '+b('9. Januar 2007')+' (Steve Jobs)',
-  'ChatGPT: veröffentlicht '+b('November 2022')+' (OpenAI)',
-  'Wichtige KI-Firmen: '+b('OpenAI · Anthropic · Google DeepMind · Meta AI'),
-  'KI-Chip-Marktführer: '+b('NVIDIA'),
-]},
-{ cat:'tech', tag:'Erfindungen', tc:'tt', title:'Wichtige Erfindungen (Zeitleiste)', ol:true, collapsible:true, items:[
-  '~1450 – '+b('Buchdruck')+' (Gutenberg, Mainz)',
-  '1769 – '+b('Dampfmaschine')+' (James Watt)',
-  '1835 – Erste dt. '+b('Eisenbahn')+' (Nürnberg–Fürth)',
-  '1876 – '+b('Telefon')+' (Alexander Graham Bell)',
-  '1879 – '+b('Glühbirne')+' (Thomas Edison)',
-  '1886 – '+b('Automobil')+' (Carl Benz, Patent)',
-  '1895 – '+b('Röntgenstrahlen')+' (Wilhelm Röntgen)',
-  '1903 – '+b('Motorflug')+' (Gebrüder Wright)',
-  '1928 – '+b('Penicillin')+' (Alexander Fleming)',
-  '1947 – '+b('Transistor')+' (Bell Labs)',
-  '1969 – '+b('Internet')+' (ARPANET)',
-  '1989 – '+b('World Wide Web')+' (Berners-Lee)',
-  '2007 – '+b('iPhone')+' (Steve Jobs)',
-  '2022 – '+b('ChatGPT')+' (OpenAI)',
-]},
-{ cat:'tech', tag:'Energie & Physik', tc:'tt', title:'Energie, Strom & Alltagsphysik', items:[
-  b('Netzspannung')+': Deutschland 230 V / 50 Hz · USA 120 V / 60 Hz · Japan 100 V',
-  b('GPS')+': 24+ Satelliten nötig für globale Abdeckung · entwickelt vom US-Militär',
-  b('Laser')+': „Light Amplification by Stimulated Emission of Radiation" – erfunden 1960',
-  b('Transistor')+': 1947, Bell Labs – Grundlage aller modernen Elektronik',
-  'Letztes dt. AKW abgeschaltet: '+b('April 2023')+' (Isar 2, Neckarwestheim, Emsland)',
-  b('Moore\'s Law')+': Transistorzahl auf Chips verdoppelt sich ca. alle 2 Jahre (seit 1965)',
-  b('Lithium-Ionen-Akku')+': Nobelpreis Chemie 2019 (Whittingham, Goodenough, Yoshino)',
-  b('Glasfaser')+': überträgt Daten mit ~200.000 km/s (2/3 Lichtgeschwindigkeit)',
-]},
-{ cat:'tech', tag:'Funfact', tc:'tt', title:'Technik-Funfacts', funfact:true, items:[
-  'Das erste Handy von Motorola (1983) kostete '+b('3.995 $')+' und hatte 30 Minuten Akkuzeit',
-  'Der erste Computer-Bug war ein echter '+b('Käfer')+' (Moth im Harvard Mark II, 1947)',
-  'Nintendo wurde '+b('1889')+' gegründet – als Spielkartenhersteller',
-  'Alle weltweit gesendeten E-Mails pro Tag: ca. '+b('300 Milliarden')+' – davon ~45 % Spam',
-  'Das QWERTZ-Layout wurde entwickelt, damit Schreibmaschinenhebel nicht '+b('verklemmen'),
-  'YouTube hatte im ersten Monat nach Launch nur ein Video (Me at the zoo) – heute werden '+b('500 Stunden Video')+' pro Minute hochgeladen',
-]},
-
-// ── HESSEN ────────────────────────────────────────────
-{ cat:'local', tag:'Kommunalwahl März 2026', tc:'tn', title:'Hessische Kommunalwahl 15. März 2026', hot:true,
-  wahlData:[
-    { label:'CDU',    pct:29.8, prev:28.5, color:'#1f5cb5' },
-    { label:'SPD',    pct:20.8, prev:24.0, color:'#e3000f' },
-    { label:'AfD',    pct:14.8, prev:6.8,  color:'#009ee0' },
-    { label:'Grüne',  pct:14.0, prev:18.4, color:'#46962b' },
-    { label:'Linke',  pct:5.7,  prev:4.0,  color:'#be3075' },
-    { label:'FDP',    pct:3.9,  prev:6.7,  color:'#ffed00' },
-  ]
-},
-{ cat:'local', hot:true, tag:'Kommunalwahl', tc:'tn', title:'Hessen-Wahl 2026 – Trends & Fakten', items:[
-  'Wahlbeteiligung: '+b('54,5 %')+' (2021: 50,4 % – leichter Anstieg)',
-  b('CDU')+' stärkste Kraft landesweit mit 29,8 % (+1,3 Pp)',
-  b('AfD')+' verdoppelte Stimmenanteil: 14,8 % (2021: 6,8 %)',
-  b('SPD')+' verlor: 20,8 % (2021: 24,0 %)',
-  b('Grüne')+' verloren deutlich: 14,0 % (2021: 18,4 %)',
-  b('FDP')+' stark verloren: 3,9 % (2021: 6,7 %)',
-  'Kommunalwahl: Kreistage & Gemeinderäte aller '+b('421 Gemeinden')+' gewählt',
-  'Frankfurt Römer: CDU als Wahlsieger kündigte Koalitionsgespräche an, Grüne außen vor',
-]},
-{ cat:'local', hot:true, tag:'Hessentag', tc:'tn', title:'Hessentag – Allgemein', items:[
-  b('Hessentag')+': Deutschlands ältestes und größtes Landesfest',
-  'Gegründet '+b('1961')+' von Ministerpräsident '+b('Georg-August Zinn'),
-  'Ziel: Heimatvertriebene und Einheimische zusammenbringen – Hessen-Identität stärken',
-  'Findet jährlich '+b('10 Tage lang')+' in einer hessischen Stadt statt',
-  'Programm: Festzug, Konzerte, Kultur, Trachtenland, Bierdorf, Regionalmarkt',
-  'Hessentagspaar: gewählte Repräsentanten der Gastgeberstadt',
-  'Am Ende: traditioneller '+b('Festzug')+' + Übergabe der Hessentagsfahne an nächste Stadt',
-  'Fördermittel des Landes: ca. '+b('7–11 Mio. €')+' pro Veranstaltung',
-]},
-{ cat:'local', hot:true, tag:'Hessentag 2026 Fulda', tc:'tn', title:'63. Hessentag – Fulda 2026', items:[
-  b('63. Hessentag')+': '+b('12.–21. Juni 2026')+' in Fulda',
-  'Motto: '+b('"FD – Foll hessisch!"'),
-  'Fulda war bereits 1990 Gastgeberstadt (damals erste Teilnahme Thüringer nach Mauerfall)',
-  'Hessentagsstraße: 2,3 km vom Bahnhof durch die Innenstadt bis in die Fuldaaue',
-  'Über '+b('1.000 Veranstaltungen')+' – die meisten mit freiem Eintritt',
-  'Konzert-Arena auf dem '+b('Domplatz')+': Künstler wie Peter Maffay & Sarah Connor',
-  'Hessentagspaar: '+b('Vera & Max Dudyka')+' (waren auch schon 2021 nominiert – Corona-Ausfall)',
-]},
-{ cat:'local', hot:true, tag:'Hessentag 2027 Idstein', tc:'tn', title:'64. Hessentag – Idstein 2027', items:[
-  b('64. Hessentag')+': 2027 in Idstein – Beschluss Kabinett '+b('10. März 2026'),
-  'Idstein erhält vom Land bis zu '+b('11,5 Mio. €')+' (inkl. Sprinterzuschlag wegen kurzer Vorbereitungszeit)',
-  b('Jubiläum')+': Idstein war bereits 2002 Hessentagsstadt (42. Hessentag)',
-  'Damalige Stars 2002: No Angels, Die Prinzen, '+b('Michael Ballack'),
-  'Bewerbung: Stadtverordnete stimmten 28:9 dafür (mit Bauchschmerzen wegen kurzer Vorbereitungszeit)',
-  'Ursprünglich sollte '+b('Bebra')+' den Hessentag ausrichten – zog aus finanziellen Gründen zurück',
-  'Hessentagsbeauftragte: '+b('Sabine Fritz')+' (Leiterin Wirtschaftsentwicklung & Stadtmarketing)',
-  'BM: '+b('Christian Herfurth')+' (CDU) setzt auf Vorfreude und das Idsteiner „Wir-Gefühl"',
-]},
-{ cat:'local', tag:'Idstein', tc:'tb', title:'Idstein – Stadtfakten', items:[
-  'Landkreis: '+b('Rheingau-Taunus-Kreis'),
-  'Einwohner: ca. '+b('25.000')+' · Fläche: 79,8 km²',
-  'Wahrzeichen: '+b('Hexenturm')+' (ehem. Bergfried der Burg)',
-  'Schloss Idstein: heute '+b('Nassau-Gymnasium'),
-  'Hexenprozess: '+b('1676')+' – über 30 Hinrichtungen',
-  'Hochschule: '+b('Hochschule Fresenius')+' (Campus Idstein)',
-  'Wörsdorf: westlicher '+b('Stadtteil')+' von Idstein',
-  b('Fachwerkaltstadt')+' – Teil der Deutschen Fachwerkstraße',
-]},
-{ cat:'local', tag:'Taunus & Rheingau', tc:'tb', title:'Taunus & Rheingau', items:[
-  'Höchster Taunusgipfel: '+b('Großer Feldberg')+' (879 m)',
-  'Saalburg: '+b('Römerkastell')+' (UNESCO Limes)',
-  'Bad Homburg: Kurstadt, bekannte '+b('Spielbank'),
-  'Rheingau: berühmtes '+b('Weinanbaugebiet')+' (Riesling)',
-  'Bad Schwalbach: Kreisstadt des '+b('Rheingau-Taunus-Kreises'),
-  'Rüdesheim: '+b('Drosselgasse')+', Touristenziel',
-  'Oberes Mittelrheintal: '+b('UNESCO')+'-Welterbe',
-]},
-{ cat:'local', tag:'Frankfurt & Hessen', tc:'tb', title:'Frankfurt & Hessen', items:[
-  'Finanzmetropole: Sitz '+b('EZB')+', Deutsche Börse, Bundesbank',
-  'Größter Flughafen D: '+b('Frankfurt Airport')+' (FRA)',
-  'Geburtsort: '+b('Johann Wolfgang von Goethe')+' (1749)',
-  'Hessens Hauptstadt: '+b('Wiesbaden')+' · Höchste Erhebung: '+b('Wasserkuppe')+' (950 m)',
-  'Brüder Grimm: '+b('Jacob & Wilhelm')+', geboren in '+b('Hanau'),
-  'Frankfurter Schule: Adorno & Horkheimer (kritische Theorie)',
-  'Landesfarben: '+b('Rot-Weiß'),
-]},
-
-]; // END CARDS
-
-// ══════════════════════════════════════════════════════
-// CATEGORIES
-// ══════════════════════════════════════════════════════
-const CATS = [
-  { id:'all',   label:'Alle' },
-  { id:'news',  label:'Aktuelles' },
-  { id:'geo',   label:'Geografie' },
-  { id:'hist',  label:'Geschichte' },
-  { id:'sci',   label:'Wissenschaft' },
-  { id:'cult',  label:'Kultur' },
-  { id:'sport', label:'Sport' },
-  { id:'pol',   label:'Politik' },
-  { id:'tech',  label:'Technik' },
-  { id:'local', label:'Hessen' },
-];
-
-// ══════════════════════════════════════════════════════
-// RENDER
-// ══════════════════════════════════════════════════════
-let activeCat = 'all';
-
-function buildChips() {
-  const row = document.getElementById('chipRow');
-  row.innerHTML = CATS.map(c =>
-    '<button class="chip'+(c.id===activeCat?' on':'')+'" data-id="'+c.id+'">'+c.label+'</button>'
-  ).join('');
-  row.querySelectorAll('.chip').forEach(btn =>
-    btn.addEventListener('click', function(){
-      activeCat = this.dataset.id;
-      buildChips();
-      renderGrid();
-      window.scrollTo({top:0,behavior:'smooth'});
-    })
-  );
+/* ── Statistik ── */
+function streakDots(streak){
+  let h="";
+  for(let i=0;i<STREAK_GOAL;i++)h+=`<span class="st-dot ${i<streak?"on":"off"}"></span>`;
+  return`<div class="st-streak-dots">${h}</div>`;
 }
+function renderStats(container){
+  const p=loadProg();
+  const entries=Object.entries(p);
+  const practiced=entries.filter(([,v])=>v.totalOk+v.totalWr>0);
+  const totalUniq=practiced.length;
+  const mastered=practiced.filter(([,v])=>isMastered(v));
+  const open=practiced.filter(([,v])=>!isMastered(v)).sort((a,b)=>b[1].streak-a[1].streak||normSort(a[0]).localeCompare(normSort(b[0])));
+  const totalOk=entries.reduce((s,[,v])=>s+(v.totalOk||0),0);
+  const totalWr=entries.reduce((s,[,v])=>s+(v.totalWr||0),0);
+  const totalAns=totalOk+totalWr;
+  const pct=totalAns>0?Math.round(totalOk/totalAns*100):0;
+  /* Ø Streak der offenen Länder (nur die mit streak>0) */
+  const openWithStreak=open.filter(([,v])=>v.streak>0);
+  const avgStreak=openWithStreak.length?Math.round(openWithStreak.reduce((s,[,v])=>s+v.streak,0)/openWithStreak.length*10)/10:0;
 
-function buildWahlCard(c) {
-  const maxPct = 32;
-  let html = '<div class="card"><div class="card-head"><div class="card-head-left">';
-  html += '<span class="tag '+c.tc+'">'+c.tag+'</span>';
-  if(c.hot) html += '<span class="badge-new">Aktuell</span>';
-  html += '</div></div><h3>'+c.title+'</h3>';
-  html += '<div class="wahl-bars">';
-  c.wahlData.forEach(w => {
-    const diff = (w.pct - w.prev).toFixed(1);
-    const diffStr = diff > 0 ? '+'+diff+' %' : diff+' %';
-    const diffCls = diff > 0 ? 'up' : 'dn';
-    const width = Math.round(w.pct / maxPct * 100);
-    html += '<div class="wahl-row">';
-    html += '<div class="wahl-label">'+w.label+'</div>';
-    html += '<div class="wahl-bar-bg"><div class="wahl-bar-fill" style="width:'+width+'%;background:'+w.color+'"></div></div>';
-    html += '<div class="wahl-pct">'+w.pct+' %</div>';
-    html += '<div class="wahl-change '+diffCls+'">'+diffStr+'</div>';
-    html += '</div>';
+  const progress=totalUniq>0?Math.round(mastered.length/totalUniq*100):0;
+
+  const openRows=open.length
+    ?open.map(([k,v])=>`<div class="st-land-row"><span class="fi">${gF(k)}</span><span class="fn">${esc(k)}</span>${streakDots(Math.min(v.streak,STREAK_GOAL))}</div>`).join("")
+    :`<div class="st-empty">Keine offenen Länder – alles gemeistert!</div>`;
+
+  container.innerHTML=`
+    <div class="st-grid" style="margin-bottom:12px;">
+      <div class="st-tile"><div class="st-val">${progress}\u00a0%</div><div class="st-lbl">Lernfortschritt</div></div>
+      <div class="st-tile"><div class="st-val">${totalUniq}</div><div class="st-lbl">Länder geübt</div></div>
+    </div>
+    <div class="st-pct-row"><div class="st-pct-bar-wrap"><div class="st-pct-bar" style="width:${progress}%"></div></div></div>
+    <div class="st-grid" style="margin-bottom:14px;">
+      <div class="st-tile"><div class="st-val">${mastered.length}</div><div class="st-lbl">Gemeistert</div></div>
+      <div class="st-tile st-red"><div class="st-val">${open.length}</div><div class="st-lbl">Noch offen</div></div>
+    </div>
+    <div class="st-section-hdr">Noch offen (${open.length})</div>
+    <div class="st-land-list">${openRows}</div>
+    <div class="fcrow" id="stResetRow">
+      <button class="fc-btn fc-sec" id="stClose2" type="button">Schließen</button><button class="fc-btn fc-sec" id="stReset" type="button">Fortschritt zurücksetzen</button>
+    </div>
+  `;
+  document.getElementById("stClose2").addEventListener("click",closeFC);
+  document.getElementById("stReset").addEventListener("click",()=>{
+    const row=document.getElementById("stResetRow");
+    row.innerHTML=`<button class="fc-btn fc-sec" id="stResetNo" type="button">Abbrechen</button><button class="fc-btn fc-wr" id="stResetYes" type="button">Löschen</button>`;
+    document.getElementById("stResetNo").addEventListener("click",()=>{renderStats(container);});
+    document.getElementById("stResetYes").addEventListener("click",()=>{saveProg({});renderStats(container);});
   });
-  html += '</div>';
-  html += '<p style="font-size:11px;color:var(--mut);margin-top:10px">Landesergebnis Hessen · endgültiges Ergebnis</p>';
-  html += '</div>';
-  return html;
 }
 
-function buildCard(c) {
-  if(c.wahlData) return buildWahlCard(c);
+let LD=[], curK=new Set(), curU=new Set(), curS="";
+const openCards=new Set();
 
-  let html = '<div class="card"><div class="card-head"><div class="card-head-left">';
-  html += '<span class="tag '+c.tc+'">'+c.tag+'</span>';
-  if(c.hot) html += '<span class="badge-new">Aktuell</span>';
-  html += '</div></div>';
-  html += '<h3>'+c.title+'</h3>';
-
-  const listTag = c.ol ? 'ol' : 'ul';
-  const items = c.items || [];
-  html += '<'+listTag+'>' + items.map(i => '<li>'+i+'</li>').join('') + '</'+listTag+'>';
-
-  html += '</div>';
-  return html;
+async function loadData(){
+  try{const r=await fetch("laender.json");if(!r.ok)throw new Error(`HTTP ${r.status}`);const d=await r.json();if(!Array.isArray(d)||!d.length)throw new Error("Leer");return d;}
+  catch(e){document.getElementById("loadMsg").innerHTML=location.protocol==="file:"?"⚠️ Bitte lokalen Server verwenden.":`⚠️ Fehler beim Laden.<br><small>${e.message}</small>`;return null;}
 }
 
-function renderGrid() {
-  const visible = activeCat === 'all' ? CARDS : CARDS.filter(c => c.cat === activeCat);
-  document.getElementById('grid').innerHTML = visible.map(c => buildCard(c)).join('');
+function getFilt(){
+  const q=curS.toLowerCase();
+  return LD.filter(l=>{
+    const mk=curK.size===0||curK.has(l.Kontinent);
+    let mu=true;
+    if(curU.size>0){
+      const inMember=curU.has("un_member")&&!l.UNStatus;
+      const inStatus=l.UNStatus&&curU.has(l.UNStatus);
+      mu=inMember||inStatus;
+    }
+    const ms=!q||l.Land.toLowerCase().includes(q)||l.Hauptstadt.toLowerCase().includes(q);
+    return mk&&mu&&ms;
+  });
 }
 
-// ── SEARCH ──
-let searchQuery = '';
-
-const searchInput    = document.getElementById('searchInput');
-const searchClear    = document.getElementById('searchClear');
-const searchInputMob = document.getElementById('searchInputMob');
-const searchClearMob = document.getElementById('searchClearMob');
-const resultCount    = document.getElementById('resultCount');
-
-function onSearch(val, clearBtn, otherInput) {
-  searchQuery = val.trim().toLowerCase();
-  clearBtn.classList.toggle('vis', searchQuery.length > 0);
-  if(otherInput) otherInput.value = val;
-  if(searchQuery) { activeCat = 'all'; buildChips(); }
-  renderGrid();
+function renderList(){
+  const f=[...getFilt()].sort((a,b)=>normSort(a.Land).localeCompare(normSort(b.Land)));
+  const main=document.getElementById("main");
+  const noR=document.getElementById("noRes");
+  Array.from(main.children).forEach(c=>{if(c.id!=="noRes"&&c.id!=="loadMsg")c.remove();});
+  if(!f.length){noR.style.display="block";return;}
+  noR.style.display="none";
+let last="";
+  f.forEach(l=>{
+    const g=ag(l.Land);
+    if(g!==last){last=g;const d=document.createElement("div");d.className="alpha-div";d.setAttribute("aria-hidden","true");const gc=f.filter(x=>ag(x.Land)===g).length;d.innerHTML=`<span class="alpha-letter">${g}</span><span class="alpha-line"></span><span class="cont-count">${gc} ${gc===1?"Land":"Länder"}</span>`;main.insertBefore(d,noR);}
+    main.insertBefore(buildCard(l),noR);
+  });
 }
 
-searchInput.addEventListener('input', function() {
-  onSearch(this.value, searchClear, searchInputMob);
+function buildCard(l){
+  const flag=gF(l.Land);const isO=openCards.has(l.Land);
+  const st=l.UNStatus?UN_CFG[l.UNStatus]:null;
+  const card=document.createElement("article");
+  let cc="country-card"+(isO?" open":"");
+  if(st)cc+=" "+st.cc;
+  card.className=cc;card.dataset.land=l.Land;
+  const dot=st?`<span class="un-dot ${st.mc}" aria-hidden="true"></span>`:"";
+  const multi=l.Hauptstadt.includes("\n");
+  const hHTML=`<div class="ivalue${multi?" ml":""}">${esc(l.Hauptstadt)}</div>`;
+  let unB="";
+  if(st&&l.UNStatusText)unB=`<div class="iblock un-block ${st.bc}"><div class="ilabel">${st.label}</div><div class="ivalue">${esc(l.UNStatusText)}</div></div>`;
+  let hintB="";
+  if(l.UNHinweis&&l.UNHinweisText)hintB=`<div class="iblock un-hint"><div class="ilabel">Hinweis</div><div class="ivalue">${esc(l.UNHinweisText)}</div></div>`;
+  const faktB=l.Fakt?`<div class="iblock fakt-b"><div class="ilabel">Wusstest du?</div><div class="ivalue">${esc(l.Fakt)}</div></div>`:"";
+  card.innerHTML=`<button class="card-trigger" aria-expanded="${isO}" aria-controls="cb-${cid(l.Land)}" type="button"><span class="flag" aria-hidden="true">${flag}</span><span class="cname">${esc(l.Land)}${dot}</span><span class="ctag tag-${l.Kontinent}">${l.Kontinent}</span><svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="cbody" id="cb-${cid(l.Land)}" role="region" aria-label="${esc(l.Land)}"><div class="igrid"><div class="iblock"><div class="ilabel">Hauptstadt</div>${hHTML}</div><div class="iblock"><div class="ilabel">Bevölkerung</div><div class="ivalue">${esc(l.Bevölkerung)}</div></div><div class="iblock"><div class="ilabel">Fläche</div><div class="ivalue">${esc(l["Fläche"])}</div></div>${unB}${hintB}${faktB}</div></div>`;
+  card.querySelector(".card-trigger").addEventListener("click",()=>{const o=card.classList.toggle("open");card.querySelector(".card-trigger").setAttribute("aria-expanded",String(o));if(o)openCards.add(l.Land);else openCards.delete(l.Land);updateTogAll();});
+  return card;
+}
+
+/* ── Search ── */
+const swm=document.getElementById("sWrapM"),si=document.getElementById("sI"),sim=document.getElementById("sIM"),stb=document.getElementById("sTglBtn");
+function closeSrch(){swm.classList.remove("open");stb.setAttribute("aria-expanded","false");stb.classList.remove("active");sim.value="";curS="";renderList();}
+stb.addEventListener("click",()=>{const o=swm.classList.contains("open");if(o)closeSrch();else{swm.classList.add("open");stb.setAttribute("aria-expanded","true");stb.classList.add("active");sim.focus();}});
+si.addEventListener("input",deb(e=>{curS=e.target.value;renderList();},150));
+sim.addEventListener("input",deb(e=>{curS=e.target.value;renderList();},150));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&swm.classList.contains("open")){closeSrch();stb.focus();}});
+
+/* ── Filters ── */
+document.querySelectorAll(".seg-btn").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const v=b.dataset.k;
+    if(curK.has(v)){curK.delete(v);b.classList.remove("active");b.removeAttribute("aria-current");}
+    else{curK.add(v);b.classList.add("active");b.setAttribute("aria-current","true");}
+    renderList();updateTogAll();
+  });
 });
-searchInputMob.addEventListener('input', function() {
-  onSearch(this.value, searchClearMob, searchInput);
+document.querySelectorAll(".un-chip").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const v=b.dataset.u;
+    if(curU.has(v)){curU.delete(v);b.classList.remove("active");b.removeAttribute("aria-current");}
+    else{curU.add(v);b.classList.add("active");b.setAttribute("aria-current","true");}
+    renderList();updateTogAll();
+  });
 });
 
-function clearSearch(mainInput, mobInput, clearBtn, clearBtnMob) {
-  mainInput.value = ''; mobInput.value = '';
-  searchQuery = '';
-  clearBtn.classList.remove('vis');
-  clearBtnMob.classList.remove('vis');
-  resultCount.innerHTML = '';
-  renderGrid();
-  mainInput.focus();
+function updateTogAll(){
+  const any=getFilt().some(l=>openCards.has(l.Land));
+  const btn=document.getElementById("togAllBtn"),ico=document.getElementById("togAllIco"),lbl=document.getElementById("togAllLbl");
+  btn.setAttribute("aria-label",any?"Alle zuklappen":"Alle aufklappen");
+  if(lbl)lbl.textContent=any?"Zuklappen":"Aufklappen";
+  ico.style.transform=any?"rotate(180deg)":"rotate(0deg)";
 }
-searchClear.addEventListener('click', () => clearSearch(searchInput, searchInputMob, searchClear, searchClearMob));
-searchClearMob.addEventListener('click', () => clearSearch(searchInput, searchInputMob, searchClear, searchClearMob));
+document.getElementById("togAllBtn").addEventListener("click",()=>{const any=getFilt().some(l=>openCards.has(l.Land));if(any)getFilt().forEach(l=>openCards.delete(l.Land));else getFilt().forEach(l=>openCards.add(l.Land));renderList();updateTogAll();});
 
-// highlight matched text in HTML
-function highlight(html, query) {
-  if(!query) return html;
-  const safe = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return html.replace(new RegExp('(' + safe + ')', 'gi'), '<mark>$1</mark>');
-}
+/* ══ FLASHCARDS ══ */
+const fcOv=document.getElementById("fcOv"),fcBox=document.getElementById("fcBox");
+/* FC.isRetry = true wenn wir gerade "Falsche wiederholen"-Runde spielen */
+const FC={pool:[],idx:0,ok:0,wr:0,okList:[],wrongList:[],streakSnapshot:{},mode:"type",sel:new Set(),listFilter:"all",isRetry:false};
+function openFC(){fcOv.classList.add("active");document.body.style.overflow="hidden";fcBox.focus();}
+function closeFC(){if(typeof _clearAdv==="function")_clearAdv();fcOv.classList.remove("active");document.body.style.overflow="";}
 
-// check if a card matches the query
-function cardMatches(c, q) {
-  if(!q) return true;
-  const haystack = (c.title + ' ' + c.tag + ' ' + (c.items||[]).join(' ')).toLowerCase();
-  return haystack.includes(q);
-}
+function renderStart(tab){
+  tab=tab||"learn";
+  const filt=getFilt();
+  const sorted=[...filt].sort((a,b)=>normSort(a.Land).localeCompare(normSort(b.Land)));
+  FC.sel=new Set([...FC.sel].filter(n=>sorted.some(l=>l.Land===n)));
+  const weakSet=new Set(getWeakLands());
+  const weakInPool=sorted.filter(l=>weakSet.has(l.Land));
+  if(FC.listFilter==="wrong"&&weakInPool.length===0)FC.listFilter="all";
+  const listSrc=FC.listFilter==="wrong"?weakInPool:sorted;
 
-// ── UPDATED RENDER ──
-function renderGrid() {
-  let pool = activeCat === 'all' ? CARDS : CARDS.filter(c => c.cat === activeCat);
-  if(searchQuery) pool = pool.filter(c => cardMatches(c, searchQuery));
+  const navHTML=`<div class="fc-nav"><button class="fc-nav-btn${tab==="learn"?" active":""}" data-tab="learn" type="button">Lernkarten</button><button class="fc-nav-btn${tab==="stats"?" active":""}" data-tab="stats" type="button">Statistik</button></div>`;
 
-  // Update count
-  if(searchQuery || activeCat !== 'all') {
-    resultCount.innerHTML = '<span>' + pool.length + '</span> Karten';
-  } else {
-    resultCount.innerHTML = '';
-  }
-
-  if(pool.length === 0) {
-    document.getElementById('grid').innerHTML =
-      '<div class="no-results"><strong>Keine Treffer</strong>Versuch ein anderes Stichwort</div>';
+  if(tab==="stats"){
+    fcBox.innerHTML=navHTML+`<div id="stContent"></div>`;
+    fcBox.querySelectorAll(".fc-nav-btn").forEach(b=>b.addEventListener("click",()=>renderStart(b.dataset.tab)));
+    renderStats(document.getElementById("stContent"));
     return;
   }
 
-  document.getElementById('grid').innerHTML = pool.map(c => {
-    let html = buildCard(c);
-    if(searchQuery) html = highlight(html, searchQuery);
-    return html;
-  }).join('');
+  const selCount=FC.sel.size;
+  fcBox.innerHTML=`
+    ${navHTML}
+    <div class="fc-mode-row">
+      <div class="fc-mode-lbl">Modus</div>
+      <div class="fc-mode-btns">
+        <button class="fc-mbtn${FC.mode==="reveal"?" active":""}" data-m="reveal" type="button">Aufdecken</button>
+        <button class="fc-mbtn${FC.mode==="mc"?" active":""}" data-m="mc" type="button">Multiple Choice</button>
+        <button class="fc-mbtn${FC.mode==="type"?" active":""}" data-m="type" type="button">Eingabe</button>
+      </div>
+    </div>
+    <div class="fc-pick-header">
+      <span class="fc-pick-lbl">Länder auswählen</span>
+      <div class="fc-pick-actions">
+        <button class="fc-pick-action" id="fcSelAll" type="button">Alle</button>
+        <button class="fc-pick-action" id="fcSelNone" type="button">Keine</button>
+      </div>
+    </div>
+    <div class="fc-filter-row">
+      <button class="fc-fchip${FC.listFilter==="all"?" active":""}" data-f="all" type="button">Alle (${sorted.length})</button>
+      <button class="fc-fchip${FC.listFilter==="wrong"?" active":""}" data-f="wrong" type="button"${weakInPool.length===0?" disabled":""} title="L\u00e4nder die noch nicht gemeistert sind">Noch offen (${weakInPool.length})</button>
+    </div>
+    <div class="fc-list" id="fcList" role="listbox" aria-multiselectable="true" aria-label="Staaten ausw\u00e4hlen"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;min-height:26px;">
+      <span class="fc-pick-count" id="fcCount">${selCount} von ${listSrc.length} ausgew\u00e4hlt</span>
+      <button class="fc-pick-action" id="fcRangeApply" type="button" style="display:none;">Bereich ausw\u00e4hlen</button>
+    </div>
+    <div class="fc-warn" id="fcW" role="alert" aria-live="polite"></div>
+    ${brow([{t:"Schlie\u00dfen",c:"fc-sec",id:"fcCancel"},{t:"Starten",c:"fc-pri",id:"fcStart"}])}
+  `;
+
+  fcBox.querySelectorAll(".fc-nav-btn").forEach(b=>b.addEventListener("click",()=>renderStart(b.dataset.tab)));
+  fcBox.querySelectorAll(".fc-mbtn").forEach(b=>b.addEventListener("click",()=>{FC.mode=b.dataset.m;fcBox.querySelectorAll(".fc-mbtn").forEach(x=>x.classList.toggle("active",x===b));}));
+  fcBox.querySelectorAll(".fc-fchip").forEach(b=>b.addEventListener("click",()=>{
+    if(b.disabled)return;
+    FC.listFilter=b.dataset.f;
+    if(b.dataset.f==="wrong"){
+      const newWeak=sorted.filter(l=>weakSet.has(l.Land));
+      FC.sel=new Set(newWeak.map(l=>l.Land));
+    } else {
+      FC.sel=new Set();
+    }
+    renderStart("learn");
+  }));
+
+  const list=document.getElementById("fcList");
+  const p=loadProg();
+  let lastG="";
+  listSrc.forEach((l,i)=>{
+    const g=ag(l.Land);
+    if(g!==lastG){
+      lastG=g;
+      const gc=listSrc.filter(x=>ag(x.Land)===g).length;
+      const sep=document.createElement("div");
+      sep.className="fc-alpha-sep";sep.setAttribute("aria-hidden","true");
+      sep.innerHTML=`<span class="fc-alpha-letter">${g}</span><span class="fc-alpha-line"></span><span class="fc-alpha-count">${gc}</span>`;
+      list.appendChild(sep);
+    }
+    const row=document.createElement("div");
+    row.className="fc-item"+(FC.sel.has(l.Land)?" checked":"");
+    row.dataset.name=l.Land;row.dataset.idx=i;
+    row.setAttribute("role","option");
+    row.setAttribute("aria-selected",String(FC.sel.has(l.Land)));
+    const v=p[l.Land];
+    const badge=isMastered(v)
+      ?`<span style="font-size:.65rem;color:var(--acc);flex-shrink:0;font-weight:700;">\u2713</span>`
+      :v&&(v.totalOk+v.totalWr)>0
+        ?`<span style="font-size:.65rem;color:var(--muted);flex-shrink:0;">${v.streak}/${STREAK_GOAL}</span>`
+        :``;
+    row.innerHTML='<input type="checkbox" '+(FC.sel.has(l.Land)?'checked':'')+' tabindex="-1" aria-hidden="true"><span class="fi">'+gF(l.Land)+'</span><span class="fn">'+esc(l.Land)+'</span>'+badge;
+    row.addEventListener("click",()=>{if(FC.sel.has(l.Land))FC.sel.delete(l.Land);else FC.sel.add(l.Land);refreshPickList(listSrc);});
+    list.appendChild(row);
+  });
+
+  document.getElementById("fcSelAll").addEventListener("click",()=>{FC.sel=new Set(listSrc.map(l=>l.Land));refreshPickList(listSrc);});
+  document.getElementById("fcSelNone").addEventListener("click",()=>{FC.sel=new Set();refreshPickList(listSrc);});
+  document.getElementById("fcStart").addEventListener("click",()=>{
+    const pool=listSrc.filter(l=>FC.sel.has(l.Land));
+    if(!pool.length){document.getElementById("fcW").textContent="Bitte mindestens ein Land ausw\u00e4hlen.";return;}
+    FC.pool=shuffle(pool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=false;
+    const snap=loadProg();FC.streakSnapshot={};pool.forEach(l=>{FC.streakSnapshot[l.Land]=snap[l.Land]?.streak||0;});
+    renderCard();
+  });
+  document.getElementById("fcCancel").addEventListener("click",closeFC);
 }
 
-// ── INIT ──
-buildChips();
-renderGrid();
+function refreshPickList(listSrc){
+  const list=document.getElementById("fcList");
+  list.querySelectorAll(".fc-item").forEach(row=>{
+    const name=row.dataset.name;
+    const on=FC.sel.has(name);
+    row.querySelector("input").checked=on;
+    row.setAttribute("aria-selected",String(on));
+    row.classList.toggle("range-from",false);
+  });
+  const applyBtn=document.getElementById("fcRangeApply");
+  if(applyBtn){
+    const selIdxs=listSrc.map((l,i)=>FC.sel.has(l.Land)?i:-1).filter(i=>i>=0);
+    if(selIdxs.length>=2){
+      const first=selIdxs[0],last=selIdxs[selIdxs.length-1];
+      const gap=(last-first+1)-selIdxs.length;
+      if(gap>0){applyBtn.style.display="inline";applyBtn.textContent=`Bereich ausw\u00e4hlen (+${gap})`;applyBtn.onclick=()=>{for(let x=first;x<=last;x++)FC.sel.add(listSrc[x].Land);refreshPickList(listSrc);};}
+      else applyBtn.style.display="none";
+    } else applyBtn.style.display="none";
+  }
+  const c=document.getElementById("fcCount");
+  if(c)c.textContent=`${FC.sel.size} von ${listSrc.length} ausgew\u00e4hlt`;
+}
+
+function buildProgLabel(){
+  const total=FC.pool.length;
+  return `${FC.idx+1}\u00a0/\u00a0${total} \u00b7 \u2713\u00a0${FC.ok} \u00b7 \u2717\u00a0${FC.wr}`;
+}
+
+function recordAnswer(land,ok){
+  /* Streak-Logik in localStorage */
+  const p=loadProg();
+  if(!p[land])p[land]={streak:0,totalOk:0,totalWr:0};
+  const v=p[land];
+  if(ok){v.streak++;v.totalOk++;}else{v.streak=0;v.totalWr++;}
+  saveProg(p);
+}
+
+function _clearAdv(){if(FC._advClick){fcBox.removeEventListener("click",FC._advClick);FC._advClick=null;}if(FC._advKey){document.removeEventListener("keydown",FC._advKey);FC._advKey=null;}}
+function renderCard(){
+  _clearAdv();
+  if(FC.idx>=FC.pool.length){renderResult();return;}
+  const l=FC.pool[FC.idx];const flag=gF(l.Land);
+  const prog=buildProgLabel();
+  if(FC.mode==="reveal")renderReveal(l,flag,prog);else if(FC.mode==="mc")renderMC(l,flag,prog);else renderType(l,flag,prog);
+}
+
+function recordOnly(l,ok,eingabe){
+  recordAnswer(l.Land,ok);
+  if(ok){FC.ok++;FC.okList.push(l);}
+  else{FC.wr++;FC.wrongList.push(eingabe?{...l,_eingabe:eingabe}:l);}
+  FC.idx++;
+}
+function onAnswer(l,ok,eingabe){
+  recordOnly(l,ok,eingabe);
+  renderCard();
+}
+
+function renderReveal(l,flag,prog){
+  fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div>${brow([{t:"Abbrechen",c:"fc-sec",id:"fcAb"},{t:"Antwort zeigen",c:"fc-rev",id:"fcRev"}])}`;
+  document.getElementById("fcRev").addEventListener("click",()=>{
+    fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><div class="fc-ans">${esc(l.Hauptstadt)}</div>${brow([{t:"\u2717 Nicht gewusst",c:"fc-wr",id:"fcNo"},{t:"\u2713 Gewusst",c:"fc-ok",id:"fcYes"}])}`;
+    document.getElementById("fcYes").addEventListener("click",()=>onAnswer(l,true));
+    document.getElementById("fcNo").addEventListener("click",()=>onAnswer(l,false));
+  });
+  document.getElementById("fcAb").addEventListener("click",closeFC);
+}
+
+function renderMC(l,flag,prog){
+  const others=shuffle(FC.pool.filter(x=>x.Land!==l.Land)).slice(0,3);
+  const opts=shuffle([l,...others]);
+  const grid=opts.map(o=>`<button class="fc-mc-opt" data-land="${esc(o.Land)}" type="button">${esc(hsvs(o.Hauptstadt)[0])}</button>`).join("");
+  fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><div class="fc-mc-grid">${grid}</div><div class="fc-fb" id="fcFb" role="status" aria-live="polite"></div>`;
+  fcBox.querySelectorAll(".fc-mc-opt").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const ok=btn.dataset.land===l.Land;
+      fcBox.querySelectorAll(".fc-mc-opt").forEach(b=>b.disabled=true);
+      if(ok){
+        onAnswer(l,true);
+      } else {
+        /* Falsch: richtige Antwort zeigen, manuell weiter */
+        btn.classList.add("mc-err");
+        fcBox.querySelectorAll(".fc-mc-opt").forEach(b=>{if(b.dataset.land===l.Land)b.classList.add("mc-ok");});
+        const fb=document.getElementById("fcFb");
+        fb.textContent="Richtig w\u00e4re: "+hsvs(l.Hauptstadt)[0];
+        fb.className="fc-fb err";
+        recordOnly(l,false);
+        const row=document.createElement("div");row.className="fcrow";row.style.marginTop="12px";
+        row.innerHTML=`<button class="fc-btn fc-pri" type="button">Weiter</button>`;
+        const goNext=()=>{document.removeEventListener("keydown",_nxKey);renderCard();};
+        const _nxKey=(e)=>{if(e.key==="Enter")goNext();};
+        row.querySelector("button").addEventListener("click",goNext);
+        document.addEventListener("keydown",_nxKey);
+        FC._advKey=_nxKey;
+        fcBox.appendChild(row);row.querySelector("button").focus();
+      }
+    });
+  });
+}
+
+function renderType(l,flag,prog){
+  fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><input class="fc-inp" id="fcIn" type="text" placeholder="Hauptstadt eingeben \u2026" autocomplete="off" spellcheck="false"><div class="fc-fb" id="fcFb" role="status" aria-live="polite"></div>${brow([{t:"Abbrechen",c:"fc-sec",id:"fcAb"},{t:"Pr\u00fcfen",c:"fc-rev",id:"fcCk"}])}`;
+  const inp=document.getElementById("fcIn");
+  const ckBtn=document.getElementById("fcCk");
+
+  const check=()=>{
+    const val=inp.value.trim();
+    if(!val||inp.disabled)return;
+    const ni=norm(val);
+    const vs=hsvs(l.Hauptstadt);
+    const ok=vs.some(x=>norm(x)===ni);
+    inp.classList.add(ok?"ok":"err");
+    inp.disabled=true;
+    ckBtn.disabled=true;
+    if(ok){
+      onAnswer(l,true);
+    } else {
+      const fb=document.getElementById("fcFb");
+      fb.textContent="Richtig w\u00e4re: "+(vs.length>1?vs.join(" / "):l.Hauptstadt);
+      fb.className="fc-fb err";
+      recordOnly(l,false,val);
+      fcBox.querySelector(".fcrow").innerHTML=`<button class="fc-btn fc-pri" id="fcNx" type="button">Weiter</button>`;
+      const nx=document.getElementById("fcNx");
+      const goNext=()=>{document.removeEventListener("keydown",_nxKey);renderCard();};
+      const _nxKey=(e)=>{if(e.key==="Enter"){e.preventDefault();goNext();}};
+      nx.addEventListener("click",goNext);
+      setTimeout(()=>document.addEventListener("keydown",_nxKey),0);
+      FC._advKey=_nxKey;
+      nx.focus();
+    }
+  };
+
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check();}});
+  ckBtn.addEventListener("click",check);
+  document.getElementById("fcAb").addEventListener("click",closeFC);
+  inp.focus();
+}
+
+function landRow(l,showStreak){
+  const prog=loadProg();const v=prog[l.Land];
+  const streakInfo=showStreak&&v?` <span style="font-size:.65rem;color:var(--muted);">${v.streak}/${STREAK_GOAL}</span>`:``;
+  const cap=esc(l.Hauptstadt).replace(/\n/g," / ");
+  const answerLine=l._eingabe
+    ?`<div class="fc-wrong-row-answer"><span class="fc-wrong-eingabe">\u201e${esc(l._eingabe)}\u201c</span><span class="fc-sep">\u2192</span>${cap}</div>`
+    :`<div class="fc-wrong-row-answer">${cap}</div>`;
+  return `<div class="fc-wrong-row"><div class="fc-wrong-row-top"><span class="fi" aria-hidden="true">${gF(l.Land)}</span><span class="fn">${esc(l.Land)}${streakInfo}</span></div>${answerLine}</div>`;
+}
+
+function renderResult(){
+  _clearAdv();
+  const total=FC.ok+FC.wr;
+  const pct=total>0?Math.round(FC.ok/total*100):0;
+  const e="";
+
+  const prog=loadProg();
+  const newlyMastered=FC.okList.filter(l=>isMastered(prog[l.Land])&&(FC.streakSnapshot[l.Land]||0)<STREAK_GOAL);
+  const masteredBox=newlyMastered.length>0
+    ?`<div class="fc-res-box fc-res-mastered"><div class="fc-res-hdr">\u2605 Gemeistert (${newlyMastered.length})</div><div class="fc-wrong-list">${newlyMastered.map(l=>`<div class="fc-wrong-row"><div class="fc-wrong-row-top"><span class="fi" aria-hidden="true">${gF(l.Land)}</span><span class="fn">${esc(l.Land)}</span></div>${streakDots(STREAK_GOAL)}</div>`).join("")}</div></div>`
+    :"";
+
+  /* Falsch-Box */
+  const wrBox=FC.wrongList.length>0
+    ?`<div class="fc-res-box fc-res-wr"><div class="fc-res-hdr">\u2717 Falsch (${FC.wrongList.length})</div><div class="fc-wrong-list">${FC.wrongList.map(l=>landRow(l,false)).join("")}</div></div>`
+    :"";
+
+  /* Buttons */
+  const btns=FC.wrongList.length>0
+    ?[{t:"Schlie\u00dfen",c:"fc-sec",id:"fcDone"},{t:"Nochmal",c:"fc-sec",id:"fcRedo"},{t:`Falsche wiederholen (${FC.wrongList.length})`,c:"fc-pri",id:"fcRetry"}]
+    :[{t:"Schlie\u00dfen",c:"fc-sec",id:"fcDone"},{t:"Nochmal",c:"fc-pri",id:"fcRedo"}];
+
+  fcBox.innerHTML=`<div class="fc-result-t">Fertig!</div><div class="fc-result-s">${FC.ok} richtig \u00b7 ${FC.wr} falsch \u00b7 ${pct}\u00a0%</div>${masteredBox}${wrBox}${brow(btns)}`;
+
+  document.getElementById("fcDone").addEventListener("click",closeFC);
+  document.getElementById("fcRedo").addEventListener("click",()=>{
+    const origPool=[...FC.okList,...FC.wrongList].map(l=>({Land:l.Land,Hauptstadt:l.Hauptstadt,Kontinent:l.Kontinent}));
+    FC.pool=shuffle(origPool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=false;renderCard();
+  });
+  const retryBtn=document.getElementById("fcRetry");
+  if(retryBtn)retryBtn.addEventListener("click",()=>{
+    const wrongPool=FC.wrongList.map(l=>({Land:l.Land,Hauptstadt:l.Hauptstadt,Kontinent:l.Kontinent}));
+    const snap2=loadProg();const ss2={};wrongPool.forEach(l=>{ss2[l.Land]=snap2[l.Land]?.streak||0;});
+    FC.pool=shuffle(wrongPool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=true;FC.streakSnapshot=ss2;renderCard();
+  });
+}
+
+document.getElementById("fcBtn").addEventListener("click",()=>{
+  FC.sel=new Set();
+  openFC();
+  renderStart("learn");
+});
+fcOv.addEventListener("click",e=>{if(e.target===fcOv)closeFC();});
+fcOv.addEventListener("keydown",e=>{if(e.key==="Escape")closeFC();});
+
+/* ── Info ── */
+const iOv=document.getElementById("infoOv");
+const iBox=iOv.querySelector(".fc-box");
+document.getElementById("infoBtn").addEventListener("click",()=>{iOv.classList.add("active");document.body.style.overflow="hidden";iBox.scrollTop=0;});
+document.getElementById("infoCloseX").addEventListener("click",()=>{iOv.classList.remove("active");document.body.style.overflow="";});
+iOv.addEventListener("click",e=>{if(e.target===iOv){iOv.classList.remove("active");document.body.style.overflow="";}});
+iOv.addEventListener("keydown",e=>{if(e.key==="Escape"){iOv.classList.remove("active");document.body.style.overflow="";}});
+
+/* ── Boot ── */
+(async()=>{
+  const d=await loadData();if(!d)return;LD=d;
+  document.getElementById("loadMsg").style.display="none";
+  curU.add("un_member");
+  const chip=document.querySelector('.un-chip[data-u="un_member"]');
+  if(chip){chip.classList.add("active");chip.setAttribute("aria-current","true");}
+  renderList();updateTogAll();
+})();
 </script>
 </body>
 </html>
