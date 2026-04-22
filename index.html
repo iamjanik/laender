@@ -845,9 +845,9 @@ function renderMC(l,flag,prog){
       fb.textContent=ok?"Richtig!":"Richtig w\u00e4re: "+hsvs(l.Hauptstadt)[0];
       fb.className="fc-fb "+(ok?"ok":"err");
       onAnswer(l,ok);
-      /* Auf Klick irgendwo in der Box warten zum Weiterblättern */
       setTimeout(()=>{
-        fcBox.addEventListener("click",function _adv(){fcBox.removeEventListener("click",_adv);renderCard();},{once:true});
+        FC._advClick=()=>{FC._advClick=null;renderCard();};
+        fcBox.addEventListener("click",FC._advClick,{once:true});
       },300);
     });
   });
@@ -885,6 +885,7 @@ function landRow(l,showStreak){
 }
 
 function renderResult(){
+  _clearAdv();
   const total=FC.ok+FC.wr;
   const pct=total>0?Math.round(FC.ok/total*100):0;
   const e=pct>=80?"🎉":pct>=50?"👍":"📚";
