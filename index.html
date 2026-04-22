@@ -235,8 +235,7 @@ main{max-width:800px;margin:0 auto;padding:10px 14px 60px;}
 .fc-list{max-height:240px;overflow-y:auto;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);margin-bottom:6px;text-align:left;}
 .fc-list::-webkit-scrollbar{width:4px;}
 .fc-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.fc-item{display:flex;align-items:center;gap:9px;padding:7px 12px;cursor:pointer;font-size:.84rem;color:var(--text);user-select:none;border-bottom:1px solid var(--border);}
-.fc-item:last-child{border-bottom:none;}
+.fc-item{display:flex;align-items:center;gap:9px;padding:7px 12px;cursor:pointer;font-size:.84rem;color:var(--text);user-select:none;}
 .fc-item:hover{background:var(--surface2);}
 .fc-item input[type=checkbox]{width:15px;height:15px;accent-color:var(--acc);cursor:pointer;flex-shrink:0;}
 .fc-item .fi{font-size:1.1rem;flex-shrink:0;}
@@ -259,10 +258,10 @@ main{max-width:800px;margin:0 auto;padding:10px 14px 60px;}
 .info-sec p{margin:0;font-size:.875rem;line-height:1.65;color:var(--text);font-family:'DM Sans',sans-serif;}
 @media(max-width:500px){.cbody{padding-left:14px;}.igrid{grid-template-columns:1fr 1fr;}.fc-btn{padding:9px 14px;font-size:.82rem;}}
 /* Buchstaben-Trenner in FC-Liste */
-.fc-alpha-sep{display:flex;align-items:center;gap:7px;padding:5px 12px 2px;pointer-events:none;}
-.fc-alpha-letter{font-size:.7rem;font-weight:700;color:var(--muted);letter-spacing:.06em;flex-shrink:0;}
-.fc-alpha-line{flex:1;height:1px;background:var(--border);}
-.fc-alpha-count{font-size:.68rem;color:var(--muted);flex-shrink:0;}
+.fc-alpha-sep{display:flex;align-items:center;gap:7px;padding:8px 12px 3px;pointer-events:none;}
+.fc-alpha-letter{font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.07em;flex-shrink:0;}
+.fc-alpha-line{display:none;}
+.fc-alpha-count{font-size:.65rem;color:var(--muted);flex-shrink:0;opacity:.6;}
 /* Falsch-gemacht Eingabe in Ergebnisliste */
 .fc-wrong-row .fc-wrong-eingabe{color:var(--un-n-tx);font-style:italic;flex-shrink:0;}
 /* Range-Auswahl: Startpunkt-Hervorhebung */
