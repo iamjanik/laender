@@ -311,7 +311,17 @@ a.nice-link:hover{opacity:.75;}
 .st-pct-bar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
 .st-pct-bar{height:7px;border-radius:4px;background:var(--acc);transition:width .5s ease;}
 .st-pct-lbl{font-size:.75rem;font-weight:600;color:var(--acc);white-space:nowrap;}
-/* ── Falsch-Filter Chip in Auswahl ── */
+/* ── Ergebnis-Boxen (Richtig / Falsch) ── */
+.fc-res-box{border-radius:10px;padding:10px 14px;margin-bottom:10px;text-align:left;max-height:180px;overflow-y:auto;}
+.fc-res-box::-webkit-scrollbar{width:4px;}
+.fc-res-box::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.fc-res-hdr{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
+.fc-res-ok{background:var(--acc-light);border:1px solid #b8d4b5;}
+.fc-res-ok .fc-res-hdr{color:var(--acc);}
+[data-theme="dark"] .fc-res-ok,.is-dark .fc-res-ok{border-color:#2a4a28;}
+.fc-res-wr{background:var(--un-n-bg);border:1px solid var(--un-n-bd);}
+.fc-res-wr .fc-res-hdr{color:var(--un-n-tx);}
+
 .fc-filter-row{display:flex;gap:6px;margin-bottom:10px;}
 .fc-fchip{padding:4px 12px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);}
 .fc-fchip.active{background:var(--acc);border-color:var(--acc);color:white;font-weight:600;}
@@ -659,7 +669,8 @@ document.getElementById("togAllBtn").addEventListener("click",()=>{const any=get
 
 /* ══ FLASHCARDS ══ */
 const fcOv=document.getElementById("fcOv"),fcBox=document.getElementById("fcBox");
-const FC={pool:[],origPool:[],idx:0,ok:0,wr:0,wrong:[],pending:[],mode:"type",sel:new Set(),listFilter:"all"};
+/* FC.isRetry = true wenn wir gerade "Falsche wiederholen"-Runde spielen */
+const FC={pool:[],idx:0,ok:0,wr:0,okList:[],wrongList:[],mode:"type",sel:new Set(),listFilter:"all",isRetry:false};
 function openFC(){fcOv.classList.add("active");fcBox.focus();}
 function closeFC(){fcOv.classList.remove("active");}
 
@@ -702,15 +713,15 @@ function renderStart(tab){
     </div>
     <div class="fc-filter-row">
       <button class="fc-fchip${FC.listFilter==="all"?" active":""}" data-f="all" type="button">Alle (${sorted.length})</button>
-      <button class="fc-fchip${FC.listFilter==="wrong"?" active":""}" data-f="wrong" type="button"${weakInPool.length===0?" disabled":""} title="Länder die noch nicht 5× hintereinander richtig waren">Noch offen (${weakInPool.length})</button>
+      <button class="fc-fchip${FC.listFilter==="wrong"?" active":""}" data-f="wrong" type="button"${weakInPool.length===0?" disabled":""} title="L\u00e4nder die noch nicht gemeistert sind">Noch offen (${weakInPool.length})</button>
     </div>
-    <div class="fc-list" id="fcList" role="listbox" aria-multiselectable="true" aria-label="Staaten auswählen"></div>
+    <div class="fc-list" id="fcList" role="listbox" aria-multiselectable="true" aria-label="Staaten ausw\u00e4hlen"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;min-height:26px;">
-      <span class="fc-pick-count" id="fcCount">${selCount} von ${listSrc.length} ausgewählt</span>
-      <button class="fc-pick-action" id="fcRangeApply" type="button" style="display:none;">Bereich auswählen</button>
+      <span class="fc-pick-count" id="fcCount">${selCount} von ${listSrc.length} ausgew\u00e4hlt</span>
+      <button class="fc-pick-action" id="fcRangeApply" type="button" style="display:none;">Bereich ausw\u00e4hlen</button>
     </div>
     <div class="fc-warn" id="fcW" role="alert" aria-live="polite"></div>
-    ${brow([{t:"Schließen",c:"fc-sec",id:"fcCancel"},{t:"Starten",c:"fc-pri",id:"fcStart"}])}
+    ${brow([{t:"Schlie\u00dfen",c:"fc-sec",id:"fcCancel"},{t:"Starten",c:"fc-pri",id:"fcStart"}])}
   `;
 
   fcBox.querySelectorAll(".fc-nav-btn").forEach(b=>b.addEventListener("click",()=>renderStart(b.dataset.tab)));
@@ -736,8 +747,12 @@ function renderStart(tab){
     row.setAttribute("role","option");
     row.setAttribute("aria-selected",String(FC.sel.has(l.Land)));
     const v=p[l.Land];
-    const masteredMark=isMastered(v)?`<span style="font-size:.65rem;color:var(--acc);flex-shrink:0;font-weight:700;">✓</span>`:v&&(v.totalOk+v.totalWr)>0?`<span style="font-size:.65rem;color:var(--muted);flex-shrink:0;">${v.streak}/${STREAK_GOAL}</span>`:``;
-    row.innerHTML='<input type="checkbox" '+(FC.sel.has(l.Land)?'checked':'')+' tabindex="-1" aria-hidden="true"><span class="fi">'+gF(l.Land)+'</span><span class="fn">'+esc(l.Land)+'</span>'+masteredMark;
+    const badge=isMastered(v)
+      ?`<span style="font-size:.65rem;color:var(--acc);flex-shrink:0;font-weight:700;">\u2713</span>`
+      :v&&(v.totalOk+v.totalWr)>0
+        ?`<span style="font-size:.65rem;color:var(--muted);flex-shrink:0;">${v.streak}/${STREAK_GOAL}</span>`
+        :``;
+    row.innerHTML='<input type="checkbox" '+(FC.sel.has(l.Land)?'checked':'')+' tabindex="-1" aria-hidden="true"><span class="fi">'+gF(l.Land)+'</span><span class="fn">'+esc(l.Land)+'</span>'+badge;
     row.addEventListener("click",()=>{if(FC.sel.has(l.Land))FC.sel.delete(l.Land);else FC.sel.add(l.Land);refreshPickList(listSrc);});
     list.appendChild(row);
   });
@@ -746,8 +761,8 @@ function renderStart(tab){
   document.getElementById("fcSelNone").addEventListener("click",()=>{FC.sel=new Set();refreshPickList(listSrc);});
   document.getElementById("fcStart").addEventListener("click",()=>{
     const pool=listSrc.filter(l=>FC.sel.has(l.Land));
-    if(!pool.length){document.getElementById("fcW").textContent="Bitte mindestens einen Staat auswählen.";return;}
-    FC.pool=buildPool(pool);FC.origPool=[...pool];FC.pending=[];FC.idx=0;FC.ok=0;FC.wr=0;FC.wrong=[];renderCard();
+    if(!pool.length){document.getElementById("fcW").textContent="Bitte mindestens einen Staat ausw\u00e4hlen.";return;}
+    FC.pool=shuffle(pool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=false;renderCard();
   });
   document.getElementById("fcCancel").addEventListener("click",closeFC);
 }
@@ -767,53 +782,53 @@ function refreshPickList(listSrc){
     if(selIdxs.length>=2){
       const first=selIdxs[0],last=selIdxs[selIdxs.length-1];
       const gap=(last-first+1)-selIdxs.length;
-      if(gap>0){applyBtn.style.display="inline";applyBtn.textContent=`Bereich auswählen (+${gap})`;applyBtn.onclick=()=>{for(let x=first;x<=last;x++)FC.sel.add(listSrc[x].Land);refreshPickList(listSrc);};}
+      if(gap>0){applyBtn.style.display="inline";applyBtn.textContent=`Bereich ausw\u00e4hlen (+${gap})`;applyBtn.onclick=()=>{for(let x=first;x<=last;x++)FC.sel.add(listSrc[x].Land);refreshPickList(listSrc);};}
       else applyBtn.style.display="none";
     } else applyBtn.style.display="none";
   }
   const c=document.getElementById("fcCount");
-  if(c)c.textContent=`${FC.sel.size} von ${listSrc.length} ausgewählt`;
+  if(c)c.textContent=`${FC.sel.size} von ${listSrc.length} ausgew\u00e4hlt`;
 }
 
-
-function uniqCount(){return new Set(FC.pool.slice(0,FC.idx).map(l=>l.Land)).size;}
 function buildProgLabel(){
-  const l=FC.pool[FC.idx];
-  const p=loadProg();const v=p?.[l?.Land];
-  const streak=v?v.streak:0;
-  const streakStr=streak>0?` · 🔥${streak}/${STREAK_GOAL}`:"";
   const total=FC.pool.length;
-  const uniq=new Set(FC.pool.map(l=>l.Land)).size;
-  const posLabel=total>uniq?`${FC.idx+1}\u00a0/\u00a0${total} (${uniq} Länder)`:`${FC.idx+1}\u00a0/\u00a0${total}`;
-  return`${posLabel} · ✓\u00a0${FC.ok} · ✗\u00a0${FC.wr}${streakStr}`;
+  return `${FC.idx+1}\u00a0/\u00a0${total} \u00b7 \u2713\u00a0${FC.ok} \u00b7 \u2717\u00a0${FC.wr}`;
 }
-function afterAnswer(land,ok){
-  const newStreak=recordResult(land,ok);
-  if(!ok){
-    /* Nicht gemeistert → hinten nochmal einschieben (bis gemeistert) */
-    const p=loadProg();
-    if(!isMastered(p[land])){
-      FC.pool.push(FC.pool[FC.idx]);
-    }
-  }
-  FC.idx++;
-  renderCard();
+
+function recordAnswer(land,ok){
+  /* Streak-Logik in localStorage */
+  const p=loadProg();
+  if(!p[land])p[land]={streak:0,totalOk:0,totalWr:0};
+  const v=p[land];
+  if(ok){v.streak++;v.totalOk++;}else{v.streak=0;v.totalWr++;}
+  saveProg(p);
 }
+
 function renderCard(){
   if(FC.idx>=FC.pool.length){renderResult();return;}
   const l=FC.pool[FC.idx];const flag=gF(l.Land);
   const prog=buildProgLabel();
   if(FC.mode==="reveal")renderReveal(l,flag,prog);else if(FC.mode==="mc")renderMC(l,flag,prog);else renderType(l,flag,prog);
 }
+
+function onAnswer(l,ok,eingabe){
+  recordAnswer(l.Land,ok);
+  if(ok){FC.ok++;FC.okList.push(l);}
+  else{FC.wr++;FC.wrongList.push(eingabe?{...l,_eingabe:eingabe}:l);}
+  FC.idx++;
+  renderCard();
+}
+
 function renderReveal(l,flag,prog){
   fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div>${brow([{t:"Abbrechen",c:"fc-sec",id:"fcAb"},{t:"Antwort zeigen",c:"fc-rev",id:"fcRev"}])}`;
   document.getElementById("fcRev").addEventListener("click",()=>{
-    fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><div class="fc-ans">${esc(l.Hauptstadt)}</div>${brow([{t:"✗ Nicht gewusst",c:"fc-wr",id:"fcNo"},{t:"✓ Gewusst",c:"fc-ok",id:"fcYes"}])}`;
-    document.getElementById("fcYes").addEventListener("click",()=>{FC.ok++;afterAnswer(l.Land,true);});
-    document.getElementById("fcNo").addEventListener("click",()=>{FC.wr++;FC.wrong.push(l);afterAnswer(l.Land,false);});
+    fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><div class="fc-ans">${esc(l.Hauptstadt)}</div>${brow([{t:"\u2717 Nicht gewusst",c:"fc-wr",id:"fcNo"},{t:"\u2713 Gewusst",c:"fc-ok",id:"fcYes"}])}`;
+    document.getElementById("fcYes").addEventListener("click",()=>onAnswer(l,true));
+    document.getElementById("fcNo").addEventListener("click",()=>onAnswer(l,false));
   });
   document.getElementById("fcAb").addEventListener("click",closeFC);
 }
+
 function renderMC(l,flag,prog){
   const others=shuffle(FC.pool.filter(x=>x.Land!==l.Land)).slice(0,3);
   const opts=shuffle([l,...others]);
@@ -824,65 +839,77 @@ function renderMC(l,flag,prog){
       const ok=btn.dataset.land===l.Land;
       fcBox.querySelectorAll(".fc-mc-opt").forEach(b=>{b.disabled=true;if(b.dataset.land===l.Land)b.classList.add("mc-ok");else if(b===btn&&!ok)b.classList.add("mc-err");});
       const fb=document.getElementById("fcFb");
-      fb.textContent=ok?"Richtig!":"Richtig wäre: "+hsvs(l.Hauptstadt)[0];
+      fb.textContent=ok?"Richtig!":"Richtig w\u00e4re: "+hsvs(l.Hauptstadt)[0];
       fb.className="fc-fb "+(ok?"ok":"err");
-      if(ok)FC.ok++;else{FC.wr++;FC.wrong.push(l);}
-      afterAnswer(l.Land,ok);
+      onAnswer(l,ok);
       const row=document.createElement("div");row.className="fcrow";
       row.innerHTML=`<button class="fc-btn fc-pri" type="button">Weiter</button>`;
-      row.querySelector("button").addEventListener("click",()=>{renderCard();});
+      row.querySelector("button").addEventListener("click",()=>renderCard());
       fcBox.appendChild(row);row.querySelector("button").focus();
     });
   });
 }
 
 function renderType(l,flag,prog){
-  fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><input class="fc-inp" id="fcIn" type="text" placeholder="Hauptstadt eingeben …" autocomplete="off" spellcheck="false"><div class="fc-fb" id="fcFb" role="status" aria-live="polite"></div>${brow([{t:"Abbrechen",c:"fc-sec",id:"fcAb"},{t:"Prüfen",c:"fc-rev",id:"fcCk"}])}`;
+  fcBox.innerHTML=`<div class="fc-prog">${prog}</div><span class="fc-flag">${flag}</span><div class="fc-q">Hauptstadt von<br><strong>${esc(l.Land)}</strong>?</div><input class="fc-inp" id="fcIn" type="text" placeholder="Hauptstadt eingeben \u2026" autocomplete="off" spellcheck="false"><div class="fc-fb" id="fcFb" role="status" aria-live="polite"></div>${brow([{t:"Abbrechen",c:"fc-sec",id:"fcAb"},{t:"Pr\u00fcfen",c:"fc-rev",id:"fcCk"}])}`;
   const inp=document.getElementById("fcIn");inp.focus();
   const check=()=>{
     const val=inp.value.trim();if(!val)return;
     const ni=norm(val);const vs=hsvs(l.Hauptstadt);const ok=vs.some(x=>norm(x)===ni);
     inp.classList.add(ok?"ok":"err");inp.disabled=true;
     const fb=document.getElementById("fcFb");
-    fb.textContent=ok?"Richtig!":"Richtig wäre: "+(vs.length>1?vs.join(" / "):l.Hauptstadt);
+    fb.textContent=ok?"Richtig!":"Richtig w\u00e4re: "+(vs.length>1?vs.join(" / "):l.Hauptstadt);
     fb.className="fc-fb "+(ok?"ok":"err");
-    if(ok)FC.ok++;else{FC.wr++;FC.wrong.push({...l,_eingabe:val});}
-    afterAnswer(l.Land,ok);
+    onAnswer(l,ok,ok?null:val);
     fcBox.querySelector(".fcrow").innerHTML=`<button class="fc-btn fc-pri" id="fcNx" type="button">Weiter</button>`;
-    document.getElementById("fcNx").addEventListener("click",()=>{renderCard();});
+    document.getElementById("fcNx").addEventListener("click",()=>renderCard());
     document.getElementById("fcNx").focus();
   };
   inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
   document.getElementById("fcCk").addEventListener("click",check);
   document.getElementById("fcAb").addEventListener("click",closeFC);
 }
+
+function landRow(l,showStreak){
+  const prog=loadProg();const v=prog[l.Land];
+  const streakInfo=showStreak&&v?` <span style="font-size:.65rem;color:var(--muted);">${v.streak}/${STREAK_GOAL}</span>`:``;
+  const cap=esc(l.Hauptstadt).replace(/\n/g," / ");
+  const eingabe=l._eingabe?`<span class="fc-wrong-eingabe">\u201e${esc(l._eingabe)}\u201c</span><span class="fc-sep">\u2192</span>`:"";
+  return `<div class="fc-wrong-row"><span class="fi" aria-hidden="true">${gF(l.Land)}</span><span class="fn">${esc(l.Land)}${streakInfo}</span><span class="fc-sep">\u00b7</span>${eingabe}<span class="fa">${cap}</span></div>`;
+}
+
 function renderResult(){
-  const p=FC.ok+FC.wr>0?Math.round(FC.ok/(FC.ok+FC.wr)*100):0;
-  const e=p>=80?"🎉":p>=50?"👍":"📚";
-  const prog=loadProg();
-  const nowMastered=FC.origPool.filter(l=>isMastered(prog[l.Land]));
-  const stillOpen=FC.origPool.filter(l=>!isMastered(prog[l.Land]));
+  const total=FC.ok+FC.wr;
+  const pct=total>0?Math.round(FC.ok/total*100):0;
+  const e=pct>=80?"🎉":pct>=50?"👍":"📚";
 
-  let wrongBox="";
-  if(FC.wrong.length>0){
-    const seen=new Set();
-    const deduped=FC.wrong.filter(l=>{if(seen.has(l.Land))return false;seen.add(l.Land);return true;});
-    const rows=deduped.map(l=>{
-      const cap=esc(l.Hauptstadt).replace(/\n/g," / ");
-      const eingabe=l._eingabe?`<span class="fc-wrong-eingabe">„${esc(l._eingabe)}"</span><span class="fc-sep">→</span>`:"";
-      return `<div class="fc-wrong-row"><span class="fi" aria-hidden="true">${gF(l.Land)}</span><span class="fn">${esc(l.Land)}</span><span class="fc-sep">·</span>${eingabe}<span class="fa">${cap}</span></div>`;
-    }).join("");
-    wrongBox=`<div class="fc-wrong-box"><div class="fc-wrong-hdr">Fehler dieser Runde (${deduped.length})</div><div class="fc-wrong-list">${rows}</div></div>`;
-  }
+  /* Richtig-Box */
+  const okBox=FC.okList.length>0
+    ?`<div class="fc-res-box fc-res-ok"><div class="fc-res-hdr">\u2713 Richtig (${FC.okList.length})</div><div class="fc-wrong-list">${FC.okList.map(l=>landRow(l,FC.isRetry)).join("")}</div></div>`
+    :"";
 
-  const masteredStr=nowMastered.length>0?`<div style="font-size:.78rem;color:var(--acc);margin-bottom:2px;font-weight:600;">✓ ${nowMastered.length} gemeistert</div>`:"";
-  const openStr=stillOpen.length>0
-    ?`<div style="font-size:.78rem;color:var(--muted);margin-bottom:16px;">${stillOpen.length} noch offen</div>`
-    :`<div style="font-size:.78rem;color:var(--acc);margin-bottom:16px;font-weight:600;">Alle gemeistert! 🏆</div>`;
+  /* Falsch-Box */
+  const wrBox=FC.wrongList.length>0
+    ?`<div class="fc-res-box fc-res-wr"><div class="fc-res-hdr">\u2717 Falsch (${FC.wrongList.length})</div><div class="fc-wrong-list">${FC.wrongList.map(l=>landRow(l,false)).join("")}</div></div>`
+    :"";
 
-  fcBox.innerHTML=`<span class="fc-result-e">${e}</span><div class="fc-result-t">Fertig!</div><div class="fc-result-s">${FC.ok} richtig · ${FC.wr} falsch · ${p}\u00a0%</div>${masteredStr}${openStr}${wrongBox}${brow([{t:"Schließen",c:"fc-sec",id:"fcDone"},{t:"Nochmal",c:"fc-pri",id:"fcRedo"}])}`;
-  document.getElementById("fcRedo").addEventListener("click",()=>{FC.pool=buildPool([...FC.origPool]);FC.idx=0;FC.ok=0;FC.wr=0;FC.wrong=[];renderCard();});
+  /* Buttons */
+  const btns=FC.wrongList.length>0
+    ?[{t:"Schlie\u00dfen",c:"fc-sec",id:"fcDone"},{t:"Nochmal",c:"fc-sec",id:"fcRedo"},{t:`Falsche wiederholen (${FC.wrongList.length})`,c:"fc-pri",id:"fcRetry"}]
+    :[{t:"Schlie\u00dfen",c:"fc-sec",id:"fcDone"},{t:"Nochmal",c:"fc-pri",id:"fcRedo"}];
+
+  fcBox.innerHTML=`<span class="fc-result-e">${e}</span><div class="fc-result-t">Fertig!</div><div class="fc-result-s">${FC.ok} richtig \u00b7 ${FC.wr} falsch \u00b7 ${pct}\u00a0%</div>${okBox}${wrBox}${brow(btns)}`;
+
   document.getElementById("fcDone").addEventListener("click",closeFC);
+  document.getElementById("fcRedo").addEventListener("click",()=>{
+    const origPool=[...FC.okList,...FC.wrongList].map(l=>({Land:l.Land,Hauptstadt:l.Hauptstadt,Kontinent:l.Kontinent}));
+    FC.pool=shuffle(origPool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=false;renderCard();
+  });
+  const retryBtn=document.getElementById("fcRetry");
+  if(retryBtn)retryBtn.addEventListener("click",()=>{
+    const wrongPool=FC.wrongList.map(l=>({Land:l.Land,Hauptstadt:l.Hauptstadt,Kontinent:l.Kontinent}));
+    FC.pool=shuffle(wrongPool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=true;renderCard();
+  });
 }
 
 document.getElementById("fcBtn").addEventListener("click",()=>{
