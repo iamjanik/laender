@@ -673,7 +673,7 @@ document.getElementById("togAllBtn").addEventListener("click",()=>{const any=get
 /* ══ FLASHCARDS ══ */
 const fcOv=document.getElementById("fcOv"),fcBox=document.getElementById("fcBox");
 /* FC.isRetry = true wenn wir gerade "Falsche wiederholen"-Runde spielen */
-const FC={pool:[],idx:0,ok:0,wr:0,okList:[],wrongList:[],mode:"type",sel:new Set(),listFilter:"all",isRetry:false};
+const FC={pool:[],idx:0,ok:0,wr:0,okList:[],wrongList:[],streakSnapshot:{},mode:"type",sel:new Set(),listFilter:"all",isRetry:false};
 function openFC(){fcOv.classList.add("active");fcBox.focus();}
 function closeFC(){fcOv.classList.remove("active");}
 
@@ -765,7 +765,9 @@ function renderStart(tab){
   document.getElementById("fcStart").addEventListener("click",()=>{
     const pool=listSrc.filter(l=>FC.sel.has(l.Land));
     if(!pool.length){document.getElementById("fcW").textContent="Bitte mindestens einen Staat ausw\u00e4hlen.";return;}
-    FC.pool=shuffle(pool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=false;renderCard();
+    FC.pool=shuffle(pool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=false;
+    const snap=loadProg();FC.streakSnapshot={};pool.forEach(l=>{FC.streakSnapshot[l.Land]=snap[l.Land]?.streak||0;});
+    renderCard();
   });
   document.getElementById("fcCancel").addEventListener("click",closeFC);
 }
@@ -892,9 +894,8 @@ function renderResult(){
   const pct=total>0?Math.round(FC.ok/total*100):0;
   const e=pct>=80?"🎉":pct>=50?"👍":"📚";
 
-  /* Neu gemeisterte Länder dieser Runde */
   const prog=loadProg();
-  const newlyMastered=FC.okList.filter(l=>isMastered(prog[l.Land]));
+  const newlyMastered=FC.okList.filter(l=>isMastered(prog[l.Land])&&(FC.streakSnapshot[l.Land]||0)<STREAK_GOAL);
   const masteredBox=newlyMastered.length>0
     ?`<div class="fc-res-box fc-res-mastered"><div class="fc-res-hdr">\u2605 Gemeistert (${newlyMastered.length})</div><div class="fc-wrong-list">${newlyMastered.map(l=>`<div class="fc-wrong-row"><span class="fi" aria-hidden="true">${gF(l.Land)}</span><span class="fn">${esc(l.Land)}</span>${streakDots(STREAK_GOAL)}</div>`).join("")}</div></div>`
     :"";
@@ -919,7 +920,8 @@ function renderResult(){
   const retryBtn=document.getElementById("fcRetry");
   if(retryBtn)retryBtn.addEventListener("click",()=>{
     const wrongPool=FC.wrongList.map(l=>({Land:l.Land,Hauptstadt:l.Hauptstadt,Kontinent:l.Kontinent}));
-    FC.pool=shuffle(wrongPool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=true;renderCard();
+    const snap2=loadProg();const ss2={};wrongPool.forEach(l=>{ss2[l.Land]=snap2[l.Land]?.streak||0;});
+    FC.pool=shuffle(wrongPool);FC.idx=0;FC.ok=0;FC.wr=0;FC.okList=[];FC.wrongList=[];FC.isRetry=true;FC.streakSnapshot=ss2;renderCard();
   });
 }
 
