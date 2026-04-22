@@ -240,11 +240,8 @@ main{max-width:800px;margin:0 auto;padding:10px 14px 60px;}
 .fc-item input[type=checkbox]{width:15px;height:15px;accent-color:var(--acc);cursor:pointer;flex-shrink:0;}
 .fc-item .fi{font-size:1.1rem;flex-shrink:0;}
 .fc-item .fn{flex:1;font-weight:500;}
-.fc-result-e{font-size:2.2rem;display:block;margin-bottom:6px;}
 .fc-result-t{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:6px;color:var(--text);}
 .fc-result-s{font-size:.85rem;color:var(--muted);margin-bottom:22px;}
-.fc-wrong-box{background:var(--un-n-bg);border:1px solid var(--un-n-bd);border-radius:10px;padding:12px 14px;margin-bottom:18px;text-align:left;max-height:240px;overflow-y:auto;}
-.fc-wrong-hdr{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--un-n-tx);margin-bottom:8px;}
 .fc-wrong-list{display:flex;flex-direction:column;gap:0;}
 .fc-wrong-row{display:flex;flex-direction:column;gap:2px;padding:7px 0;border-bottom:1px solid var(--border);font-size:.85rem;color:var(--text);line-height:1.4;}
 .fc-wrong-row:last-child{border-bottom:none;}
@@ -305,9 +302,6 @@ a.nice-link:hover{opacity:.75;}
 .st-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
 .st-dot.on{background:var(--acc);}
 .st-dot.off{background:var(--border);}
-.st-dot.done{background:var(--acc);}
-.st-mastered-mark{font-size:.75rem;color:var(--acc);font-weight:700;flex-shrink:0;}
-.st-land-counts{font-size:.65rem;color:var(--muted);flex-shrink:0;white-space:nowrap;}
 .st-empty{font-size:.83rem;color:var(--muted);text-align:center;padding:14px 0;}
 .st-pct-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
 .st-pct-bar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
@@ -484,24 +478,6 @@ const UN_CFG={"nicht_anerkannt":{cc:"un-n",mc:"dn",bc:"un-n",icon:"",label:"UN-S
 
 function gF(n){return FLAGS[n]||"🌐";}
 function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
-/* Sortierung: nicht-gemeisterte zuerst (nach aufsteigendem Streak), dann gemeisterte, innerhalb jeder Gruppe geshuffelt */
-function weightedSort(pool){
-  const p=loadProg();
-  const grpOpen=[],grpMastered=[],grpNew=[];
-  pool.forEach(l=>{
-    const v=p[l.Land];
-    if(!v||(v.totalOk+v.totalWr)===0)grpNew.push(l);
-    else if(isMastered(v))grpMastered.push(l);
-    else grpOpen.push(l);
-  });
-  /* Offene nach Streak aufsteigend (niedrigster zuerst = schwächste zuerst) */
-  grpOpen.sort((a,b)=>(p[a.Land]?.streak||0)-(p[b.Land]?.streak||0));
-  return [...shuffle(grpOpen),...shuffle(grpNew),...shuffle(grpMastered)];
-}
-/* Baut den initialen Pool: alle ausgewählten Länder, nicht-gemeisterte vorangestellt */
-function buildPool(selected){
-  return weightedSort(selected);
-}
 function norm(s){return s.toLowerCase().trim().replace(/\s+/g,"").replace(/[^a-z0-9äöüéèàâêîôûñ]/g,"");}
 function hsvs(h){return h.split(/[\n/,]/).map(s=>s.replace(/\(.*?\)/g,"").trim()).filter(Boolean);}
 function deb(fn,d=150){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),d);};}
@@ -519,17 +495,7 @@ const PROG_KEY="laender_progress";
 const STREAK_GOAL=5;
 function loadProg(){try{const d=JSON.parse(localStorage.getItem(PROG_KEY)||"{}");/* Migration alter Einträge {ok,wr} → neues Format */Object.keys(d).forEach(k=>{const v=d[k];if(v.streak===undefined){d[k]={streak:0,totalOk:v.ok||0,totalWr:v.wr||0};}});return d;}catch{return{};}}
 function saveProg(p){try{localStorage.setItem(PROG_KEY,JSON.stringify(p));}catch{}}
-function recordResult(land,ok){
-  const p=loadProg();
-  if(!p[land])p[land]={streak:0,totalOk:0,totalWr:0};
-  const v=p[land];
-  if(ok){v.streak++;v.totalOk++;}
-  else{v.streak=0;v.totalWr++;}
-  saveProg(p);
-  return v.streak;
-}
 function isMastered(v){return v&&v.streak>=STREAK_GOAL;}
-function getMasteredLands(){const p=loadProg();return Object.entries(p).filter(([,v])=>isMastered(v)).map(([k])=>k);}
 function getOpenLands(){const p=loadProg();return Object.entries(p).filter(([,v])=>!isMastered(v)&&(v.totalOk+v.totalWr)>0).map(([k])=>k);}
 /* Für Auswahlliste: Länder die noch nicht gemeistert sind (inkl. nie versucht) */
 function isWeak(v){return v&&!isMastered(v)&&(v.totalOk+v.totalWr)>0;}
